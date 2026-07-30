@@ -1,4 +1,4 @@
-package com.aerocat.cloudy
+package dev.ncatt.ota
 
 import android.app.Application
 import com.topjohnwu.superuser.Shell

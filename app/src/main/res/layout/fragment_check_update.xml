@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    OneUI 8.5 "Software update" layout.
+
+    8.5 opens this screen with a hero block - large state glyph, one headline, one quiet
+    supporting line - and only then drops into cards. The old build put the state in a
+    CardItemView row at the top, which reads as a list item rather than an answer to
+    "am I up to date?". The Available-build and Changelog sections are collapsed until a
+    remote release actually exists, so the up-to-date screen stays short.
+-->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,54 +21,103 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
+        android:paddingBottom="@dimen/oui_content_bottom_inset">
 
-        <!-- ===== Status ===== -->
-        <dev.oneuiproject.oneui.widget.Separator
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sep_status" />
-
+        <!-- ===== Hero ===== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_oui_card"
-            android:layout_marginHorizontal="@dimen/oui_card_margin_h"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="32dp"
+            android:paddingTop="@dimen/oui_hero_padding_top"
+            android:paddingBottom="28dp">
 
-            <dev.oneuiproject.oneui.widget.CardItemView
-                android:id="@+id/rowStatus"
+            <FrameLayout
+                android:layout_width="@dimen/oui_hero_glyph_size"
+                android:layout_height="@dimen/oui_hero_glyph_size"
+                android:background="@drawable/bg_oui_hero_circle">
+
+                <ImageView
+                    android:id="@+id/heroIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_cloud_large"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/heroTitle"
+                style="@style/Cloudy.Text.Hero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:showTopDivider="false"
-                app:icon="@drawable/ic_cloudy_settings"
-                app:title="@string/status_checking"
-                tools:ignore="ContentDescription" />
+                android:layout_marginTop="22dp"
+                android:text="@string/status_checking" />
+
+            <TextView
+                android:id="@+id/heroSubtitle"
+                style="@style/Cloudy.Text.HeroSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="LumiROM 8.6.4" />
 
             <ProgressBar
                 android:id="@+id/downloadBar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
                 android:max="100"
                 android:visibility="gone"
                 tools:visibility="visible" />
         </LinearLayout>
 
-        <!-- ===== Available build ===== -->
-        <dev.oneuiproject.oneui.widget.Separator
+        <!-- ===== Actions (above the fold in 8.5, not buried under the cards) ===== -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sep_available" />
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
+
+            <Button
+                android:id="@+id/btnDownload"
+                style="@style/OneUI.ContainedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:visibility="gone"
+                android:text="@string/btn_download"
+                tools:visibility="visible" />
+
+            <Button
+                android:id="@+id/btnCheck"
+                style="@style/OneUI.ButtonStyleOutline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/btn_check" />
+        </LinearLayout>
+
+        <!-- ===== Available build (hidden until a release is fetched) ===== -->
+        <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/sep_available"
+            tools:visibility="visible" />
 
         <LinearLayout
+            android:id="@+id/cardAvailable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_oui_card"
             android:layout_marginHorizontal="@dimen/oui_card_margin_h"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteVersion"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -67,6 +125,9 @@
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowBuildDate"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_build_date" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowDownloadSize"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_size" />
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteAndroid"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_android" />
@@ -80,26 +141,30 @@
 
         <!-- ===== Changelog ===== -->
         <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepChangelog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sep_changelog" />
+            android:visibility="gone"
+            android:text="@string/sep_changelog"
+            tools:visibility="visible" />
 
         <LinearLayout
+            android:id="@+id/cardChangelog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_oui_card"
             android:layout_marginHorizontal="@dimen/oui_card_margin_h"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <TextView
                 android:id="@+id/changelog"
+                style="@style/Cloudy.Text.Body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="18dp"
-                android:lineSpacingExtra="5dp"
-                android:textSize="15sp"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:paddingHorizontal="@dimen/oui_card_padding_h"
+                android:paddingVertical="18dp" />
         </LinearLayout>
 
         <!-- ===== This device ===== -->
@@ -133,31 +198,6 @@
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowKernel"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_kernel" app:summaryMaxLines="3" />
-        </LinearLayout>
-
-        <!-- ===== Actions ===== -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="24dp"
-            android:paddingTop="20dp">
-
-            <Button
-                android:id="@+id/btnCheck"
-                style="@style/OneUI.ButtonStyleOutline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_check" />
-
-            <Button
-                android:id="@+id/btnDownload"
-                style="@style/OneUI.ContainedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:enabled="false"
-                android:text="@string/btn_download" />
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,5 +1,5 @@
 // Streams progress from the root worker back to the app process.
-package com.aerocat.cloudy.ota;
+package dev.ncatt.ota.ota;
 
 interface IFlashCallback {
     // percent is -1 when unknown (indeterminate); line is a raw status line for logs.

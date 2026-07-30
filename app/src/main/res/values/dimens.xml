@@ -5,7 +5,17 @@
          guarantees the OneUI 8.5 radius on every device. -->
     <dimen name="oui_card_radius">26dp</dimen>
     <dimen name="oui_card_margin_h">16dp</dimen>
+    <dimen name="oui_card_padding_h">24dp</dimen>
     <dimen name="oui_float_nav_radius">26dp</dimen>
+
+    <!-- Hero block (8.5 software-update pattern). -->
+    <dimen name="oui_hero_glyph_size">108dp</dimen>
+    <dimen name="oui_hero_padding_top">32dp</dimen>
+
+    <!-- The floating tab bar overlaps the scroll content; without this the last card
+         sits underneath the pill and the final row is unreachable. -->
+    <dimen name="oui_content_bottom_inset">96dp</dimen>
+
     <!-- Override the library's default bottom-tab padding to make the bar shorter. -->
     <dimen name="oui_des_tab_layout_default_tab_padding">4dp</dimen>
 </resources>

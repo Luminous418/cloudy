@@ -1,4 +1,4 @@
-package com.aerocat.cloudy.data
+package dev.ncatt.ota.data
 
 import com.google.gson.annotations.SerializedName
 

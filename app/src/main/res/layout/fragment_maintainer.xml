@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- OneUI 8.5 profile pattern: haloed avatar, name at hero weight, handle underneath,
+     then detail and contact cards. Matches the hero block on the Update tab so the two
+     screens read as one app. -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:overScrollMode="always"
@@ -11,40 +15,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
+        android:paddingBottom="@dimen/oui_content_bottom_inset">
 
-        <!-- Profile header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="24dp"
-            android:paddingBottom="20dp">
+            android:paddingHorizontal="32dp"
+            android:paddingTop="@dimen/oui_hero_padding_top"
+            android:paddingBottom="26dp">
 
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:src="@drawable/ic_cloud_large"
-                android:contentDescription="@string/tab_maintainer" />
+            <FrameLayout
+                android:layout_width="@dimen/oui_hero_glyph_size"
+                android:layout_height="@dimen/oui_hero_glyph_size"
+                android:background="@drawable/bg_oui_hero_circle">
+
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_cloud_large"
+                    android:contentDescription="@string/tab_maintainer" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/name"
-                android:layout_width="wrap_content"
+                style="@style/Cloudy.Text.Hero"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:textSize="21sp"
-                android:textStyle="bold"
-                android:textColor="?android:attr/textColorPrimary" />
+                android:layout_marginTop="20dp"
+                tools:text="aerocat" />
 
             <TextView
                 android:id="@+id/handle"
-                android:layout_width="wrap_content"
+                style="@style/Cloudy.Text.HeroSupport"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textSize="14sp"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:layout_marginTop="4dp"
+                tools:text="@aerocat" />
         </LinearLayout>
 
         <dev.oneuiproject.oneui.widget.Separator

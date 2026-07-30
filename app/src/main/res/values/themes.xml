@@ -1,24 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
-        OneUITheme + OneUI.* button styles come from the oneui-design library; not redefined.
-        This overlay only forces the OneUI system font family across the app.
+        OneUITheme and the OneUI.* button styles come from oneui-design; not redefined.
 
-        "sec" is Samsung's system font alias - on OneUI 8 devices it resolves to One UI Sans
-        (the library itself uses android:fontFamily="sec" internally). One UI Sans is a
-        proprietary Samsung font and cannot be bundled in the APK, so on non-Samsung devices
-        this gracefully falls back to the platform sans-serif.
+        Font: Cloudy now BUNDLES One UI Sans (res/font/oneui_sans.xml) instead of relying on
+        the "sec" system alias. "sec" only resolves to a real One UI face on Samsung firmware;
+        everywhere else it silently fell back to the platform sans, which is why the app looked
+        like stock AOSP on any non-Samsung build. The bundled family renders identically on
+        every device.
+
+        Theme-level fontFamily does NOT reach TextViews created inside oneui-design widgets
+        (CardItemView, Separator, ToolbarLayout titles) - those hardcode fontFamily="sec"
+        internally. OneUiFont installs a LayoutInflater factory in MainActivity that applies
+        the bundled typeface to every inflated TextView, which is what actually covers them.
     -->
     <style name="Theme.Cloudy" parent="OneUITheme">
-        <item name="android:fontFamily">sec</item>
-        <item name="fontFamily">sec</item>
+        <item name="android:fontFamily">@font/oneui_sans</item>
+        <item name="fontFamily">@font/oneui_sans</item>
         <item name="android:textViewStyle">@style/Cloudy.TextView</item>
         <item name="android:buttonStyle">@style/Cloudy.Button</item>
     </style>
 
     <style name="Cloudy.TextView" parent="android:Widget.Material.TextView">
-        <item name="android:fontFamily">sec</item>
+        <item name="android:fontFamily">@font/oneui_sans</item>
     </style>
+
     <style name="Cloudy.Button" parent="android:Widget.Material.Button">
-        <item name="android:fontFamily">sec</item>
+        <item name="android:fontFamily">@font/oneui_sans</item>
+    </style>
+
+    <!-- ===== OneUI 8.5 type scale =====
+         8.5 leans on a tall, tightly-tracked headline over a quiet secondary line.
+         Weight 500 (medium) is the One UI title weight; 700 is reserved for the hero. -->
+
+    <style name="Cloudy.Text.Hero" parent="Cloudy.TextView">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="Cloudy.Text.HeroSupport" parent="Cloudy.TextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="Cloudy.Text.Title" parent="Cloudy.TextView">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="Cloudy.Text.Body" parent="Cloudy.TextView">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:lineSpacingExtra">5dp</item>
     </style>
 </resources>

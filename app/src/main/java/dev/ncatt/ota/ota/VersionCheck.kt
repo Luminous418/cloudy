@@ -1,6 +1,6 @@
-package com.aerocat.cloudy.ota
+package dev.ncatt.ota.ota
 
-import com.aerocat.cloudy.data.Release
+import dev.ncatt.ota.data.Release
 
 /**
  * Decides whether a remote [Release] is newer than what's installed, using the ROM's own

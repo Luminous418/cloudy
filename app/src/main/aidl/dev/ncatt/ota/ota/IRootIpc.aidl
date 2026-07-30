@@ -1,8 +1,8 @@
 // Persistent root worker interface. Implemented inside the libsu RootService process,
 // so the app can call these without spawning a fresh `su -c` for every action.
-package com.aerocat.cloudy.ota;
+package dev.ncatt.ota.ota;
 
-import com.aerocat.cloudy.ota.IFlashCallback;
+import dev.ncatt.ota.ota.IFlashCallback;
 
 interface IRootIpc {
     // Read any system property from the root context (e.g. ro.cloudy.version).

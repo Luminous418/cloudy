@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- OneUI 8.5 hero halo: the accent colour at low opacity behind the status glyph.
+     android:alpha on a layer-list item needs API 23; minSdk here is 26. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:alpha="0.12">
+        <shape android:shape="oval">
+            <solid android:color="?attr/colorPrimary" />
+        </shape>
+    </item>
+</layer-list>

@@ -16,6 +16,7 @@
 
     <string name="f_version">Version</string>
     <string name="f_build_date">Build date</string>
+    <string name="f_size">Download size</string>
     <string name="f_android">Android version</string>
     <string name="f_patch">Security patch</string>
     <string name="f_fingerprint">Build fingerprint</string>
@@ -25,9 +26,23 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Device</string>
 
+    <!-- Hero states -->
     <string name="status_checking">Checking for updates…</string>
+    <string name="status_checking_sub">Contacting the LumiROM update server</string>
+    <string name="status_up_to_date">Your software is up to date</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s is the latest build for this device</string>
+    <string name="status_update_available">Update available</string>
+    <string name="status_update_available_sub">LumiROM %1$s is ready to download</string>
+    <string name="status_failed">Couldn\'t check for updates</string>
+    <string name="status_downloading">Downloading update</string>
+    <string name="status_downloading_sub">%1$d%% · keep Cloudy open</string>
+    <string name="status_installing">Preparing to install</string>
+
     <string name="btn_check">Check for updates</string>
     <string name="btn_download">Download and install</string>
     <string name="btn_telegram">Telegram</string>
     <string name="btn_donate">Donate</string>
+
+    <string name="unknown_maintainer">Unknown maintainer</string>
+    <string name="flash_warning">Do not unplug or power off the device.</string>
 </resources>

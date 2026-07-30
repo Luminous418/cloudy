@@ -1,7 +1,8 @@
-package com.aerocat.cloudy.ota
+package dev.ncatt.ota.ota
 
 import android.os.Build
 import java.io.File
+import java.util.concurrent.ConcurrentHashMap
 
 /** Reads the *installed* device state so Tab 1 can compare it against the remote release. */
 object DeviceInfo {
@@ -12,9 +13,11 @@ object DeviceInfo {
     val fingerprint: String get() = Build.FINGERPRINT
     val buildDisplay: String get() = Build.DISPLAY
 
-    val kernelVersion: String get() = runCatching {
-        File("/proc/version").readText().trim()
-    }.getOrElse { System.getProperty("os.version") ?: "?" }
+    /** Cached: /proc/version is a file read, and Tab 1 re-renders it on every check. */
+    val kernelVersion: String by lazy {
+        runCatching { File("/proc/version").readText().trim() }
+            .getOrElse { System.getProperty("os.version") ?: "?" }
+    }
 
     /**
      * The ROM's own version stamp: `ro.cloudy.rom.ver` (e.g. "8.6.4").
@@ -40,8 +43,20 @@ object DeviceInfo {
     const val PROP_ROM_VER_CODE = "ro.cloudy.rom.ver.code"
     const val PROP_MAINTAINER = "ro.cloudy.maintainer"
 
-    fun getProp(key: String): String? = runCatching {
-        val p = Runtime.getRuntime().exec(arrayOf("getprop", key))
-        p.inputStream.bufferedReader().readLine()?.trim()
-    }.getOrNull()
+    // Every getProp() forks a `getprop` process (~10-30ms). Tab 1 alone reads six of them on
+    // each render, on the main thread, which is a visible stutter on an A32. These are all
+    // ro.* properties - immutable for the life of the boot - so one read each is enough.
+    private val cache = ConcurrentHashMap<String, String>()
+
+    fun getProp(key: String): String? {
+        cache[key]?.let { return it.ifEmpty { null } }
+        val value = runCatching {
+            val p = Runtime.getRuntime().exec(arrayOf("getprop", key))
+            val line = p.inputStream.bufferedReader().use { it.readLine() }?.trim()
+            p.waitFor()          // reap the child instead of leaking a zombie per call
+            line
+        }.getOrNull()
+        cache[key] = value.orEmpty()
+        return value
+    }
 }

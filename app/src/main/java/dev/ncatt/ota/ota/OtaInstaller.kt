@@ -1,4 +1,4 @@
-package com.aerocat.cloudy.ota
+package dev.ncatt.ota.ota
 
 import android.content.Context
 import android.os.RecoverySystem

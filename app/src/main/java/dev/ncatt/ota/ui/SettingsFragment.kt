@@ -1,10 +1,10 @@
-package com.aerocat.cloudy.ui
+package dev.ncatt.ota.ui
 
 import android.os.Bundle
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.aerocat.cloudy.R
+import dev.ncatt.ota.R
 
 /**
  * Cloudy internal settings, using the SESL preference fork so the rows match OneUI.

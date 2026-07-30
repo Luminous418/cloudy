@@ -1,10 +1,10 @@
-package com.aerocat.cloudy.ui
+package dev.ncatt.ota.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.aerocat.cloudy.R
-import com.aerocat.cloudy.databinding.ActivityMainBinding
+import dev.ncatt.ota.R
+import dev.ncatt.ota.databinding.ActivityMainBinding
 
 /**
  * OneUI 8 shell:
@@ -21,6 +21,11 @@ class MainActivity : AppCompatActivity() {
     private val settingsFragment by lazy { SettingsFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Must run BEFORE super.onCreate(): AppCompat installs its own Factory2 there, and
+        // LayoutInflaterCompat.setFactory2 throws once a factory is already attached. This is
+        // what pushes the bundled One UI Sans into the library's own CardItemView/Separator
+        // TextViews, which ignore the theme-level fontFamily.
+        OneUiFont.install(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

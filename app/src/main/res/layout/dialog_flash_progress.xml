@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:padding="24dp"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
-    <ProgressBar android:id="@+id/flashBar" style="?android:attr/progressBarStyleHorizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/oui_card_padding_h"
+    android:paddingTop="20dp"
+    android:paddingBottom="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ProgressBar android:id="@+id/flashBar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:indeterminate="true" android:max="100"
         android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <TextView android:id="@+id/flashLabel" android:layout_marginTop="12dp"
-        android:textSize="15sp" android:text="Preparing..."
+
+    <TextView android:id="@+id/flashLabel"
+        style="@style/Cloudy.Text.Title"
+        android:layout_marginTop="16dp"
+        android:text="@string/status_installing"
         android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <TextView android:layout_marginTop="8dp" android:textSize="13sp"
-        android:textColor="?android:attr/textColorSecondary"
-        android:text="Do not unplug or power off the device."
+
+    <TextView
+        style="@style/Cloudy.Text.Body"
+        android:layout_marginTop="6dp"
+        android:textSize="13sp"
+        android:text="@string/flash_warning"
         android:layout_width="match_parent" android:layout_height="wrap_content"/>
 </LinearLayout>

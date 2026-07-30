@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.aerocat.cloudy"
+    namespace = "dev.ncatt.ota"
     compileSdk = 36          // SESL8 requires compileSdk >= 34
 
     defaultConfig {
-        applicationId = "com.aerocat.cloudy"
+        applicationId = "dev.ncatt.ota"
         minSdk = 26
         targetSdk = 34
         versionCode = 80604
