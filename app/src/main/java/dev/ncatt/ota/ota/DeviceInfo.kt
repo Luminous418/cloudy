@@ -34,7 +34,7 @@ object DeviceInfo {
 
     /** Device codename used to build the default OTA manifest URL (e.g. "a32"). */
     val deviceCodename: String
-        get() = getProp("ro.product.device").orEmpty().ifBlank { Build.DEVICE ?: "unknown" }
+        get() = getProp("ro.product.vendor.device").orEmpty().ifBlank { Build.DEVICE ?: "unknown" }
 
     /** A-Only vs A/B, detected from the ROM slot suffix property. */
     val isAOnly: Boolean get() = getProp("ro.boot.slot_suffix").isNullOrEmpty()

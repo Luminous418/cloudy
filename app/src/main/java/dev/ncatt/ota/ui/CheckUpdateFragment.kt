@@ -324,7 +324,7 @@ class CheckUpdateFragment : Fragment() {
     companion object {
         /**
          * Default manifest location. The device codename is auto-detected from
-         * `ro.product.device` (falling back to Build.DEVICE), e.g. .../16.2/a32.json
+         * `ro.product.vendor.device` (falling back to Build.DEVICE), e.g. .../16.2/a32.json
          */
         private const val OTA_BASE = "https://raw.githubusercontent.com/Luminous418/cloudy-app/refs/heads/main/updater"
         val DEFAULT_JSON_URL: String get() = "$OTA_BASE/${DeviceInfo.deviceCodename}.json"
