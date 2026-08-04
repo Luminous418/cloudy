@@ -1,0 +1,33 @@
+{
+  "rom_name": "LumiROM",
+  "maintainer": {
+    "name": "Lumi",
+    "handle": "@Luminous418",
+    "device": "Samsung Galaxy A32 4G",
+    "codename": "a32",
+    "avatar_url": "https://avatars.githubusercontent.com/u/107070993?v=4",
+    "telegram": "https://t.me/LumiROMs",
+    "donate_url": "https://paypal.me/aerocat"
+  },
+  "release": {
+    "version": "8.6.2",
+    "version_code": 80602,
+    "build_date": "2026-05-12",
+    "android_version": "16 (Baklava)",
+    "security_patch": "2026-04-05",
+    "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+    "device_model": "SM-A325F",
+    "kernel_version": "4.14.357",
+    "partition_layout": "a-only",
+    "changelog": [
+      "New base"
+    ],
+    "download": {
+      "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.2/SM-A325F/LumiROM_8.6.2-12052026_a32.zip?download=true",
+      "filename": "LumiROM_8.6.2-12052026_a32.zip",
+      "size_bytes": 4579527902,
+      "sha256": "9e32d9a3737295249cfe55483f33b07202aa5349c4815a60bec5b3153126ac02",
+      "install_type": "recovery_zip"
+      }
+    }
+}
