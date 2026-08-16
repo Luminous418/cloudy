@@ -49,7 +49,7 @@ If `keystore.properties` is missing, the release build falls back to debug signi
 The app reads a manifest by default from:
 
 ```
-https://raw.githubusercontent.com/Luminous418/cloudy-app/refs/heads/main/updater/<codename>.json
+https://raw.githubusercontent.com/Luminous418/cloudy/refs/heads/main/updater/<codename>.json
 ```
 
 Notes:
@@ -103,11 +103,19 @@ For Cloudy to install as a system app on a Samsung ROM (One UI 8.x / Android 16)
 
 ### Build script
 
-Path should be like this:
+On LumiROM builds all the Cloudy integration is handled by a single dedicated script: `scripts/Cloudy.sh` (function `ADD_CLOUDY`), called from `build_local.sh`. It:
 
-- `system/system/priv-app/Cloudy/Cloudy.apk`
-- `system/system/etc/permissions/privapp-permissions-cloudy.xml`
-- `system/system/etc/sysconfig/cloudy-allowed-preload.xml`
+- Downloads (and caches) the APK + the two XML files above into `LumiROM/Mods/Cloudy/`, then copies them into the firmware:
+
+  ```
+  system/system/priv-app/Cloudy/Cloudy.apk
+  system/system/etc/permissions/privapp-permissions-cloudy.xml
+  system/system/etc/sysconfig/cloudy-allowed-preload.xml
+  ```
+
+- Copies the baked readiness marker and boot init file:
+  `system/system/etc/cloudy_ready` and `system/system/etc/init/cloudy.rc` (creates `/cache/recovery` + `/data/media/0/cloudy` at `post-fs-data`).
+- Appends the SELinux rules to `system_ext_sepolicy.cil` (same content as the Magisk module's `sepolicy.rule`), so no module is needed on LumiROM.
 
 ### Magisk module (optional)
 
