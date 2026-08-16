@@ -1,0 +1,80 @@
+{
+  "rom_name": "LumiROM",
+  "maintainer": {
+    "name": "Lumi",
+    "handle": "@Luminous418",
+    "device": "Samsung Galaxy F22",
+    "codename": "f22",
+    "avatar_url": "https://avatars.githubusercontent.com/u/107070993?v=4",
+    "telegram": "https://t.me/LumiROMs",
+    "donate_url": "https://buymeacoffee.com/luminous418"
+  },
+  "releases": [
+    {
+      "version": "8.6.3",
+      "version_code": 80603,
+      "build_date": "2026-08-11",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-E225F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "New base and new OTA Updater app"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.3/SM-E225F/LumiROM_8.6.3-11082026_OFFICIAL_f22.zip?download=true",
+        "filename": "LumiROM_8.6.3-11082026_OFFICIAL_f22.zip",
+        "size_bytes": 4305476072,
+        "sha256": "db2e2e20188d912ace19aed057219d9f179da3eb46dae561f0dfbbfef12647c1",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.6.2",
+      "version_code": 80602,
+      "build_date": "2026-05-12",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-04-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-E225F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "AI features has been added"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.2/SM-E225F/LumiROM_8.6.2-12052026_f22.zip?download=true",
+        "filename": "LumiROM_8.6.2-12052026_f22.zip",
+        "size_bytes": 4295090499,
+        "sha256": "c67368b299b6527aebd822d469f0376e3b74b85938f1c5c2055445cde6326fd9",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.6.1",
+      "version_code": 80601,
+      "build_date": "2026-05-02",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-04-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-E225F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed app crashing, added new walls, mods to qs and new base"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.1/SM-E225F/LumiROM_8.6.1-02052026_f22.zip?download=true",
+        "filename": "LumiROM_8.6.1-02052026_f22.zip",
+        "size_bytes": 3683910228,
+        "sha256": "3cf58d4f30e412ac8908e7b256983edea43f5ee8ed4e72576ac8bc6ab13095a1",
+        "install_type": "recovery_zip"
+      }
+    }
+  ]
+}
