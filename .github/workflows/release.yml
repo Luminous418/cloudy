@@ -35,14 +35,23 @@ jobs:
           KEY_PASS: ${{ secrets.KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         run: |
-          if [ -n "$KEYSTORE_B64" ]; then
-            printf '%s' "$KEYSTORE_B64" | base64 -d > release.jks
-            printf 'storeFile=release.jks\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' \
-              "$STORE_PASS" "${KEY_PASS:-$STORE_PASS}" "$KEY_ALIAS" > keystore.properties
-            echo "Release keystore configured"
-          else
-            echo "No RELEASE_KEYSTORE secret; the release APK will be debug-signed"
+          if [ -z "$KEYSTORE_B64" ]; then
+            echo "::warning::No RELEASE_KEYSTORE secret; the release APK will be debug-signed."
+            exit 0
           fi
+          printf '%s' "$KEYSTORE_B64" | base64 -d > release.jks
+          ALIAS="${KEY_ALIAS:-cloudy}"
+          keytool -list -keystore release.jks -storepass "$STORE_PASS" >/tmp/ks_list.txt 2>&1 || {
+            echo "::error::Cannot open keystore. Check RELEASE_KEYSTORE and KEYSTORE_PASSWORD secrets."
+            cat /tmp/ks_list.txt; exit 1
+          }
+          if ! grep -q "$ALIAS" /tmp/ks_list.txt; then
+            echo "::error::Alias '$ALIAS' not found in the keystore. Check the KEY_ALIAS secret."
+            cat /tmp/ks_list.txt; exit 1
+          fi
+          printf 'storeFile=release.jks\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' \
+            "$STORE_PASS" "${KEY_PASS:-$STORE_PASS}" "$ALIAS" > keystore.properties
+          echo "Release keystore configured (alias=$ALIAS)"
 
       - name: Build
         env:
