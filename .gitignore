@@ -9,6 +9,10 @@ captures/
 # Local Android SDK / machine-specific paths
 local.properties
 
+# Release signing (never commit the keystore or its passwords)
+keystore.properties
+*.jks
+
 # IDE
 .idea/
 *.iml

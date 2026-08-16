@@ -26,11 +26,29 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      # Real signing key comes from repo secrets. When the secrets are not configured,
+      # the build falls back to the debug keystore (build.gradle.kts handles both).
+      - name: Setup release keystore
+        env:
+          KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE }}
+          STORE_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASS: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            printf '%s' "$KEYSTORE_B64" | base64 -d > release.jks
+            printf 'storeFile=release.jks\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' \
+              "$STORE_PASS" "${KEY_PASS:-$STORE_PASS}" "$KEY_ALIAS" > keystore.properties
+            echo "Release keystore configured"
+          else
+            echo "No RELEASE_KEYSTORE secret; the release APK will be debug-signed"
+          fi
+
       - name: Build
         env:
           GPR_USER: ${{ secrets.GPR_USER }}
           GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
-        run: chmod +x gradlew && ./gradlew assembleDebug --no-configuration-cache
+        run: chmod +x gradlew && ./gradlew assembleRelease --no-configuration-cache
 
       # Git ref rules: no spaces/~^:?*[\, no leading ./-, no trailing ., no "..", non-empty.
       - name: Sanitize tag
@@ -58,7 +76,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${{ steps.sanitize.outputs.tag }}" \
-            app/build/outputs/apk/debug/app-debug.apk \
+            app/build/outputs/apk/release/app-release.apk \
             --title "${{ inputs.name }}" \
             --notes-file notes.md \
             --target "${GITHUB_SHA}"

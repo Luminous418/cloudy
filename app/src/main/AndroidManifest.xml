@@ -59,6 +59,7 @@
             <meta-data android:name="com.samsung.settings.order" android:value="150" />
         </activity>
 
-        <service android:name=".ota.CloudyRootService" android:exported="false" />
+        <service android:name=".ota.CloudyRootService" android:exported="false"
+            tools:ignore="Instantiatable" />
     </application>
 </manifest>
