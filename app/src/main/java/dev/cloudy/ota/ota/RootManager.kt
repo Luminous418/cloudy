@@ -21,9 +21,16 @@ object RootManager {
     /** True only if a real root shell is available (Magisk / KernelSU / other su). */
     fun hasRoot(): Boolean = Shell.getShell().isRoot
 
-    /** The module drops this marker in post-fs-data.sh so the app can confirm its rules are live. */
+    /** Baked-ROM marker: dropped at /system/etc when the ROM provides Cloudy's SELinux rules + staging dirs itself. */
+    private const val BAKED_MARKER = "/system/etc/cloudy_ready"
+
+    /**
+     * True when the environment has Cloudy's SELinux rules live. Either the ROM bakes them
+     * (marker file in /system/etc) or the Magisk/KernelSU module dropped its readiness marker.
+     */
     fun cloudyModulePresent(): Boolean {
         val paths = listOf(
+            BAKED_MARKER,
             "/data/adb/modules/cloudy_ota/module.prop",
             "/data/adb/modules/cloudy_ota/cloudy_ready"
         )

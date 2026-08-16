@@ -21,6 +21,7 @@ class CloudyRootService : LibsuRootService() {
         }.getOrDefault("")
 
         override fun moduleReady(): Boolean =
+            File("/system/etc/cloudy_ready").exists() ||
             File("/data/adb/modules/cloudy_ota/cloudy_ready").exists() ||
             File("/data/adb/modules/cloudy_ota/module.prop").exists()
 
