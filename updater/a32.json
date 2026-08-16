@@ -25,7 +25,7 @@
         "New base and new OTA Updater app"
       ],
       "download": {
-        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.3/SM-A325F/11082026-1786475594-A32_to_/LumiROM_8.6.3-11082026_OFFICIAL_a32.zip?download=true",
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.3/SM-A325F/LumiROM_8.6.3-11082026_OFFICIAL_a32.zip?download=true",
         "filename": "LumiROM_8.6.3-11082026_OFFICIAL_a32.zip",
         "size_bytes": 4590503197,
         "install_type": "recovery_zip"
