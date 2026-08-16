@@ -1,0 +1,64 @@
+name: Release app
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Release and tag name."
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build
+        env:
+          GPR_USER: ${{ secrets.GPR_USER }}
+          GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
+        run: chmod +x gradlew && ./gradlew assembleDebug --no-configuration-cache
+
+      # Git ref rules: no spaces/~^:?*[\, no leading ./-, no trailing ., no "..", non-empty.
+      - name: Sanitize tag
+        id: sanitize
+        run: |
+          RAW="${{ inputs.name }}"
+          TAG="$(printf '%s' "$RAW" | sed 's/[^A-Za-z0-9._-]/-/g; s/\.\.//g; s/^-*//; s/[-.]*$//')"
+          if [ -z "$TAG" ]; then TAG="release-$(date +%Y%m%d%H%M%S)"; fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Using tag: $TAG (from \"$RAW\")"
+
+      - name: Generate release notes (commits)
+        run: |
+          PREV="$(git describe --tags --abbrev=0 2>/dev/null || true)"
+          if [ -n "$PREV" ]; then RANGE="$PREV..HEAD"; else RANGE="HEAD"; fi
+          {
+            echo "## Commits"
+            echo ""
+            git log "$RANGE" --oneline --format='* %h %s'
+          } > notes.md
+          cat notes.md
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.sanitize.outputs.tag }}" \
+            app/build/outputs/apk/debug/app-debug.apk \
+            --title "${{ inputs.name }}" \
+            --notes-file notes.md \
+            --target "${GITHUB_SHA}"
