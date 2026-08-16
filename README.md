@@ -1,6 +1,6 @@
 # Cloudy
 
-OTA client for **LumiROM** on the Samsung Galaxy A32 4G (`a32`, A-only). Checks for updates, downloads the ROM from the configured server and triggers installation in recovery.
+OTA client for **LumiROM** series. Checks for updates, downloads the ROM from the configured server and triggers installation in recovery.
 
 > Current integration status: the app installs as a **system priv-app** inside the ROM, with its privileged permissions and its entry in Samsung's *allowlist*. The whole pipeline (build, signing, release, ROM integration) lives in this repo.
 
