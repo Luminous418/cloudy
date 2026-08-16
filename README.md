@@ -52,45 +52,6 @@ The app reads a manifest by default from:
 https://raw.githubusercontent.com/Luminous418/cloudy-app/refs/heads/main/updater/<codename>.json
 ```
 
-Schema:
-
-```jsonc
-{
-  "rom_name": "LumiROM",
-  "maintainer": {
-    "name": "Lumi",
-    "handle": "@Luminous418",
-    "device": "Samsung Galaxy A32 4G",
-    "codename": "a32",
-    "avatar_url": "https://.../avatar.png",   // optional
-    "telegram": "https://t.me/LumiROMs",       // optional
-    "donate_url": "https://paypal.me/aerocat"  // optional
-  },
-  "releases": [
-    {
-      "version": "8.6.3",
-      "version_code": 80603,                    // compared against ro.cloudy.rom.ver.code
-      "build_date": "2026-08-11",
-      "android_version": "16",
-      "oneui_version": "80500",                 // "80500" -> "8.5" in the UI
-      "security_patch": "2026-08-01",
-      "build_fingerprint": "samsung/a32x/...",
-      "device_model": "SM-A325F",
-      "kernel_version": "5.10.x",
-      "partition_layout": "a-only",
-      "changelog": ["line 1", "line 2"],
-      "download": {
-        "url": "https://.../LumiROM_8.6.3.zip",
-        "filename": "LumiROM_8.6.3.zip",
-        "size_bytes": 2147483648,
-        "sha256": "0123...abcd",                // optional but recommended
-        "install_type": "recovery_zip"          // "recovery_zip" | "raw_image"
-      }
-    }
-  ]
-}
-```
-
 Notes:
 - `oneui_version` is the raw value of `ro.build.version.oneui` (`80500`); the app formats it as `8.5` (the fifth digit is dropped when `0`).
 - `releases` may be ordered newest to oldest; the app marks the installed version.
@@ -142,7 +103,7 @@ For Cloudy to install as a system app on a Samsung ROM (One UI 8.x / Android 16)
 
 ### Build script
 
-[`LumiROM/scripts/Mods.sh`](https://github.com/Luminous418/LumiROM) already downloads and integrates the three files from this repo (APK from the latest release, whitelist and allowlist from `main`) into the baked ROM:
+Path should be like this:
 
 - `system/system/priv-app/Cloudy/Cloudy.apk`
 - `system/system/etc/permissions/privapp-permissions-cloudy.xml`
