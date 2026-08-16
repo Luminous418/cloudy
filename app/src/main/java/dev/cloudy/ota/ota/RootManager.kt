@@ -21,6 +21,14 @@ object RootManager {
     /** True only if a real root shell is available (Magisk / KernelSU / other su). */
     fun hasRoot(): Boolean = Shell.getShell().isRoot
 
+    /**
+     * Warm up the root shell in the background. MUST go through this object so the
+     * [init] builder is set before the main shell is created - calling Shell.getShell
+     * directly first (e.g. from Application.onCreate) makes setDefaultBuilder throw
+     * "The main shell was already created" on the first real use.
+     */
+    fun preload() = Shell.getShell { }
+
     /** Baked-ROM marker: dropped at /system/etc when the ROM provides Cloudy's SELinux rules + staging dirs itself. */
     private const val BAKED_MARKER = "/system/etc/cloudy_ready"
 

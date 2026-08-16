@@ -43,9 +43,17 @@
 
     <string name="btn_check">Check for updates</string>
     <string name="btn_download">Download and install</string>
+    <string name="btn_flash_local">Flash ROM from storage</string>
     <string name="btn_telegram">Telegram</string>
     <string name="btn_donate">Donate</string>
 
     <string name="unknown_maintainer">Unknown maintainer</string>
     <string name="flash_warning">Do not unplug or power off the device.</string>
+
+    <!-- Local ROM flash from storage -->
+    <string name="status_copying">Copying ROM to app storage</string>
+    <string name="status_copying_sub">Large files may take a while</string>
+    <string name="dlg_flash_local_title">Flash %1$s?</string>
+    <string name="dlg_flash_local_msg">This copies the selected ROM to /data, then reboots your device into recovery to apply it. Recovery applies the package with its own fail-safes.\n\nMake sure the battery is charged and do not interrupt the reboot. Only continue if you understand the risk.</string>
+    <string name="dlg_flash_confirm">I understand, flash</string>
 </resources>

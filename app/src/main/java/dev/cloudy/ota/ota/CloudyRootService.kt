@@ -34,7 +34,8 @@ class CloudyRootService : LibsuRootService() {
                     "chmod 0644 '$staged'",
                     "mkdir -p /cache/recovery",
                     "printf '%s\\n' '--update_package=$staged' '--wipe_cache' > /cache/recovery/command",
-                    "chmod 0644 /cache/recovery/command",
+                    "printf '%s\\n' 'install $staged' 'reboot system' > /cache/recovery/openrecoveryscript",
+                    "chmod 0644 /cache/recovery/command /cache/recovery/openrecoveryscript",
                     "sync"
                 )
                 ""
@@ -81,7 +82,13 @@ class CloudyRootService : LibsuRootService() {
         }.getOrDefault(false)
 
         private fun resolveByName(name: String): String? {
-            for (base in listOf("/dev/block/by-name", "/dev/block/bootdevice/by-name")) {
+            // Dynamic-partition (super) devices expose logical partitions via device-mapper;
+            // Samsung A-series also keeps some physical ones under /dev/block/by-name.
+            for (base in listOf(
+                "/dev/block/mapper",
+                "/dev/block/by-name",
+                "/dev/block/bootdevice/by-name"
+            )) {
                 val f = File("$base/$name")
                 if (f.exists()) return f.absolutePath
             }

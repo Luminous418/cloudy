@@ -1,6 +1,11 @@
 package dev.cloudy.ota.ui
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +64,7 @@ class CheckUpdateFragment : Fragment() {
         b.btnCheck.setOnClickListener { check() }
         b.rowVersionPicker.setOnClickListener { showBuildPicker() }
         b.btnDownload.setOnClickListener { selectedRelease()?.let { downloadAndInstall(it.download) } }
+        b.btnFlashLocal.setOnClickListener { pickLocalRom() }
         check()
     }
 
@@ -379,6 +385,101 @@ class CheckUpdateFragment : Fragment() {
         _b = null
     }
 
+    /**
+     * Flash a ROM picked from internal storage: SAF picker -> copy into the app's own
+     * external dir (the root worker needs a real path, not a content:// URI) -> scary
+     * confirmation -> raw flash to /system with progress.
+     */
+    private fun pickLocalRom() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+        }
+        startActivityForResult(intent, REQUEST_PICK_ROM)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_PICK_ROM && resultCode == Activity.RESULT_OK) {
+            data?.data?.let(::onRomPicked)
+            return
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun onRomPicked(uri: Uri) {
+        val ctx = requireContext()
+        val name = queryDisplayName(ctx, uri) ?: "rom.zip"
+        val baseDir = ctx.getExternalFilesDir(null)
+        if (baseDir == null) {
+            setHero(R.drawable.ic_status_error, getString(R.string.status_failed), "External storage unavailable")
+            return
+        }
+        val dest = File(File(baseDir, LOCAL_ROM_DIR), name)
+        setHero(R.drawable.ic_status_available, getString(R.string.status_copying), getString(R.string.status_copying_sub))
+        b.downloadBar.isIndeterminate = true
+        b.downloadBar.visibility = View.VISIBLE
+        b.btnFlashLocal.isEnabled = false
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val ok = withContext(Dispatchers.IO) {
+                runCatching {
+                    dest.parentFile?.mkdirs()
+                    ctx.contentResolver.openInputStream(uri)?.use { input ->
+                        dest.outputStream().use { out -> input.copyTo(out) }
+                    } != null
+                }.getOrDefault(false)
+            }
+            val v = _b ?: return@launch
+            v.downloadBar.visibility = View.GONE
+            v.btnFlashLocal.isEnabled = true
+            if (ok) confirmLocalFlash(dest)
+            else setHero(R.drawable.ic_status_error, getString(R.string.status_failed), "Couldn't copy the selected file")
+        }
+    }
+
+    private fun queryDisplayName(context: Context, uri: Uri): String? =
+        context.contentResolver.query(uri, null, null, null, null)?.use { c ->
+            val idx = c.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            if (idx >= 0 && c.moveToFirst()) c.getString(idx) else null
+        }
+
+    /** Same warning as [confirmRawFlash], but for a ROM picked from storage. */
+    private fun confirmLocalFlash(pkg: File) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.dlg_flash_local_title, pkg.name))
+            .setMessage(R.string.dlg_flash_local_msg)
+            .setPositiveButton(R.string.dlg_flash_confirm) { _, _ -> installLocal(pkg) }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    /**
+     * LumiROM ships as a recovery_zip, so a locally picked ROM goes through the same
+     * recovery staging as a downloaded build: copy to /data, write /cache/recovery/command
+     * and reboot - recovery applies the package (safer than a raw dd on an A-only device).
+     */
+    private fun installLocal(pkg: File) {
+        setHero(R.drawable.ic_status_available, getString(R.string.status_installing), "")
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                OtaInstaller(requireContext().applicationContext).rootStageRecovery(pkg)
+            }
+            val v = _b ?: return@launch
+            when (result) {
+                is InstallResult.StagedRebootingToRecovery ->
+                    setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
+                is InstallResult.NeedsRoot -> {
+                    setHero(R.drawable.ic_status_error, "Root required", "Root + Cloudy module required (${result.why})")
+                    v.btnFlashLocal.isEnabled = true
+                }
+                is InstallResult.Failed -> {
+                    setHero(R.drawable.ic_status_error, "Install failed", result.why)
+                    v.btnFlashLocal.isEnabled = true
+                }
+            }
+        }
+    }
+
     private data class LocalInfo(
         val installed: String,
         val model: String,
@@ -396,5 +497,8 @@ class CheckUpdateFragment : Fragment() {
          */
         private const val OTA_BASE = "https://raw.githubusercontent.com/Luminous418/cloudy/refs/heads/main/updater"
         val DEFAULT_JSON_URL: String get() = "$OTA_BASE/${DeviceInfo.deviceCodename}.json"
+
+        private const val REQUEST_PICK_ROM = 71
+        private const val LOCAL_ROM_DIR = "roms"
     }
 }

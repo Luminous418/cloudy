@@ -48,13 +48,17 @@ class OtaInstaller(private val context: Context) {
         // Recovery expects the package on a partition it can read early. /data/media/0 (== internal
         // /sdcard) is standard for sideload-style OTAs on A-only Samsung.
         val staged = "/data/media/0/cloudy/${pkg.name}"
+        // Two automation files so both recoveries pick it up:
+        //  - /cache/recovery/command        -> stock/OEM recovery (--update_package)
+        //  - /cache/recovery/openrecoveryscript -> TWRP, executed automatically at boot
         val commands = """
             mkdir -p /data/media/0/cloudy
             cp '${pkg.absolutePath}' '$staged'
             chmod 0644 '$staged'
             mkdir -p /cache/recovery
             printf '%s\n' '--update_package=$staged' '--wipe_cache' > /cache/recovery/command
-            chmod 0644 /cache/recovery/command
+            printf '%s\n' 'install $staged' 'reboot system' > /cache/recovery/openrecoveryscript
+            chmod 0644 /cache/recovery/command /cache/recovery/openrecoveryscript
             sync
         """.trimIndent()
 
@@ -83,7 +87,8 @@ class OtaInstaller(private val context: Context) {
 
         val safe = target.filter { it.isLetterOrDigit() || it == '_' }
         val cmd = """
-            BN=/dev/block/by-name/$safe
+            BN=/dev/block/mapper/$safe
+            [ -e "${'$'}BN" ] || BN=/dev/block/by-name/$safe
             [ -e "${'$'}BN" ] || BN=/dev/block/bootdevice/by-name/$safe
             [ -e "${'$'}BN" ] || { echo "NO_PARTITION"; exit 1; }
             dd if='${pkg.absolutePath}' of="${'$'}BN" bs=8M conv=fsync
