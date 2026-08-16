@@ -8,8 +8,10 @@
     <string name="tab_settings">Settings</string>
 
     <string name="sep_status">Status</string>
-    <string name="sep_available">Available build</string>
+    <string name="sep_available">Available builds</string>
     <string name="sep_changelog">Changelog</string>
+    <string name="f_select_build">Select build</string>
+    <string name="dlg_ok">OK</string>
     <string name="sep_device">This device</string>
     <string name="sep_details">Details</string>
     <string name="sep_contact">Contact</string>
@@ -18,6 +20,7 @@
     <string name="f_build_date">Build date</string>
     <string name="f_size">Download size</string>
     <string name="f_android">Android version</string>
+    <string name="f_oneui">OneUI version</string>
     <string name="f_patch">Security patch</string>
     <string name="f_fingerprint">Build fingerprint</string>
     <string name="f_installed">Installed version</string>

@@ -9,25 +9,301 @@
     "telegram": "https://t.me/LumiROMs",
     "donate_url": "https://paypal.me/aerocat"
   },
-  "release": {
-    "version": "8.6.2",
-    "version_code": 80602,
-    "build_date": "2026-05-12",
-    "android_version": "16 (Baklava)",
-    "security_patch": "2026-04-05",
-    "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
-    "device_model": "SM-A325F",
-    "kernel_version": "4.14.357",
-    "partition_layout": "a-only",
-    "changelog": [
-      "New base"
-    ],
-    "download": {
-      "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.2/SM-A325F/LumiROM_8.6.2-12052026_a32.zip?download=true",
-      "filename": "LumiROM_8.6.2-12052026_a32.zip",
-      "size_bytes": 4579527902,
-      "sha256": "9e32d9a3737295249cfe55483f33b07202aa5349c4815a60bec5b3153126ac02",
-      "install_type": "recovery_zip"
+  "releases": [
+    {
+      "version": "8.6.3",
+      "version_code": 80603,
+      "build_date": "2026-08-11",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "New base and new OTA Updater app"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.3/SM-A325F/11082026-1786475594-A32_to_/LumiROM_8.6.3-11082026_OFFICIAL_a32.zip?download=true",
+        "filename": "LumiROM_8.6.3-11082026_OFFICIAL_a32.zip",
+        "size_bytes": 4590503197,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.6.2",
+      "version_code": 80602,
+      "build_date": "2026-05-12",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-04-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "AI features has been added"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.2/SM-A325F/LumiROM_8.6.2-12052026_a32.zip?download=true",
+        "filename": "LumiROM_8.6.2-12052026_a32.zip",
+        "size_bytes": 4579527902,
+        "sha256": "9e32d9a3737295249cfe55483f33b07202aa5349c4815a60bec5b3153126ac02",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.6.1",
+      "version_code": 80601,
+      "build_date": "2026-05-02",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-04-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed app crashing, added new walls, mods to qs and new base"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.1/SM-A325F/LumiROM_8.6.1-02052026_a32.zip?download=true",
+        "filename": "LumiROM_8.6.1-02052026_a32.zip",
+        "size_bytes": 4034311470,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.5.0",
+      "version_code": 80500,
+      "build_date": "2026-02-09",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-01-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346EXXUCFZA4:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "First OneUi 8.5 rom and fixed ril, cam, kernel, nfc, fod"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.5.0/SM-A325F/LumiROM_8.5.0-09022026_a32.zip?download=true",
+        "filename": "LumiROM_8.5.0-09022026_a32.zip",
+        "size_bytes": 4067066501,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.3.1",
+      "version_code": 80301,
+      "build_date": "2025-12-29",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80000",
+      "security_patch": "2025-12-05",
+      "build_fingerprint": "samsung/a34xdxx/a34x:16/BP2A.250605.031.A3/A346EXXSBEYK3:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed call recents on phone app, added new game settings, and new ai wallpapers to try"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.3.1/SM-A325F/LumiROM_8.3.1-29122025_a32.zip?download=true",
+        "filename": "LumiROM_8.3.1-29122025_a32.zip",
+        "size_bytes": 3508016582,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.3.0",
+      "version_code": 80300,
+      "build_date": "2025-12-25",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80000",
+      "security_patch": "2025-12-05",
+      "build_fingerprint": "samsung/a34xdxx/a34x:16/BP2A.250605.031.A3/A346EXXSBEYK3:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed Now Brief and clock selection on lockscreen, now ROM is EROFS"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.3.0/SM-A325F/LumiROM_8.3.0-25122025_a32.zip?download=true",
+        "filename": "LumiROM_8.3.0-25122025_a32.zip",
+        "size_bytes": 3418255787,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.2.5",
+      "version_code": 80205,
+      "build_date": "2025-12-02",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80000",
+      "security_patch": "2025-11-05",
+      "build_fingerprint": "samsung/a34xdxx/a34x:16/BP2A.250605.031.A3/A346EXXUAEYI7:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed accesibility"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.2.5/SM-A325F/LumiROM_8.2.5-02122025_a32.zip?download=true",
+        "filename": "LumiROM_8.2.5-02122025_a32.zip",
+        "size_bytes": 3097320528,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.2.0",
+      "version_code": 80200,
+      "build_date": "2025-11-22",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80000",
+      "security_patch": "2025-11-05",
+      "build_fingerprint": "samsung/a34xdxx/a34x:16/BP2A.250605.031.A3/A346EXXUAEYI7:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed VoLTE"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.2.0/SM-A325F/LumiROM_8.2.0-22112025_a32.zip?download=true",
+        "filename": "LumiROM_8.2.0-22112025_a32.zip",
+        "size_bytes": 4462556437,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.1.1",
+      "version_code": 80101,
+      "build_date": "2025-11-14",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80000",
+      "security_patch": "2025-10-05",
+      "build_fingerprint": "samsung/a34xdxx/a34x:16/BP2A.250605.031.A3/A346EXXUAEYI7:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed SSRM, portrait camera and OneUI home crash"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.1.1/SM-A325F/LumiROM_8.1.1-14112025_a32.zip?download=true",
+        "filename": "LumiROM_8.1.1-14112025_a32.zip",
+        "size_bytes": 3447986787,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.1.0",
+      "version_code": 80100,
+      "build_date": "2025-11-03",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80000",
+      "security_patch": "2025-10-05",
+      "build_fingerprint": "samsung/a34xdxx/a34x:16/BP2A.250605.031.A3/A346EXXUAEYI7:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed background crashes"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.1.0/SM-A325F/LumiROM_8.1.0-03112025_a32.zip?download=true",
+        "filename": "LumiROM_8.1.0-03112025_a32.zip",
+        "size_bytes": 3437025909,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.0.1",
+      "version_code": 80001,
+      "build_date": "2025-10-25",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80000",
+      "security_patch": "2025-10-05",
+      "build_fingerprint": "samsung/a34xdxx/a34x:16/BP2A.250605.031.A3/A346EXXUAEYI7:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed sound on device"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.0.1/SM-A325F/LumiROM_8.0.1-25102025_a32.zip?download=true",
+        "filename": "LumiROM_8.0.1-25102025_a32.zip",
+        "size_bytes": 3251386619,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "8.0.0",
+      "version_code": 80000,
+      "build_date": "2025-10-24",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80000",
+      "security_patch": "2025-10-05",
+      "build_fingerprint": "samsung/a34xdxx/a34x:16/BP2A.250605.031.A3/A346EXXUAEYI7:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Initial 8.0 release"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.0.0/SM-A325F/LumiROM_8.0.0-24102025_a32.zip?download=true",
+        "filename": "LumiROM_8.0.0-24102025_a32.zip",
+        "size_bytes": 3254910702,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "7.0.2",
+      "version_code": 70002,
+      "build_date": "2025-07-21",
+      "android_version": "15 (Vanilla Ice Cream)",
+      "oneui_version": "70000",
+      "security_patch": "2025-07-05",
+      "build_fingerprint": "samsung/r11sxxx/essi:15/AP3A.240905.015.A2/S711BXXS8EYEA:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Bug fixes"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/7.0.2/SM-A325F/LumiROM_7.0.2-21072025_a32.zip?download=true",
+        "filename": "LumiROM_7.0.2-21072025_a32.zip",
+        "size_bytes": 3123113420,
+        "install_type": "recovery_zip"
+      }
+    },
+    {
+      "version": "7.0.1",
+      "version_code": 70001,
+      "build_date": "2025-07-15",
+      "android_version": "15 (Vanilla Ice Cream)",
+      "oneui_version": "70000",
+      "security_patch": "2025-07-05",
+      "build_fingerprint": "samsung/r11sxxx/essi:15/AP3A.240905.015.A2/S711BXXS8EYEA:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Initial 7.0 release"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/7.0.1/SM-A325F/LumiROM_7.0.1-15072025_a32.zip?download=true",
+        "filename": "LumiROM_7.0.1-15072025_a32.zip",
+        "size_bytes": 3120431580,
+        "install_type": "recovery_zip"
       }
     }
+  ]
 }

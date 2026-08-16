@@ -1,0 +1,25 @@
+# Gradle / build outputs
+.gradle/
+build/
+.kotlin/
+captures/
+*.apk
+*.aab
+
+# Local Android SDK / machine-specific paths
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Native
+.cxx/
+.externalNativeBuild/
+
+# Misc
+.DS_Store
+*~
+*.swp

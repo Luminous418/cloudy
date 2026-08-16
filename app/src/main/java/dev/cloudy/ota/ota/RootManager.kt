@@ -1,4 +1,4 @@
-package dev.ncatt.ota.ota
+package dev.cloudy.ota.ota
 
 import com.topjohnwu.superuser.Shell
 

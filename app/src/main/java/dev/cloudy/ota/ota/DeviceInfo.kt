@@ -1,4 +1,4 @@
-package dev.ncatt.ota.ota
+package dev.cloudy.ota.ota
 
 import android.os.Build
 import java.io.File
@@ -31,6 +31,9 @@ object DeviceInfo {
 
     /** Maintainer name baked into the ROM: `ro.cloudy.maintainer`. */
     val maintainer: String get() = getProp(PROP_MAINTAINER).orEmpty()
+
+    /** Samsung One UI build stamp, e.g. "80500" → formatted as "8.5" by the UI. */
+    val oneUiVersion: String get() = getProp("ro.build.version.oneui").orEmpty()
 
     /** Device codename used to build the default OTA manifest URL (e.g. "a32"). */
     val deviceCodename: String

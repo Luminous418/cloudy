@@ -1,17 +1,22 @@
-package dev.ncatt.ota.ui
+package dev.cloudy.ota.ui
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Outline
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewOutlineProvider
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import dev.ncatt.ota.R
-import dev.ncatt.ota.data.UpdateRepository
-import dev.ncatt.ota.databinding.FragmentMaintainerBinding
-import dev.ncatt.ota.ota.DeviceInfo
+import dev.cloudy.ota.R
+import dev.cloudy.ota.data.UpdateRepository
+import dev.cloudy.ota.databinding.FragmentMaintainerBinding
+import dev.cloudy.ota.ota.DeviceInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -64,6 +69,7 @@ class MaintainerFragment : Fragment() {
                     v.rom.summary = m.romName
                     v.btnTelegram.setOnClickListener { open(mt.telegram) }
                     v.btnDonate.setOnClickListener { open(mt.donateUrl) }
+                    loadAvatar(v, mt.avatarUrl)
                 }
                 .onFailure { t ->
                     _b?.handle?.text = UpdateRepository.describe(t)
@@ -75,6 +81,40 @@ class MaintainerFragment : Fragment() {
         if (url.isNullOrBlank()) return
         runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
     }
+
+    /**
+     * Replaces the default hero glyph with the maintainer's avatar when the manifest
+     * provides an avatar_url. The photo fills the halo circle (kept as a ring via margins)
+     * and is clipped to an oval; on any failure the cloud placeholder stays untouched.
+     */
+    private fun loadAvatar(v: FragmentMaintainerBinding, url: String?) {
+        if (url.isNullOrBlank()) return
+        viewLifecycleOwner.lifecycleScope.launch {
+            val bmp = withContext(Dispatchers.IO) { fetchAvatar(url) }
+            val img = _b?.avatar ?: return@launch
+            if (bmp == null) return@launch
+            img.setImageBitmap(bmp)
+            img.scaleType = ImageView.ScaleType.CENTER_CROP
+            img.clipToOutline = true
+            img.outlineProvider = object : ViewOutlineProvider() {
+                override fun getOutline(view: View, outline: Outline) {
+                    outline.setOval(0, 0, view.width, view.height)
+                }
+            }
+            // Grow to the full halo so the avatar IS the circle, leaving the accent ring.
+            (img.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                width = ViewGroup.LayoutParams.MATCH_PARENT
+                height = ViewGroup.LayoutParams.MATCH_PARENT
+                setMargins(12, 12, 12, 12)
+                img.layoutParams = this
+            }
+        }
+    }
+
+    private suspend fun fetchAvatar(url: String): Bitmap? =
+        repo.fetchImageBytes(url)?.let { bytes ->
+            runCatching { BitmapFactory.decodeByteArray(bytes, 0, bytes.size) }.getOrNull()
+        }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -1,4 +1,4 @@
-package dev.ncatt.ota.ui
+package dev.cloudy.ota.ui
 
 import android.content.Context
 import android.graphics.Typeface
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.LayoutInflaterCompat
-import dev.ncatt.ota.R
+import dev.cloudy.ota.R
 
 /**
  * Applies the bundled One UI Sans family to every [TextView] as it is inflated.

@@ -1,4 +1,4 @@
-package dev.ncatt.ota.ui
+package dev.cloudy.ota.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import dev.ncatt.ota.R
-import dev.ncatt.ota.data.Download
-import dev.ncatt.ota.data.DownloadState
-import dev.ncatt.ota.data.UpdateManifest
-import dev.ncatt.ota.data.UpdateRepository
-import dev.ncatt.ota.databinding.FragmentCheckUpdateBinding
-import dev.ncatt.ota.ota.DeviceInfo
-import dev.ncatt.ota.ota.IFlashCallback
-import dev.ncatt.ota.ota.InstallResult
-import dev.ncatt.ota.ota.OtaInstaller
-import dev.ncatt.ota.ota.RootIpc
-import dev.ncatt.ota.ota.VersionCheck
+import dev.cloudy.ota.R
+import dev.cloudy.ota.data.Download
+import dev.cloudy.ota.data.DownloadState
+import dev.cloudy.ota.data.Release
+import dev.cloudy.ota.data.UpdateRepository
+import dev.cloudy.ota.databinding.FragmentCheckUpdateBinding
+import dev.cloudy.ota.ota.DeviceInfo
+import dev.cloudy.ota.ota.IFlashCallback
+import dev.cloudy.ota.ota.InstallResult
+import dev.cloudy.ota.ota.OtaInstaller
+import dev.cloudy.ota.ota.RootIpc
+import dev.cloudy.ota.ota.VersionCheck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,7 +31,12 @@ class CheckUpdateFragment : Fragment() {
     private val b get() = _b!!
     private val repo = UpdateRepository()
     private val rootIpc by lazy { RootIpc(requireContext().applicationContext) }
-    private var manifest: UpdateManifest? = null
+
+    /** Every build the manifest offers, sorted newest first. The selector lists these. */
+    private var releases: List<Release> = emptyList()
+
+    /** Index into [releases] of the build currently shown + targeted by Download. */
+    private var selectedIndex: Int = 0
 
     /** Falls back to the default when the stored value is missing OR blank - a user who
      *  cleared the Settings field used to leave an empty string here, which OkHttp rejects. */
@@ -52,7 +57,8 @@ class CheckUpdateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         renderLocalDeviceRows()
         b.btnCheck.setOnClickListener { check() }
-        b.btnDownload.setOnClickListener { manifest?.let { downloadAndInstall(it.release.download) } }
+        b.rowVersionPicker.setOnClickListener { showBuildPicker() }
+        b.btnDownload.setOnClickListener { selectedRelease()?.let { downloadAndInstall(it.download) } }
         check()
     }
 
@@ -67,6 +73,7 @@ class CheckUpdateFragment : Fragment() {
                     installed = DeviceInfo.romVersion.ifBlank { "${DeviceInfo.PROP_ROM_VER} unset" },
                     model = DeviceInfo.model,
                     android = DeviceInfo.androidVersion,
+                    oneUi = DeviceInfo.oneUiVersion,
                     patch = DeviceInfo.securityPatch,
                     fingerprint = DeviceInfo.fingerprint,
                     kernel = DeviceInfo.kernelVersion
@@ -76,6 +83,7 @@ class CheckUpdateFragment : Fragment() {
             v.rowInstalledVersion.summary = info.installed
             v.rowDeviceModel.summary = info.model
             v.rowAndroid.summary = info.android
+            v.rowOneUi.summary = formatOneUiVersion(info.oneUi) ?: "-"
             v.rowSecurity.summary = info.patch
             v.rowFingerprint.summary = info.fingerprint
             v.rowKernel.summary = info.kernel
@@ -97,43 +105,53 @@ class CheckUpdateFragment : Fragment() {
 
             result
                 .onSuccess { m ->
-                    manifest = m
-                    val r = m.release
-                    v.rowRemoteVersion.summary = r.version
-                    v.rowBuildDate.summary = r.buildDate
-                    v.rowDownloadSize.summary = formatBytes(r.download.sizeBytes)
-                    v.rowRemoteAndroid.summary = r.androidVersion
-                    v.rowRemoteSecurity.summary = r.securityPatch
-                    v.rowRemoteFingerprint.summary = r.fingerprint
-                    v.changelog.text = r.changelog.joinToString("\n") { "•  $it" }
+                    releases = m.allReleases.sortedWith(
+                        compareByDescending<Release> { it.versionCode ?: Long.MIN_VALUE }
+                            .thenByDescending { it.version }
+                    )
 
-                    val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(r) }
+                    if (releases.isEmpty()) {
+                        setHero(
+                            R.drawable.ic_status_error,
+                            getString(R.string.status_failed),
+                            "Manifest contains no releases"
+                        )
+                        showReleaseSections(false)
+                        v.btnDownload.visibility = View.GONE
+                        v.btnDownload.isEnabled = false
+                        return@onSuccess
+                    }
+
+                    // The selector defaults to the newest build; the hero still answers
+                    // "is there anything newer than what I have?" against that newest one.
+                    selectedIndex = 0
+                    renderSelected()
+
+                    val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(releases[0]) }
                     v.rowInstalledVersion.summary = verdict.installed
 
                     if (verdict.updateAvailable) {
                         setHero(
                             R.drawable.ic_status_available,
                             getString(R.string.status_update_available),
-                            getString(R.string.status_update_available_sub, r.version)
+                            getString(R.string.status_update_available_sub, releases[0].version)
                         )
-                        showReleaseSections(true)
-                        v.btnDownload.visibility = View.VISIBLE
-                        v.btnDownload.isEnabled = true
                     } else {
                         setHero(
                             R.drawable.ic_status_uptodate,
                             getString(R.string.status_up_to_date),
                             getString(R.string.status_up_to_date_sub, verdict.installed)
                         )
-                        // 8.5 keeps the up-to-date screen short: no changelog for a build
-                        // you already have.
-                        showReleaseSections(false)
-                        v.btnDownload.visibility = View.GONE
-                        v.btnDownload.isEnabled = false
                     }
+                    // Unlike the old single-release screen, the build selector stays on the
+                    // screen even when up to date - that is the whole point of choosing a ROM.
+                    showReleaseSections(true)
+                    v.btnDownload.visibility = View.VISIBLE
+                    v.btnDownload.isEnabled = true
                 }
                 .onFailure { t ->
-                    manifest = null
+                    releases = emptyList()
+                    selectedIndex = 0
                     setHero(
                         R.drawable.ic_status_error,
                         getString(R.string.status_failed),
@@ -172,6 +190,55 @@ class CheckUpdateFragment : Fragment() {
         else -> String.format(Locale.US, "%.0f KB", bytes / 1024.0)
     }
 
+    /**
+     * Renders a Samsung One UI version code into its human form, e.g. "80500" → "8.5".
+     * The code is five digits: the 2nd and 4th become dots, and the 5th is dropped when zero,
+     * so only the 1st, 3rd and (non-zero) 5th digits appear as numbers.
+     */
+    private fun formatOneUiVersion(raw: String?): String? {
+        val s = raw?.trim().orEmpty()
+        if (s.length != 5 || s.any { !it.isDigit() }) return null
+        val major = s[0]
+        val minor = s[2]
+        val patch = s[4]
+        return if (patch == '0') "$major.$minor" else "$major.$minor.$patch"
+    }
+
+    private fun selectedRelease(): Release? = releases.getOrNull(selectedIndex)
+
+    private fun releaseLabel(r: Release): String =
+        "${r.version} · ${formatBytes(r.download.sizeBytes)}"
+
+    /** Paints the picker row + release details + changelog for [selectedIndex]. */
+    private fun renderSelected() {
+        val v = _b ?: return
+        val sel = selectedRelease() ?: return
+        v.rowVersionPicker.summary = releaseLabel(sel)
+        v.rowBuildDate.summary = sel.buildDate
+        v.rowDownloadSize.summary = formatBytes(sel.download.sizeBytes)
+        v.rowRemoteAndroid.summary = sel.androidVersion
+        v.rowRemoteOneUi.summary = formatOneUiVersion(sel.oneuiVersion) ?: "-"
+        v.rowRemoteSecurity.summary = sel.securityPatch
+        v.rowRemoteFingerprint.summary = sel.fingerprint
+        v.changelog.text = sel.changelog.joinToString("\n") { "•  $it" }
+    }
+
+    /** Radio list of every build, mirroring LumiHub's version combo. */
+    private fun showBuildPicker() {
+        if (releases.isEmpty()) return
+        val labels = releases.map { releaseLabel(it) }.toTypedArray()
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.f_select_build)
+            .setSingleChoiceItems(labels, selectedIndex) { _, which -> selectedIndex = which }
+            .setPositiveButton(R.string.dlg_ok) { d, _ ->
+                d.dismiss()
+                renderSelected()
+                b.btnDownload.isEnabled = true
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
     private fun downloadAndInstall(dl: Download) {
         val dest = File(requireContext().getExternalFilesDir(null), dl.filename)
         b.btnDownload.isEnabled = false
@@ -205,7 +272,7 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun install(pkg: File) {
-        val dl = manifest?.release?.download ?: return
+        val dl = selectedRelease()?.download ?: return
         if (dl.installType.equals("raw_image", ignoreCase = true)) {
             confirmRawFlash(pkg, dl)   // dangerous path -> explicit confirmation first
             return
@@ -316,6 +383,7 @@ class CheckUpdateFragment : Fragment() {
         val installed: String,
         val model: String,
         val android: String,
+        val oneUi: String,
         val patch: String,
         val fingerprint: String,
         val kernel: String

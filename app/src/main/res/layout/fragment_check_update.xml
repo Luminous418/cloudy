@@ -100,7 +100,10 @@
                 android:text="@string/btn_check" />
         </LinearLayout>
 
-        <!-- ===== Available build (hidden until a release is fetched) ===== -->
+        <!-- ===== Available builds =====
+             One row per release, selectable like LumiHub's version combo. The row opens a
+             radio dialog listing every build in the manifest; picking one re-renders the
+             details below and targets the Download button at that build. -->
         <dev.oneuiproject.oneui.widget.Separator
             android:id="@+id/sepAvailable"
             android:layout_width="match_parent"
@@ -119,9 +122,11 @@
             android:visibility="gone"
             tools:visibility="visible">
 
-            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteVersion"
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowVersionPicker"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                app:showTopDivider="false" app:title="@string/f_version" tools:summary="-" />
+                android:clickable="true" android:focusable="true"
+                app:showTopDivider="false" app:title="@string/f_version"
+                app:drawableEnd="@drawable/ic_chevron_down" tools:summary="8.6.3" />
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowBuildDate"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_build_date" />
@@ -131,6 +136,9 @@
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteAndroid"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_android" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteOneUi"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_oneui" />
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteSecurity"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_patch" />
@@ -189,6 +197,9 @@
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowAndroid"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_android" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowOneUi"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_oneui" />
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowSecurity"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_patch" />

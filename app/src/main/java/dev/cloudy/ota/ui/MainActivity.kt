@@ -1,10 +1,10 @@
-package dev.ncatt.ota.ui
+package dev.cloudy.ota.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import dev.ncatt.ota.R
-import dev.ncatt.ota.databinding.ActivityMainBinding
+import dev.cloudy.ota.R
+import dev.cloudy.ota.databinding.ActivityMainBinding
 
 /**
  * OneUI 8 shell:

@@ -1,4 +1,4 @@
-package dev.ncatt.ota.data
+package dev.cloudy.ota.data
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -69,6 +69,19 @@ class UpdateRepository(
     }
 
     /**
+     * Fetches the raw bytes of an arbitrary URL (e.g. the maintainer avatar image).
+     * Returns null on any failure so callers can fall back to their placeholder.
+     */
+    suspend fun fetchImageBytes(url: String): ByteArray? = withContext(Dispatchers.IO) {
+        runCatching {
+            val request = Request.Builder().url(url).build()
+            client.newCall(request).execute().use { resp ->
+                if (!resp.isSuccessful) null else resp.body?.bytes()
+            }
+        }.getOrNull()
+    }
+
+    /**
      * Streams the package to [dest], emitting progress, then verifies SHA-256.
      * A mismatched hash fails the download instead of handing a corrupt image to the flasher.
      */
@@ -102,7 +115,8 @@ class UpdateRepository(
                 }
             }
             val hex = digest.digest().joinToString("") { "%02x".format(it) }
-            if (!hex.equals(download.sha256, ignoreCase = true)) {
+            val expected = download.sha256?.trim()
+            if (expected != null && expected.isNotEmpty() && !hex.equals(expected, ignoreCase = true)) {
                 dest.delete()
                 emit(DownloadState.Failed("Checksum mismatch - download rejected"))
             } else {
