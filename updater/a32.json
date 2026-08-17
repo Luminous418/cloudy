@@ -11,6 +11,28 @@
   },
   "releases": [
     {
+      "version": "8.6.4",
+      "version_code": 80604,
+      "build_date": "2026-08-16",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed OTA app and added new goodies on app"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.4/SM-A325F/LumiROM_8.6.4-16082026_OFFICIAL_a32.zip?download=true",
+        "filename": "LumiROM_8.6.4-16082026_OFFICIAL_a32.zip",
+        "size_bytes": 4587403688,
+        "sha256": "1cd0a978a7432f4859e047d1d438a6e6a3a8d72beb51d6a7046f5d3e1bb58659",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
       "version": "8.6.3",
       "version_code": 80603,
       "build_date": "2026-08-11",

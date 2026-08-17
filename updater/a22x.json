@@ -11,6 +11,28 @@
   },
   "releases": [
     {
+      "version": "8.6.4",
+      "version_code": 80604,
+      "build_date": "2026-08-16",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-A226B",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed OTA app and added new goodies on app"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.4/SM-A226B/LumiROM_8.6.4-16082026_OFFICIAL_a22x.zip?download=true",
+        "filename": "LumiROM_8.6.4-16082026_OFFICIAL_a22x.zip",
+        "size_bytes": 4509774443,
+        "sha256": "fde7f089c4069950cf4e8308f66bef3462e125ffcc65d2bf8b309c4b4e65b640",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
       "version": "8.6.3",
       "version_code": 80603,
       "build_date": "2026-08-11",

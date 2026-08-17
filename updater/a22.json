@@ -11,6 +11,28 @@
   },
   "releases": [
     {
+      "version": "8.6.4",
+      "version_code": 80604,
+      "build_date": "2026-08-17",
+      "android_version": "16 (Baklava)",
+      "oneui_version": "80500",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXUFFZD5:user/release-keys",
+      "device_model": "SM-A225F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed OTA app and added new goodies on app"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.4/SM-A225F/LumiROM_8.6.4-17082026_OFFICIAL_a22.zip?download=true",
+        "filename": "LumiROM_8.6.4-17082026_OFFICIAL_a22.zip",
+        "size_bytes": 4219189199,
+        "sha256": "0f3ec2f38632a800d168ed73da4c3eab582874b8842432c7822d3bbff57e6fa7",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
       "version": "8.6.3",
       "version_code": 80603,
       "build_date": "2026-08-11",
