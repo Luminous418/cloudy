@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Advanced settings screen: opened as a separate screen from the Settings tab. -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Update source">
+        <EditTextPreference
+            android:key="json_url"
+            android:title="Custom JSON URL"
+            android:dialogTitle="Update manifest URL"
+            android:summary="Remote manifest Cloudy checks for new LumiROM builds" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Maintenance">
+        <Preference
+            android:key="reset"
+            android:title="Reset configurations"
+            android:summary="Clear all saved Cloudy flags and restore defaults" />
+    </PreferenceCategory>
+</PreferenceScreen>

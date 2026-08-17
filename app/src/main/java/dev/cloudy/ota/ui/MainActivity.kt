@@ -3,6 +3,7 @@ package dev.cloudy.ota.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import dev.cloudy.ota.R
 import dev.cloudy.ota.databinding.ActivityMainBinding
 
@@ -60,11 +61,31 @@ class MainActivity : AppCompatActivity() {
 
     /** Swap the main_content fragment and update the collapsing header subtitle. */
     private fun show(fragment: Fragment, subtitleRes: Int) {
+        // Dropping any pushed sub-screen (e.g. Advanced settings) when switching tabs so the
+        // tab always lands on its base fragment and the back stack can't leak between tabs.
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
         // Plain FragmentTransaction API: the KTX commit{} extension lives in
         // androidx.fragment:fragment-ktx, which the SESL fork does not ship.
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.tab_enter, R.anim.tab_exit)
             .setReorderingAllowed(true)
             .replace(binding.fragmentContainer.id, fragment)
+            .commit()
+        binding.toolbarLayout.setSubtitle(getString(subtitleRes))
+    }
+
+    /** Push a sub-screen on top of the current tab (system back returns to the tab). */
+    fun pushFragment(fragment: Fragment, subtitleRes: Int) {
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.advanced_enter, R.anim.advanced_exit,
+                R.anim.advanced_pop_enter, R.anim.advanced_pop_exit
+            )
+            .setReorderingAllowed(true)
+            .replace(binding.fragmentContainer.id, fragment)
+            .addToBackStack(null)
             .commit()
         binding.toolbarLayout.setSubtitle(getString(subtitleRes))
     }

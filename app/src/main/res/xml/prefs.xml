@@ -2,18 +2,16 @@
 <!-- SESL preference screen: rows render in the OneUI style via the tribalfs preference fork. -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Update source">
-        <EditTextPreference
-            android:key="json_url"
-            android:title="Custom JSON URL"
-            android:dialogTitle="Update manifest URL"
-            android:summary="Remote manifest Cloudy checks for new LumiROM builds" />
-    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/prefs_general">
 
-    <PreferenceCategory android:title="Maintenance">
         <Preference
-            android:key="reset"
-            android:title="Reset configurations"
-            android:summary="Clear all saved Cloudy flags and restore defaults" />
+            android:key="credits"
+            android:title="@string/prefs_credits"
+            android:summary="@string/prefs_credits_summary" />
+
+        <Preference
+            android:key="advanced"
+            android:title="@string/prefs_advanced"
+            android:summary="@string/prefs_advanced_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

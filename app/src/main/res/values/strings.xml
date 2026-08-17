@@ -56,4 +56,15 @@
     <string name="dlg_flash_local_title">Flash %1$s?</string>
     <string name="dlg_flash_local_msg">This copies the selected ROM to /data, then reboots your device into recovery to apply it. Recovery applies the package with its own fail-safes.\n\nMake sure the battery is charged and do not interrupt the reboot. Only continue if you understand the risk.</string>
     <string name="dlg_flash_confirm">I understand, flash</string>
+
+    <!-- Settings -->
+    <string name="prefs_general">General</string>
+    <string name="prefs_credits">Credits</string>
+    <string name="prefs_credits_summary">About the app and its creators</string>
+    <string name="prefs_advanced">Advanced settings</string>
+    <string name="prefs_advanced_summary">Update source and maintenance</string>
+    <string name="dlg_credits_title">Credits</string>
+    <string name="dlg_credits_body">Cloudy is the LumiROM OTA updater.\n\nMaintained by Lumi (@Luminous418).\nApp made by ncatt (@ncatt).\n\nIt is built on libsu for root access and the One UI 8 design library. Thanks to the LumiROM community for testing and support.\n\nReport issues or get support in the LumiROM Telegram.</string>
+    <string name="dlg_credits_telegram">Telegram</string>
+    <string name="url_telegram">https://t.me/LumiROMs</string>
 </resources>

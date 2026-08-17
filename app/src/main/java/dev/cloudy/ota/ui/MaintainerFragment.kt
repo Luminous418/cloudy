@@ -17,6 +17,7 @@ import dev.cloudy.ota.R
 import dev.cloudy.ota.data.UpdateRepository
 import dev.cloudy.ota.databinding.FragmentMaintainerBinding
 import dev.cloudy.ota.ota.DeviceInfo
+import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -72,7 +73,13 @@ class MaintainerFragment : Fragment() {
                     loadAvatar(v, mt.avatarUrl)
                 }
                 .onFailure { t ->
-                    _b?.handle?.text = UpdateRepository.describe(t)
+                    val v = _b ?: return@onFailure
+                    v.handle.text = UpdateRepository.describe(t)
+                    // Offline fallback: reuse the last avatar we fetched, from disk, so the
+                    // profile image still shows when the manifest cannot be reached.
+                    val cachedUrl = requireContext().getSharedPreferences("cloudy", 0)
+                        .getString("avatar_url", null)
+                    if (!cachedUrl.isNullOrBlank()) loadAvatar(v, cachedUrl)
                 }
         }
     }
@@ -89,6 +96,10 @@ class MaintainerFragment : Fragment() {
      */
     private fun loadAvatar(v: FragmentMaintainerBinding, url: String?) {
         if (url.isNullOrBlank()) return
+        // Persist the URL on every load (download or cache hit) so the offline fallback below
+        // can reuse the image from disk even if the manifest can't be reached on a later launch.
+        requireContext().getSharedPreferences("cloudy", 0).edit()
+            .putString("avatar_url", url).apply()
         viewLifecycleOwner.lifecycleScope.launch {
             val bmp = withContext(Dispatchers.IO) { fetchAvatar(url) }
             val img = _b?.avatar ?: return@launch
@@ -111,10 +122,29 @@ class MaintainerFragment : Fragment() {
         }
     }
 
-    private suspend fun fetchAvatar(url: String): Bitmap? =
-        repo.fetchImageBytes(url)?.let { bytes ->
-            runCatching { BitmapFactory.decodeByteArray(bytes, 0, bytes.size) }.getOrNull()
+    /**
+     * Loads the maintainer avatar, favouring a disk cache so a previously downloaded image
+     * is reused even offline or on a slow link. The cache is keyed by the avatar URL, so a
+     * changed URL simply re-downloads into a new entry.
+     */
+    private suspend fun fetchAvatar(url: String): Bitmap? {
+        val cached = runCatching { avatarCacheFile(url).readBytes() }.getOrNull()
+        if (cached != null && cached.isNotEmpty()) {
+            return runCatching { BitmapFactory.decodeByteArray(cached, 0, cached.size) }.getOrNull()
         }
+        val bytes = repo.fetchImageBytes(url) ?: return null
+        runCatching {
+            val file = avatarCacheFile(url)
+            file.parentFile?.mkdirs()
+            file.writeBytes(bytes)
+        }
+        return runCatching { BitmapFactory.decodeByteArray(bytes, 0, bytes.size) }.getOrNull()
+    }
+
+    private fun avatarCacheFile(url: String): File {
+        val name = "avatar_${url.hashCode().toUInt().toString(16)}.img"
+        return File(requireContext().filesDir, "avatars/$name")
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

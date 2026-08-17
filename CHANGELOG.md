@@ -2,6 +2,13 @@
 
 All notable changes to the Cloudy OTA helper.
 
+## [2.21] - 2026-08-17
+
+### Added
+- Settings tab: **Credits** dialog (with app/ROM credits and Telegram link) and **Advanced settings** screen (Update source + Maintenance), opened with a subtle slide/fade animation.
+- Subtle fade animation when switching bottom tabs (no frame overlap between tabs).
+- Maintainer avatar is now cached on disk (`filesDir/avatars/`) and reused across launches, including offline via the stored avatar URL.
+
 ## [2.2] - 2026-08-16
 
 ### Added

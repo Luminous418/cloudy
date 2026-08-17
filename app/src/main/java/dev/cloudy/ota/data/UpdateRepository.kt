@@ -48,7 +48,7 @@ class UpdateRepository(
             require(url.startsWith("http://") || url.startsWith("https://")) {
                 "Manifest URL must start with http:// or https://"
             }
-            val request = Request.Builder().url(url).header("User-Agent", "Cloudy/2.2").build()
+            val request = Request.Builder().url(url).header("User-Agent", "Cloudy/2.21").build()
             client.newCall(request).execute().use { resp ->
                 if (!resp.isSuccessful) {
                     error(
