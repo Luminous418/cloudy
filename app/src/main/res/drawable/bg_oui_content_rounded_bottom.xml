@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Content scrim behind the scrolling fragments: same tone as the theme background but
+     with rounded bottom corners, so the edge above the floating bar stays circular even
+     while the content inside is scrolled away. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#010101" />
+    <corners
+        android:bottomLeftRadius="@dimen/oui_float_nav_radius"
+        android:bottomRightRadius="@dimen/oui_float_nav_radius" />
+</shape>

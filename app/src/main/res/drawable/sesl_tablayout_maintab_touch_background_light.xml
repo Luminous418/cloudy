@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Overrides the SESL main-tab touch feedback (light) so the white flash matches the
+     floating nav pill (same corner radius) and is a bit smaller than the bar. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="8dp"
+    android:insetTop="8dp"
+    android:insetRight="8dp"
+    android:insetBottom="8dp">
+    <shape android:shape="rectangle">
+        <corners android:radius="@dimen/oui_float_nav_radius" />
+        <solid android:color="@color/sesl_ripple_color_light" />
+    </shape>
+</inset>

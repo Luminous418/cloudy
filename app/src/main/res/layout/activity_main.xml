@@ -20,14 +20,19 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_oui_content_rounded_bottom"
+        android:clipToOutline="true"
+        android:paddingBottom="12dp"
         app:layout_location="main_content" />
 
     <dev.oneuiproject.oneui.widget.BottomFloatingLayout
+        android:id="@+id/bottomFloating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="10dp"
+        android:paddingTop="14dp"
         app:maxChildWidth="480dp"
         app:layout_location="footer">
 
@@ -37,7 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_oui_float_nav"
             android:elevation="0dp"
-            android:outlineProvider="none"
+            android:clipToOutline="true"
             android:minHeight="48dp"
             app:menu="@menu/menu_bottom_tabs" />
     </dev.oneuiproject.oneui.widget.BottomFloatingLayout>

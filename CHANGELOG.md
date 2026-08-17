@@ -2,6 +2,12 @@
 
 All notable changes to the Cloudy OTA helper.
 
+## [2.22] - 2026-08-17
+
+### Changed
+- Floating bottom navigation: the tab bar now floats with a fixed gap above the content and the content's bottom edge stays rounded while scrolling, so the separation between content and bar no longer changes or becomes straight when the large title collapses.
+- Tab press flash (recoil/touch feedback) now matches the floating pill: same corner radius, slightly smaller than the bar, and the correct ripple color in light mode.
+
 ## [2.21] - 2026-08-17
 
 ### Added
