@@ -86,3 +86,19 @@ jobs:
             --title "${{ inputs.name }}" \
             --notes-file notes.md \
             --target "${GITHUB_SHA}"
+
+      # Rolling "latest" release: always holds the newest build, in addition to the
+      # versioned releases. Since it is re-published on every run it keeps the "Latest"
+      # badge, while older versioned releases stay listed underneath.
+      - name: Update rolling 'latest' release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view latest >/dev/null 2>&1; then
+            gh release delete latest --yes --cleanup-tag
+          fi
+          gh release create latest \
+            app/build/outputs/apk/release/app-release.apk \
+            --title "Cloudy latest (${{ inputs.name }})" \
+            --notes "Rolling release: always the newest Cloudy build. Source: **${{ inputs.name }}** (tag \`${{ steps.sanitize.outputs.tag }}\`)." \
+            --target "${GITHUB_SHA}"
