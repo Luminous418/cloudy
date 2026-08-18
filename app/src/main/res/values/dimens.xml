@@ -6,7 +6,9 @@
     <dimen name="oui_card_radius">26dp</dimen>
     <dimen name="oui_card_margin_h">16dp</dimen>
     <dimen name="oui_card_padding_h">24dp</dimen>
-    <dimen name="oui_float_nav_radius">26dp</dimen>
+    <!-- Floating nav pill radius: half the pill height (~60dp) so the bar and the
+         tab flash are both full capsules and look equally round. -->
+    <dimen name="oui_float_nav_radius">30dp</dimen>
 
     <!-- Hero block (8.5 software-update pattern). -->
     <dimen name="oui_hero_glyph_size">108dp</dimen>

@@ -55,3 +55,15 @@ data class Download(
     @SerializedName("sha256") val sha256: String? = null,
     @SerializedName("install_type") val installType: String // "recovery_zip" | "raw_image"
 )
+
+/**
+ * Manifest for updating the Cloudy app itself (updater/app.json in the repo). Mirrors the
+ * ROM manifest's download object so the same download + SHA-256 pipeline applies.
+ */
+data class AppUpdate(
+    @SerializedName("app_name") val appName: String,
+    @SerializedName("version") val version: String,
+    @SerializedName("version_code") val versionCode: Long,
+    @SerializedName("changelog") val changelog: List<String>? = null,
+    @SerializedName("download") val download: Download
+)

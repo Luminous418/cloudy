@@ -102,3 +102,51 @@ jobs:
             --title "Cloudy latest (${{ inputs.name }})" \
             --notes "Rolling release: always the newest Cloudy build. Source: **${{ inputs.name }}** (tag \`${{ steps.sanitize.outputs.tag }}\`)." \
             --target "${GITHUB_SHA}"
+
+      - name: Publish updater/app.json
+        run: |
+          set -euo pipefail
+          VERSION_CODE="$(grep -oP 'versionCode = \K[0-9]+' app/build.gradle.kts)"
+          VERSION_NAME="$(grep -oP 'versionName = "\K[^"]+' app/build.gradle.kts)"
+          SIZE="$(stat -c %s app/build/outputs/apk/release/app-release.apk)"
+          SHA="$(sha256sum app/build/outputs/apk/release/app-release.apk | cut -d' ' -f1)"
+          PREV="$(git describe --tags --abbrev=0 2>/dev/null || true)"
+          python3 - "$VERSION_NAME" "$VERSION_CODE" "$SIZE" "$SHA" "$PREV" <<'PY'
+          import json, subprocess, sys
+          name, code, size, sha, prev = sys.argv[1:6]
+          if prev:
+              log = subprocess.check_output(
+                  ["git", "log", f"{prev}..HEAD", "--oneline", "--format=%s"]
+              ).decode().strip().splitlines()
+          else:
+              log = []
+          manifest = {
+              "app_name": "Cloudy",
+              "version": name,
+              "version_code": int(code),
+              "changelog": log or [f"Cloudy {name}"],
+              "download": {
+                  "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
+                  "filename": f"Cloudy_{name}.apk",
+                  "size_bytes": int(size),
+                  "sha256": sha,
+                  "install_type": "apk",
+              },
+          }
+          with open("updater/app.json", "w") as f:
+              f.write(json.dumps(manifest, indent=2) + "\n")
+          PY
+          cat updater/app.json
+
+      - name: Commit updater/app.json
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add updater/app.json
+          if git diff --cached --quiet; then
+            echo "updater/app.json unchanged - nothing to commit"
+          else
+            git commit -m "updater: publish Cloudy app manifest"
+            git push
+          fi

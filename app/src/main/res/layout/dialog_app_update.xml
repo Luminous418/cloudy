@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Self-update download progress. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/oui_card_padding_h"
+    android:paddingTop="20dp"
+    android:paddingBottom="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ProgressBar android:id="@+id/updateBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminate="true" android:max="100"
+        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+    <TextView android:id="@+id/updateLabel"
+        style="@style/Cloudy.Text.Title"
+        android:layout_marginTop="16dp"
+        android:text="@string/app_update_downloading"
+        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+</LinearLayout>

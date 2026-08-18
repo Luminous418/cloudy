@@ -1,11 +1,18 @@
 package dev.cloudy.ota.ui
 
+import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import dev.cloudy.ota.R
 import dev.cloudy.ota.databinding.ActivityMainBinding
+import dev.cloudy.ota.ota.UpdateAlarm
+import dev.cloudy.ota.ota.UpdateChecker
+import dev.cloudy.ota.ota.UpdateNotifier
+import kotlin.concurrent.thread
+import kotlinx.coroutines.runBlocking
 
 /**
  * OneUI 8 shell:
@@ -14,6 +21,12 @@ import dev.cloudy.ota.databinding.ActivityMainBinding
  * Fragments are swapped directly (no ViewPager2) which is the OneUI-native pattern.
  */
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        /** Which tab a tapped update notification should open. */
+        const val EXTRA_TAB = "dev.cloudy.ota.extra.TAB"
+        private const val REQUEST_NOTIF_PERMISSION = 9001
+    }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -42,7 +55,55 @@ class MainActivity : AppCompatActivity() {
 
         removeOverflowTab()
 
-        if (savedInstanceState == null) show(updateFragment, R.string.tab_check_update)
+        if (savedInstanceState == null) {
+            // A tapped notification may ask for a specific tab; otherwise land on Update.
+            val requestedTab = intent?.getStringExtra(EXTRA_TAB)
+            if (requestedTab == UpdateChecker.TAB_SETTINGS) {
+                show(settingsFragment, R.string.tab_settings)
+                binding.bottomTab.getTabAt(2)?.select()
+            } else {
+                show(updateFragment, R.string.tab_check_update)
+                binding.bottomTab.getTabAt(0)?.select()
+            }
+        }
+
+        // Start with the collapsing header already collapsed (title at the top-left),
+        // matching the state it reaches after scrolling down.
+        binding.toolbarLayout.setExpanded(false, false)
+
+        startUpdateNotifications()
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        // BottomTabLayout maps a selected tab to the menu item callback in show().
+        when (intent.getStringExtra(EXTRA_TAB)) {
+            UpdateChecker.TAB_SETTINGS -> binding.bottomTab.getTabAt(2)?.select()
+            UpdateChecker.TAB_UPDATE -> binding.bottomTab.getTabAt(0)?.select()
+        }
+    }
+
+    /**
+     * Background update notifications: ensure the channel exists, ask for the runtime
+     * permission if needed (Android 13+), arm the daily alarm, and do one silent check
+     * right now so the user gets pinged as soon as something is released.
+     */
+    private fun startUpdateNotifications() {
+        val ctx = applicationContext
+        UpdateNotifier.ensureChannel(ctx)
+        if (!UpdateChecker.notificationsEnabled(ctx)) return
+        if (!UpdateNotifier.canPost(this)) {
+            requestPermissions(
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                REQUEST_NOTIF_PERMISSION
+            )
+        }
+        UpdateAlarm.schedule(ctx)
+        thread {
+            val result = runBlocking { UpdateChecker.check(ctx) }
+            UpdateNotifier.notifyIfNeeded(ctx, result)
+        }
     }
 
     /**

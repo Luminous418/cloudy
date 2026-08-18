@@ -1,0 +1,19 @@
+{
+  "app_name": "Cloudy",
+  "version": "2.3",
+  "version_code": 7,
+  "changelog": [
+    "App and ROM update notifications with heads-up pop-ups",
+    "Configurable background check interval (hourly to monthly)",
+    "App self-updater with SHA-256 verification",
+    "App info header in Settings",
+    "Alarm re-armed on reboot"
+  ],
+  "download": {
+    "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
+    "filename": "Cloudy_2.3.apk",
+    "size_bytes": 15750740,
+    "sha256": "1e2dac92f6e205f281f6e248d93e777857de707e2d6c491e8a875c1edbd899b5",
+    "install_type": "apk"
+  }
+}

@@ -4,6 +4,15 @@
 
     <PreferenceCategory android:title="@string/prefs_general">
 
+        <dev.cloudy.ota.ui.AppInfoPreference
+            android:key="app_info" />
+
+        <SwitchPreferenceCompat
+            android:key="update_notifications"
+            android:title="@string/prefs_update_notifications"
+            android:summary="@string/prefs_update_notifications_summary"
+            android:defaultValue="true" />
+
         <Preference
             android:key="credits"
             android:title="@string/prefs_credits"

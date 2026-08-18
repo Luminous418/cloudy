@@ -2,6 +2,7 @@ package dev.cloudy.ota.data
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import dev.cloudy.ota.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -42,13 +43,31 @@ class UpdateRepository(
      * the UI reported "Check failed: null" on every single check. Marking a function `suspend`
      * does NOT move it off the caller's thread; only a dispatcher switch does.
      */
-    suspend fun fetchManifest(url: String): Result<UpdateManifest> = withContext(Dispatchers.IO) {
+    suspend fun fetchManifest(url: String): Result<UpdateManifest> = fetchJson(url, UpdateManifest::class.java)
+
+    /** Same fetch pipeline for the app-self-update manifest (updater/app.json). */
+    suspend fun fetchAppUpdate(url: String): Result<AppUpdate> = fetchJson(url, AppUpdate::class.java)
+
+    /**
+     * Shared HTTP + JSON fetch used by both manifests.
+     *
+     * The `withContext(Dispatchers.IO)` is load-bearing, not tidiness. `Call.execute()` is the
+     * BLOCKING OkHttp call, and both callers launch this from `lifecycleScope`, which dispatches
+     * on Main. Without the switch, Android's StrictMode kills the request with
+     * NetworkOnMainThreadException - whose `message` is null - so runCatching swallowed it and
+     * the UI reported "Check failed: null" on every single check. Marking a function `suspend`
+     * does NOT move it off the caller's thread; only a dispatcher switch does.
+     */
+    private suspend fun <T> fetchJson(url: String, clazz: Class<T>): Result<T> = withContext(Dispatchers.IO) {
         runCatching {
             require(url.isNotBlank()) { "No manifest URL configured" }
             require(url.startsWith("http://") || url.startsWith("https://")) {
                 "Manifest URL must start with http:// or https://"
             }
-            val request = Request.Builder().url(url).header("User-Agent", "Cloudy/2.21").build()
+            val request = Request.Builder()
+                .url(url)
+                .header("User-Agent", "Cloudy/${BuildConfig.VERSION_NAME}")
+                .build()
             client.newCall(request).execute().use { resp ->
                 if (!resp.isSuccessful) {
                     error(
@@ -62,7 +81,7 @@ class UpdateRepository(
                 }
                 val body = resp.body?.string()
                 if (body.isNullOrBlank()) error("Update server returned an empty response")
-                gson.fromJson(body, UpdateManifest::class.java)
+                gson.fromJson(body, clazz)
                     ?: error("Manifest was empty or not an object")
             }
         }

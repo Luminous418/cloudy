@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FileProvider paths: the downloaded app APK lives in the app's own external files dir. -->
+<paths>
+    <external-files-path name="apk" path="." />
+</paths>
