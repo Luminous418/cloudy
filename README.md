@@ -133,39 +133,6 @@ For Cloudy to install as a system app on a Samsung ROM (One UI 8.x / Android 16)
 
    **Important (classic One UI 8.x pitfall):** Samsung will not install any package that is not in its `allowed-system-preload-apps.xml` list. PM drops it with `Package is not in allowed list : <pkg>` and leaves no trace in `packages.xml`. This extra file is what lets the app install. Without it, the app looks correctly placed and signed but never shows up as installed.
 
-### Build script
-
-On LumiROM builds all the Cloudy integration is handled by a single dedicated script: `scripts/Cloudy.sh` (function `ADD_CLOUDY`), called from `build_local.sh`. It:
-
-- Downloads (and caches) the APK + the two XML files above into `LumiROM/Mods/Cloudy/`, then copies them into the firmware:
-
-  ```
-  system/system/priv-app/Cloudy/Cloudy.apk
-  system/system/etc/permissions/privapp-permissions-cloudy.xml
-  system/system/etc/sysconfig/cloudy-allowed-preload.xml
-  ```
-
-- Copies the baked readiness marker and boot init file:
-  `system/system/etc/cloudy_ready` and `system/system/etc/init/cloudy.rc` (creates `/cache/recovery` + `/data/media/0/cloudy` at `post-fs-data`).
-- Appends the SELinux rules to `system_ext_sepolicy.cil` (same content as the Magisk module's `sepolicy.rule`), so no module is needed on LumiROM.
-
-### Magisk module (optional)
-
-[`magisk-module/`](magisk-module/) grants the SELinux context and prepares the paths (`/data/media/0/cloudy`, `/cache/recovery`) for OTA staging and the reboot to recovery. Compatible with Magisk and KernelSU.
-
-## Structure
-
-```
-├── app/                        # App source code (Kotlin, Jetpack, libsu)
-│   └── java/dev/cloudy/ota/ota/    # Update checks, notifications, alarm scheduling
-├── updater/                    # JSON manifests (a32.json, a22.json, ...; app.json = self-update)
-├── privapp-permissions/        # Privileged permissions whitelist
-├── allowed-preload/            # Samsung system allowlist
-├── magisk-module/              # Magisk/KernelSU module for SELinux
-├── .github/workflows/release.yml  # Signed release pipeline (also publishes updater/app.json)
-└── gradlew / build.gradle.kts  # Gradle build
-```
-
 ## Support
 
-Report issues in this repo. For the ROM, updates and community: [@LumiROMs](https://t.me/LumiROMs).
+Report issues in this repo by using the Issues tab or clicking this [link](https://github.com/Luminous418/cloudy/issues)

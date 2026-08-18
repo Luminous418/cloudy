@@ -1,6 +1,0 @@
-id=cloudy_ota
-name=Cloudy OTA Helper
-version=v1.2.0
-versionCode=120
-author=LumiROM / aerocat
-description=Grants dev.cloudy.ota the SELinux + permission context to stage recovery OTAs and reboot to recovery on A-only Galaxy A32. Works with Magisk and KernelSU.
