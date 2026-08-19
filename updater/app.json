@@ -3,14 +3,14 @@
   "version": "2.31",
   "version_code": 8,
   "changelog": [
-    "App fully translated: Spanish, French, Portuguese, German, Italian, Russian and Vietnamese",
-    "All screens, dialogs and error messages localized, following the system language"
+    "Cloudy 2.31: app fully localized (ES, FR, PT, DE, IT, RU, VI)",
+    "updater: publish Cloudy app manifest"
   ],
   "download": {
     "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
     "filename": "Cloudy_2.31.apk",
     "size_bytes": 15833648,
-    "sha256": "81fbc93399ac66f390befc2e6f81704ed9d939c07f92033196bef5f8e01db22d",
+    "sha256": "6963a821fc4c4feb4274cf8a8a579cb3421c1bb8c0d9f8f1db379456b1e1cead",
     "install_type": "apk"
   }
 }
