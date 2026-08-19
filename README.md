@@ -1,4 +1,9 @@
-# Cloudy
+<p align="right">
+  <img align="right" height="130" src="art/icon.svg" alt="Cloudy"/>
+</p>
+
+<img src="art/title.svg" height="70" alt="Cloudy"/>
+<br><br>
 
 OTA client for **LumiROM** series. Checks for updates, downloads the ROM from the configured server and triggers installation in recovery. It also updates **itself** from a JSON manifest and can notify you about new app and ROM releases.
 
