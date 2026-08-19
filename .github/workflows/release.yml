@@ -110,29 +110,21 @@ jobs:
           VERSION_NAME="$(grep -oP 'versionName = "\K[^"]+' app/build.gradle.kts)"
           SIZE="$(stat -c %s app/build/outputs/apk/release/app-release.apk)"
           SHA="$(sha256sum app/build/outputs/apk/release/app-release.apk | cut -d' ' -f1)"
-          PREV="$(git describe --tags --abbrev=0 2>/dev/null || true)"
-          python3 - "$VERSION_NAME" "$VERSION_CODE" "$SIZE" "$SHA" "$PREV" <<'PY'
-          import json, subprocess, sys
-          name, code, size, sha, prev = sys.argv[1:6]
-          if prev:
-              log = subprocess.check_output(
-                  ["git", "log", f"{prev}..HEAD", "--oneline", "--format=%s"]
-              ).decode().strip().splitlines()
-          else:
-              log = []
-          manifest = {
-              "app_name": "Cloudy",
-              "version": name,
-              "version_code": int(code),
-              "changelog": log or [f"Cloudy {name}"],
-              "download": {
-                  "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
-                  "filename": f"Cloudy_{name}.apk",
-                  "size_bytes": int(size),
-                  "sha256": sha,
-                  "install_type": "apk",
-              },
-          }
+          python3 - "$VERSION_NAME" "$VERSION_CODE" "$SIZE" "$SHA" <<'PY'
+          import json, sys
+          name, code, size, sha = sys.argv[1:5]
+          # Preserve the curated changelog (and app_name / install_type) already committed
+          # in the manifest; only refresh the version and the freshly built APK metadata.
+          with open("updater/app.json") as f:
+              manifest = json.load(f)
+          manifest["version"] = name
+          manifest["version_code"] = int(code)
+          dl = manifest.setdefault("download", {})
+          dl["url"] = "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk"
+          dl["filename"] = f"Cloudy_{name}.apk"
+          dl["size_bytes"] = int(size)
+          dl["sha256"] = sha
+          dl["install_type"] = "apk"
           with open("updater/app.json", "w") as f:
               f.write(json.dumps(manifest, indent=2) + "\n")
           PY
