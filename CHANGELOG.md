@@ -2,6 +2,24 @@
 
 All notable changes to the Cloudy OTA helper.
 
+## [2.31] - 2026-08-19
+
+### Added
+- **Localization**: the app is now fully translated and follows the system language — Spanish, French, Portuguese, German, Italian, Russian and Vietnamese (plus the English default). Covers every screen, dialog and error message.
+
+### Changed
+- All hardcoded user-facing strings extracted to `values/strings.xml` and referenced from resources, making future translations and maintenance easier.
+
+## [2.3] - 2026-08-18
+
+### Added
+- **Self-updater**: Cloudy checks its own `updater/app.json` manifest, shows the installed/available version on the Settings header and can download and install new app versions.
+- **Update notifications**: background checks with a configurable interval (hourly / 8h / 12h / daily / weekly / monthly) that notify when a new LumiROM or Cloudy build is available.
+
+### Changed
+- Settings tab header now shows the Cloudy version with a "Check for app updates" action.
+- Notifications moved to a dedicated notification channel.
+
 ## [2.22] - 2026-08-17
 
 ### Changed
