@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_version">Phiên bản %1$s</string>
+    <string name="settings_entry_summary">Kiểm tra bản cập nhật LumiROM</string>
+
+    <string name="tab_check_update">Cập nhật</string>
+    <string name="tab_maintainer">Nhà phát triển</string>
+    <string name="tab_settings">Cài đặt</string>
+
+    <string name="sep_status">Trạng thái</string>
+    <string name="sep_available">Các bản dựng khả dụng</string>
+    <string name="sep_changelog">Nhật ký thay đổi</string>
+    <string name="f_select_build">Chọn bản dựng</string>
+    <string name="dlg_ok">OK</string>
+    <string name="sep_device">Thiết bị này</string>
+    <string name="sep_details">Chi tiết</string>
+    <string name="sep_contact">Liên hệ</string>
+
+    <string name="f_version">Phiên bản</string>
+    <string name="f_build_date">Ngày dựng</string>
+    <string name="f_size">Kích thước tải xuống</string>
+    <string name="f_android">Phiên bản Android</string>
+    <string name="f_oneui">Phiên bản One UI</string>
+    <string name="f_patch">Bản vá bảo mật</string>
+    <string name="f_fingerprint">Dấu vân tay bản dựng</string>
+    <string name="f_installed">Phiên bản đã cài</string>
+    <string name="f_model">Mẫu máy</string>
+    <string name="f_kernel">Phiên bản kernel</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Thiết bị</string>
+
+    <string name="status_checking">Đang kiểm tra cập nhật…</string>
+    <string name="status_checking_sub">Đang kết nối máy chủ cập nhật LumiROM</string>
+    <string name="status_up_to_date">Phần mềm của bạn đã mới nhất</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s là bản mới nhất cho thiết bị này</string>
+    <string name="status_update_available">Có bản cập nhật</string>
+    <string name="status_update_available_sub">LumiROM %1$s sẵn sàng để tải</string>
+    <string name="status_failed">Không thể kiểm tra cập nhật</string>
+    <string name="status_downloading">Đang tải bản cập nhật</string>
+    <string name="status_downloading_sub">%1$d%% · giữ Cloudy mở</string>
+    <string name="status_installing">Đang chuẩn bị cài đặt</string>
+
+    <string name="btn_check">Kiểm tra cập nhật</string>
+    <string name="btn_download">Tải và cài đặt</string>
+    <string name="btn_flash_local">Flash ROM từ bộ nhớ</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Quyên góp</string>
+
+    <string name="unknown_maintainer">Nhà phát triển không xác định</string>
+    <string name="flash_warning">Không rút phích hoặc tắt thiết bị.</string>
+
+    <string name="status_copying">Đang sao chép ROM vào bộ nhớ ứng dụng</string>
+    <string name="status_copying_sub">Tệp lớn có thể mất một lúc</string>
+    <string name="dlg_flash_local_title">Flash %1$s?</string>
+    <string name="dlg_flash_local_msg">Thao tác này sao chép ROM đã chọn vào /data rồi khởi động lại thiết bị vào recovery để áp dụng. Recovery tự áp dụng gói với các cơ chế bảo vệ riêng.\n\nHãy đảm bảo pin đã sạc và không ngắt quá trình khởi động lại. Chỉ tiếp tục nếu bạn hiểu rủi ro.</string>
+    <string name="dlg_flash_confirm">Tôi hiểu, flash</string>
+
+    <string name="prefs_general">Chung</string>
+    <string name="prefs_credits">Giới thiệu</string>
+    <string name="prefs_credits_summary">Giới thiệu về ứng dụng và những người tạo ra nó</string>
+    <string name="prefs_advanced">Cài đặt nâng cao</string>
+    <string name="prefs_advanced_summary">Nguồn cập nhật và bảo trì</string>
+    <string name="prefs_check_app_update">Kiểm tra cập nhật ứng dụng</string>
+    <string name="dlg_credits_title">Giới thiệu</string>
+    <string name="dlg_credits_body">Cloudy là ứng dụng cập nhật OTA của LumiROM.\n\nĐược duy trì bởi Lumi (@Luminous418).\nỨng dụng được tạo bởi ncatt (@ncatt).\n\nXây dựng trên libsu cho quyền root và thư viện thiết kế One UI 8. Cảm ơn cộng đồng LumiROM đã thử nghiệm và hỗ trợ.\n\nBáo cáo vấn đề hoặc nhận hỗ trợ trên Telegram LumiROM.</string>
+    <string name="dlg_credits_telegram">Telegram</string>
+
+    <string name="app_update_checking">Đang kiểm tra cập nhật ứng dụng…</string>
+    <string name="app_update_uptodate">Mới nhất</string>
+    <string name="app_update_available_title">Có bản cập nhật</string>
+    <string name="app_update_available_msg">Cloudy %1$s sẵn sàng để cài đặt.</string>
+    <string name="app_update_download">Tải và cài đặt</string>
+    <string name="app_update_downloading">Đang tải bản cập nhật…</string>
+    <string name="app_update_downloading_sub">Đang tải bản cập nhật… %1$d%%</string>
+    <string name="app_update_error_title">Kiểm tra cập nhật thất bại</string>
+    <string name="app_update_open_installer_failed">Không thể mở trình cài đặt: %1$s</string>
+
+    <string name="prefs_update_notifications">Thông báo cập nhật</string>
+    <string name="prefs_update_notifications_summary">Nhận thông báo khi có bản cập nhật LumiROM hoặc Cloudy mới</string>
+    <string name="notif_channel">Thông báo cập nhật</string>
+    <string name="notif_app_title">Có bản cập nhật Cloudy</string>
+    <string name="notif_app_msg">Cloudy %1$s sẵn sàng để cài đặt</string>
+    <string name="notif_rom_title">Có bản cập nhật LumiROM</string>
+    <string name="notif_rom_msg">LumiROM %1$s sẵn sàng để cài đặt</string>
+
+    <string-array name="update_interval_labels">
+        <item>Mỗi giờ</item>
+        <item>Mỗi 8 giờ</item>
+        <item>Mỗi 12 giờ</item>
+        <item>Mỗi ngày</item>
+        <item>Mỗi tuần</item>
+        <item>Mỗi tháng</item>
+    </string-array>
+
+    <string name="pref_cat_source">Nguồn cập nhật</string>
+    <string name="pref_json_url">URL JSON tùy chỉnh</string>
+    <string name="pref_json_url_dialog">URL tệp kê khai cập nhật</string>
+    <string name="pref_json_url_summary">Tệp kê khai từ xa mà Cloudy kiểm tra các bản dựng LumiROM mới</string>
+    <string name="pref_cat_background">Kiểm tra nền</string>
+    <string name="pref_check_interval">Khoảng thời gian kiểm tra</string>
+    <string name="pref_check_interval_summary">Tần suất Cloudy kiểm tra cập nhật trong nền</string>
+    <string name="pref_cat_maintenance">Bảo trì</string>
+    <string name="pref_reset">Đặt lại cấu hình</string>
+    <string name="pref_reset_summary">Xóa mọi cài đặt đã lưu của Cloudy và khôi phục mặc định</string>
+
+    <string name="hero_staged">Đã chuẩn bị</string>
+    <string name="hero_rebooting">Đang khởi động lại vào recovery để áp dụng…</string>
+    <string name="hero_root_required">Cần quyền root</string>
+    <string name="hero_root_required_sub">Cần root + mô-đun Cloudy (%1$s)</string>
+    <string name="hero_install_failed">Cài đặt thất bại</string>
+    <string name="hero_flashed">Đã flash</string>
+    <string name="hero_rebooting_finalize">Đang khởi động lại vào recovery để hoàn tất…</string>
+    <string name="hero_flash_failed">Flash thất bại</string>
+    <string name="dialog_flashing">Đang flash %1$s</string>
+    <string name="hero_worker_unavailable">Worker root không khả dụng — mô-đun Cloudy đã cài chưa?</string>
+    <string name="flash_progress_format">%1$d%%  ·  %2$s</string>
+    <string name="dlg_flash_direct_title">Flash trực tiếp vào /%1$s?</string>
+    <string name="dlg_flash_direct_msg">Thao tác này ghi ảnh trực tiếp vào phân vùng %1$s.\n\nGalaxy A32 là A-only — không có slot dự phòng. Nếu ghi bị ngắt hoặc ảnh sai, thiết bị có thể không khởi động được và cần recovery/Odin để khôi phục.\n\nChỉ tiếp tục nếu bạn hiểu rủi ro.</string>
+
+    <string name="prop_unset">chưa đặt</string>
+    <string name="installed_unknown">không xác định (%1$s chưa đặt)</string>
+    <string name="err_no_internet">Không có kết nối Internet</string>
+    <string name="err_server_timeout">Máy chủ cập nhật hết thời gian chờ</string>
+    <string name="err_bad_json">Tệp kê khai không phải JSON hợp lệ</string>
+    <string name="err_read_manifest">Không thể đọc tệp kê khai cập nhật</string>
+    <string name="err_network">Lỗi mạng</string>
+    <string name="err_empty_body">Thân phản hồi trống</string>
+    <string name="err_checksum">Kiểm tra tổng không khớp - từ chối tải xuống</string>
+    <string name="err_no_releases">Tệp kê khai không chứa bản dựng nào</string>
+    <string name="err_storage_unavailable">Bộ nhớ ngoài không khả dụng</string>
+    <string name="err_copy_failed">Không thể sao chép tệp đã chọn</string>
+    <string name="err_not_priv_app">Không phải ứng dụng đặc quyền: %1$s</string>
+    <string name="err_verify_failed">Xác minh gói thất bại: %1$s</string>
+    <string name="err_no_root_shell">Không có shell root</string>
+    <string name="err_module_missing">Mô-đun Cloudy chưa cài đặt</string>
+    <string name="err_staging_failed">Chuẩn bị thất bại: %1$s</string>
+    <string name="err_reboot_failed">Khởi động lại vào recovery thất bại: %1$s</string>
+    <string name="err_raw_not_confirmed">Flash trực tiếp chưa được xác nhận</string>
+    <string name="err_raw_need_root">Cần root + mô-đun Cloudy để flash trực tiếp</string>
+    <string name="err_partition_not_found">Không tìm thấy phân vùng \'%1$s\'</string>
+    <string name="err_dd_failed">lỗi dd: %1$s</string>
+
+    <string name="rs_stage_failed">lỗi chuẩn bị</string>
+    <string name="rs_flush_complete">ghi hoàn tất</string>
+    <string name="rs_flashed">Đã flash %1$s</string>
+    <string name="rs_dd_exited">dd thoát với mã %1$s</string>
+    <string name="rs_raw_failed">lỗi flash trực tiếp</string>
+    <string name="rs_shell_failed">lỗi lệnh shell</string>
+</resources>

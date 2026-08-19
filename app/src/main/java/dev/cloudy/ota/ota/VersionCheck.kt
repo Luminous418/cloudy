@@ -1,5 +1,7 @@
 package dev.cloudy.ota.ota
 
+import android.content.res.Resources
+import dev.cloudy.ota.R
 import dev.cloudy.ota.data.Release
 
 /**
@@ -15,7 +17,7 @@ object VersionCheck {
 
     data class Result(val updateAvailable: Boolean, val installed: String, val reason: String)
 
-    fun evaluate(release: Release): Result {
+    fun evaluate(release: Release, res: Resources): Result {
         val installedVersion = DeviceInfo.romVersion            // ro.cloudy.rom.ver
         val installedCode = DeviceInfo.romVersionCode           // ro.cloudy.rom.ver.code
 
@@ -37,7 +39,7 @@ object VersionCheck {
         // 3) fingerprint fallback (non-LumiROM base, prop unset)
         val differs = release.fingerprint.isNotBlank() &&
                 release.fingerprint != DeviceInfo.fingerprint
-        return Result(differs, "unknown (${DeviceInfo.PROP_ROM_VER} unset)", "fingerprint fallback")
+        return Result(differs, res.getString(R.string.installed_unknown, DeviceInfo.PROP_ROM_VER), "fingerprint fallback")
     }
 
     /** Pulls the first x[.y[.z]] token out of a label like "LumiROM 8.6.4 Beta". */

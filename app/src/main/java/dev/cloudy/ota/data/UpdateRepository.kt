@@ -1,8 +1,10 @@
 package dev.cloudy.ota.data
 
+import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import dev.cloudy.ota.BuildConfig
+import dev.cloudy.ota.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -26,6 +28,7 @@ sealed interface DownloadState {
 }
 
 class UpdateRepository(
+    private val context: Context,
     private val client: OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(20, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
@@ -108,7 +111,9 @@ class UpdateRepository(
         val request = Request.Builder().url(download.url).build()
         client.newCall(request).execute().use { resp ->
             if (!resp.isSuccessful) { emit(DownloadState.Failed("HTTP ${resp.code}")); return@flow }
-            val body = resp.body ?: run { emit(DownloadState.Failed("Empty body")); return@flow }
+            val body = resp.body ?: run {
+                emit(DownloadState.Failed(context.getString(R.string.err_empty_body))); return@flow
+            }
             val total = if (download.sizeBytes > 0) download.sizeBytes else body.contentLength()
 
             val digest = MessageDigest.getInstance("SHA-256")
@@ -137,27 +142,25 @@ class UpdateRepository(
             val expected = download.sha256?.trim()
             if (expected != null && expected.isNotEmpty() && !hex.equals(expected, ignoreCase = true)) {
                 dest.delete()
-                emit(DownloadState.Failed("Checksum mismatch - download rejected"))
+                emit(DownloadState.Failed(context.getString(R.string.err_checksum)))
             } else {
                 emit(DownloadState.Done(dest))
             }
         }
     }.flowOn(Dispatchers.IO)
 
-    companion object {
-        /**
-         * Turns a throwable into something worth showing on a status row. Several of the
-         * failures that actually happen here (NetworkOnMainThreadException, some IOExceptions)
-         * carry a null message, which is how the old code produced "Check failed: null".
-         */
-        fun describe(t: Throwable): String = when (t) {
-            is UnknownHostException -> "No internet connection"
-            is SocketTimeoutException -> "Update server timed out"
-            is JsonSyntaxException -> "Manifest is not valid JSON"
-            is IllegalArgumentException, is IllegalStateException ->
-                t.message ?: "Could not read the update manifest"
-            is IOException -> t.message ?: "Network error"
-            else -> t.message ?: t::class.java.simpleName
-        }
+    /**
+     * Turns a throwable into something worth showing on a status row. Several of the
+     * failures that actually happen here (NetworkOnMainThreadException, some IOExceptions)
+     * carry a null message, which is how the old code produced "Check failed: null".
+     */
+    fun describe(t: Throwable): String = when (t) {
+        is UnknownHostException -> context.getString(R.string.err_no_internet)
+        is SocketTimeoutException -> context.getString(R.string.err_server_timeout)
+        is JsonSyntaxException -> context.getString(R.string.err_bad_json)
+        is IllegalArgumentException, is IllegalStateException ->
+            t.message ?: context.getString(R.string.err_read_manifest)
+        is IOException -> t.message ?: context.getString(R.string.err_network)
+        else -> t.message ?: t::class.java.simpleName
     }
 }

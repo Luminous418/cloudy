@@ -27,7 +27,7 @@ class MaintainerFragment : Fragment() {
 
     private var _b: FragmentMaintainerBinding? = null
     private val b get() = _b!!
-    private val repo = UpdateRepository()
+    private val repo by lazy { UpdateRepository(requireContext()) }
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
         _b = FragmentMaintainerBinding.inflate(i, c, false)
@@ -74,7 +74,7 @@ class MaintainerFragment : Fragment() {
                 }
                 .onFailure { t ->
                     val v = _b ?: return@onFailure
-                    v.handle.text = UpdateRepository.describe(t)
+                    v.handle.text = repo.describe(t)
                     // Offline fallback: reuse the last avatar we fetched, from disk, so the
                     // profile image still shows when the manifest cannot be reached.
                     val cachedUrl = requireContext().getSharedPreferences("cloudy", 0)

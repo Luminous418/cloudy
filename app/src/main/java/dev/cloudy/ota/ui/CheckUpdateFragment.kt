@@ -34,7 +34,7 @@ class CheckUpdateFragment : Fragment() {
 
     private var _b: FragmentCheckUpdateBinding? = null
     private val b get() = _b!!
-    private val repo = UpdateRepository()
+    private val repo by lazy { UpdateRepository(requireContext()) }
     private val rootIpc by lazy { RootIpc(requireContext().applicationContext) }
 
     /** Every build the manifest offers, sorted newest first. The selector lists these. */
@@ -76,7 +76,7 @@ class CheckUpdateFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             val info = withContext(Dispatchers.IO) {
                 LocalInfo(
-                    installed = DeviceInfo.romVersion.ifBlank { "${DeviceInfo.PROP_ROM_VER} unset" },
+                    installed = DeviceInfo.romVersion.ifBlank { "${DeviceInfo.PROP_ROM_VER} ${getString(R.string.prop_unset)}" },
                     model = DeviceInfo.model,
                     android = DeviceInfo.androidVersion,
                     oneUi = DeviceInfo.oneUiVersion,
@@ -120,7 +120,7 @@ class CheckUpdateFragment : Fragment() {
                         setHero(
                             R.drawable.ic_status_error,
                             getString(R.string.status_failed),
-                            "Manifest contains no releases"
+                            getString(R.string.err_no_releases)
                         )
                         showReleaseSections(false)
                         v.btnDownload.visibility = View.GONE
@@ -133,7 +133,7 @@ class CheckUpdateFragment : Fragment() {
                     selectedIndex = 0
                     renderSelected()
 
-                    val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(releases[0]) }
+                    val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(releases[0], resources) }
                     v.rowInstalledVersion.summary = verdict.installed
 
                     if (verdict.updateAvailable) {
@@ -161,7 +161,7 @@ class CheckUpdateFragment : Fragment() {
                     setHero(
                         R.drawable.ic_status_error,
                         getString(R.string.status_failed),
-                        UpdateRepository.describe(t)
+                        repo.describe(t)
                     )
                     showReleaseSections(false)
                     v.btnDownload.visibility = View.GONE
@@ -298,13 +298,14 @@ class CheckUpdateFragment : Fragment() {
             val v = _b ?: return@launch
             when (result) {
                 is InstallResult.StagedRebootingToRecovery ->
-                    setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
+                    setHero(R.drawable.ic_status_available, getString(R.string.hero_staged), getString(R.string.hero_rebooting))
                 is InstallResult.NeedsRoot -> {
-                    setHero(R.drawable.ic_status_error, "Root required", "Root + Cloudy module required (${result.why})")
+                    setHero(R.drawable.ic_status_error, getString(R.string.hero_root_required),
+                        getString(R.string.hero_root_required_sub, result.why))
                     v.btnDownload.isEnabled = true
                 }
                 is InstallResult.Failed -> {
-                    setHero(R.drawable.ic_status_error, "Install failed", result.why)
+                    setHero(R.drawable.ic_status_error, getString(R.string.hero_install_failed), result.why)
                     v.btnDownload.isEnabled = true
                 }
             }
@@ -315,15 +316,10 @@ class CheckUpdateFragment : Fragment() {
     private fun confirmRawFlash(pkg: File, dl: Download) {
         val target = "system"   // for LumiROM full images; a boot/recovery image would pass its own name
         AlertDialog.Builder(requireContext())
-            .setTitle("Flash directly to /$target?")
-            .setMessage(
-                "This writes the image straight to the $target partition.\n\n" +
-                "The Galaxy A32 is A-only — there is no backup slot. If the write is " +
-                "interrupted or the image is wrong, the device may not boot and will need " +
-                "recovery/Odin to restore.\n\nOnly continue if you understand the risk."
-            )
-            .setPositiveButton("I understand, flash") { _, _ -> startRawFlash(pkg, target, dl.sizeBytes) }
-            .setNegativeButton("Cancel", null)
+            .setTitle(getString(R.string.dlg_flash_direct_title, target))
+            .setMessage(getString(R.string.dlg_flash_direct_msg, target))
+            .setPositiveButton(R.string.dlg_flash_confirm) { _, _ -> startRawFlash(pkg, target, dl.sizeBytes) }
+            .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
 
@@ -335,7 +331,7 @@ class CheckUpdateFragment : Fragment() {
         val bar = progressView.findViewById<android.widget.ProgressBar>(R.id.flashBar)
         val label = progressView.findViewById<android.widget.TextView>(R.id.flashLabel)
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle("Flashing $partition")
+            .setTitle(getString(R.string.dialog_flashing, partition))
             .setView(progressView)
             .setCancelable(false)
             .create()
@@ -347,7 +343,7 @@ class CheckUpdateFragment : Fragment() {
                 setHero(
                     R.drawable.ic_status_error,
                     getString(R.string.status_failed),
-                    "Root worker unavailable — is the Cloudy module installed?"
+                    getString(R.string.hero_worker_unavailable)
                 )
                 return@launch
             }
@@ -355,7 +351,7 @@ class CheckUpdateFragment : Fragment() {
                 override fun onProgress(percent: Int, line: String?) {
                     this@CheckUpdateFragment.view?.post {
                         if (percent >= 0) { bar.isIndeterminate = false; bar.progress = percent }
-                        label.text = if (percent >= 0) "$percent%  ·  ${line.orEmpty()}" else line.orEmpty()
+                        label.text = if (percent >= 0) getString(R.string.flash_progress_format, percent, line.orEmpty()) else line.orEmpty()
                     }
                 }
                 override fun onDone(success: Boolean, message: String?) {
@@ -364,10 +360,10 @@ class CheckUpdateFragment : Fragment() {
                     this@CheckUpdateFragment.view?.post {
                         dialog.dismiss()
                         if (success) {
-                            setHero(R.drawable.ic_status_available, "Flashed", "Rebooting to recovery to finalize…")
+                            setHero(R.drawable.ic_status_available, getString(R.string.hero_flashed), getString(R.string.hero_rebooting_finalize))
                             rootIpc.worker?.rebootRecovery()
                         } else {
-                            setHero(R.drawable.ic_status_error, "Flash failed", message.orEmpty())
+                            setHero(R.drawable.ic_status_error, getString(R.string.hero_flash_failed), message.orEmpty())
                         }
                     }
                 }
@@ -411,7 +407,7 @@ class CheckUpdateFragment : Fragment() {
         val name = queryDisplayName(ctx, uri) ?: "rom.zip"
         val baseDir = ctx.getExternalFilesDir(null)
         if (baseDir == null) {
-            setHero(R.drawable.ic_status_error, getString(R.string.status_failed), "External storage unavailable")
+            setHero(R.drawable.ic_status_error, getString(R.string.status_failed), getString(R.string.err_storage_unavailable))
             return
         }
         val dest = File(File(baseDir, LOCAL_ROM_DIR), name)
@@ -433,7 +429,7 @@ class CheckUpdateFragment : Fragment() {
             v.downloadBar.visibility = View.GONE
             v.btnFlashLocal.isEnabled = true
             if (ok) confirmLocalFlash(dest)
-            else setHero(R.drawable.ic_status_error, getString(R.string.status_failed), "Couldn't copy the selected file")
+            else setHero(R.drawable.ic_status_error, getString(R.string.status_failed), getString(R.string.err_copy_failed))
         }
     }
 
@@ -467,13 +463,14 @@ class CheckUpdateFragment : Fragment() {
             val v = _b ?: return@launch
             when (result) {
                 is InstallResult.StagedRebootingToRecovery ->
-                    setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
+                    setHero(R.drawable.ic_status_available, getString(R.string.hero_staged), getString(R.string.hero_rebooting))
                 is InstallResult.NeedsRoot -> {
-                    setHero(R.drawable.ic_status_error, "Root required", "Root + Cloudy module required (${result.why})")
+                    setHero(R.drawable.ic_status_error, getString(R.string.hero_root_required),
+                        getString(R.string.hero_root_required_sub, result.why))
                     v.btnFlashLocal.isEnabled = true
                 }
                 is InstallResult.Failed -> {
-                    setHero(R.drawable.ic_status_error, "Install failed", result.why)
+                    setHero(R.drawable.ic_status_error, getString(R.string.hero_install_failed), result.why)
                     v.btnFlashLocal.isEnabled = true
                 }
             }

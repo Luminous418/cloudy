@@ -2,28 +2,28 @@
 <!-- Advanced settings screen: opened as a separate screen from the Settings tab. -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Update source">
+    <PreferenceCategory android:title="@string/pref_cat_source">
         <EditTextPreference
             android:key="json_url"
-            android:title="Custom JSON URL"
-            android:dialogTitle="Update manifest URL"
-            android:summary="Remote manifest Cloudy checks for new LumiROM builds" />
+            android:title="@string/pref_json_url"
+            android:dialogTitle="@string/pref_json_url_dialog"
+            android:summary="@string/pref_json_url_summary" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Background checks">
+    <PreferenceCategory android:title="@string/pref_cat_background">
         <ListPreference
             android:key="update_interval"
-            android:title="Check interval"
-            android:summary="How often Cloudy checks for new updates in the background"
+            android:title="@string/pref_check_interval"
+            android:summary="@string/pref_check_interval_summary"
             android:entries="@array/update_interval_labels"
             android:entryValues="@array/update_interval_values"
             android:defaultValue="86400000" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Maintenance">
+    <PreferenceCategory android:title="@string/pref_cat_maintenance">
         <Preference
             android:key="reset"
-            android:title="Reset configurations"
-            android:summary="Clear all saved Cloudy flags and restore defaults" />
+            android:title="@string/pref_reset"
+            android:summary="@string/pref_reset_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

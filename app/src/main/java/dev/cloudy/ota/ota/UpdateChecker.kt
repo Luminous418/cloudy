@@ -49,7 +49,7 @@ object UpdateChecker {
      * Runs off the caller thread; safe to call from any dispatcher.
      */
     suspend fun check(context: Context): Result = withContext(Dispatchers.IO) {
-        val repo = UpdateRepository()
+        val repo = UpdateRepository(context)
         var appVersion: String? = null
         var appVersionCode: Long? = null
         var romVersion: String? = null
@@ -65,7 +65,7 @@ object UpdateChecker {
                 compareByDescending<Release> { it.versionCode ?: Long.MIN_VALUE }
                     .thenByDescending { it.version }
             ).firstOrNull()
-            if (newest != null && VersionCheck.evaluate(newest).updateAvailable) {
+            if (newest != null && VersionCheck.evaluate(newest, context.resources).updateAvailable) {
                 romVersion = newest.version
             }
         }

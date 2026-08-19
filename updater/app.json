@@ -1,16 +1,16 @@
 {
   "app_name": "Cloudy",
-  "version": "2.3",
-  "version_code": 7,
+  "version": "2.31",
+  "version_code": 8,
   "changelog": [
-    "Update README and remove magisk module",
-    "Cloudy 2.3: self-updater, app info header, update notifications with configurable interval"
+    "App fully translated: Spanish, French, Portuguese, German, Italian, Russian and Vietnamese",
+    "All screens, dialogs and error messages localized, following the system language"
   ],
   "download": {
     "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
-    "filename": "Cloudy_2.3.apk",
-    "size_bytes": 15750740,
-    "sha256": "f32dacb5ca00eb3e22e7b4e6bc914c82d95cb36d269dbbb1652a4a63166c33f1",
+    "filename": "Cloudy_2.31.apk",
+    "size_bytes": 15833648,
+    "sha256": "81fbc93399ac66f390befc2e6f81704ed9d939c07f92033196bef5f8e01db22d",
     "install_type": "apk"
   }
 }

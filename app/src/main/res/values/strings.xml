@@ -107,4 +107,63 @@
         <item>604800000</item>
         <item>2592000000</item>
     </string-array>
+
+    <!-- Advanced settings screen -->
+    <string name="pref_cat_source">Update source</string>
+    <string name="pref_json_url">Custom JSON URL</string>
+    <string name="pref_json_url_dialog">Update manifest URL</string>
+    <string name="pref_json_url_summary">Remote manifest Cloudy checks for new LumiROM builds</string>
+    <string name="pref_cat_background">Background checks</string>
+    <string name="pref_check_interval">Check interval</string>
+    <string name="pref_check_interval_summary">How often Cloudy checks for new updates in the background</string>
+    <string name="pref_cat_maintenance">Maintenance</string>
+    <string name="pref_reset">Reset configurations</string>
+    <string name="pref_reset_summary">Clear all saved Cloudy flags and restore defaults</string>
+
+    <!-- Install / flash hero states and dialogs -->
+    <string name="hero_staged">Staged</string>
+    <string name="hero_rebooting">Rebooting to recovery to apply…</string>
+    <string name="hero_root_required">Root required</string>
+    <string name="hero_root_required_sub">Root + Cloudy module required (%1$s)</string>
+    <string name="hero_install_failed">Install failed</string>
+    <string name="hero_flashed">Flashed</string>
+    <string name="hero_rebooting_finalize">Rebooting to recovery to finalize…</string>
+    <string name="hero_flash_failed">Flash failed</string>
+    <string name="dialog_flashing">Flashing %1$s</string>
+    <string name="hero_worker_unavailable">Root worker unavailable — is the Cloudy module installed?</string>
+    <string name="flash_progress_format">%1$d%%  ·  %2$s</string>
+    <string name="dlg_flash_direct_title">Flash directly to /%1$s?</string>
+    <string name="dlg_flash_direct_msg">This writes the image straight to the %1$s partition.\n\nThe Galaxy A32 is A-only — there is no backup slot. If the write is interrupted or the image is wrong, the device may not boot and will need recovery/Odin to restore.\n\nOnly continue if you understand the risk.</string>
+
+    <!-- Errors -->
+    <string name="prop_unset">unset</string>
+    <string name="installed_unknown">unknown (%1$s unset)</string>
+    <string name="err_no_internet">No internet connection</string>
+    <string name="err_server_timeout">Update server timed out</string>
+    <string name="err_bad_json">Manifest is not valid JSON</string>
+    <string name="err_read_manifest">Could not read the update manifest</string>
+    <string name="err_network">Network error</string>
+    <string name="err_empty_body">Empty body</string>
+    <string name="err_checksum">Checksum mismatch - download rejected</string>
+    <string name="err_no_releases">Manifest contains no releases</string>
+    <string name="err_storage_unavailable">External storage unavailable</string>
+    <string name="err_copy_failed">Couldn\'t copy the selected file</string>
+    <string name="err_not_priv_app">Not a privileged app: %1$s</string>
+    <string name="err_verify_failed">Package verification failed: %1$s</string>
+    <string name="err_no_root_shell">No root shell</string>
+    <string name="err_module_missing">Cloudy module not installed</string>
+    <string name="err_staging_failed">Staging failed: %1$s</string>
+    <string name="err_reboot_failed">Reboot to recovery failed: %1$s</string>
+    <string name="err_raw_not_confirmed">Raw flash not confirmed</string>
+    <string name="err_raw_need_root">Root + Cloudy module required for raw flash</string>
+    <string name="err_partition_not_found">Partition \'%1$s\' not found</string>
+    <string name="err_dd_failed">dd failed: %1$s</string>
+
+    <!-- Root worker (separate process) -->
+    <string name="rs_stage_failed">stage failed</string>
+    <string name="rs_flush_complete">flush complete</string>
+    <string name="rs_flashed">Flashed %1$s</string>
+    <string name="rs_dd_exited">dd exited %1$s</string>
+    <string name="rs_raw_failed">raw flash failed</string>
+    <string name="rs_shell_failed">shell command failed</string>
 </resources>

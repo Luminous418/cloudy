@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_version">Версия %1$s</string>
+    <string name="settings_entry_summary">Проверка обновлений LumiROM</string>
+
+    <string name="tab_check_update">Обновить</string>
+    <string name="tab_maintainer">Разработчик</string>
+    <string name="tab_settings">Настройки</string>
+
+    <string name="sep_status">Статус</string>
+    <string name="sep_available">Доступные сборки</string>
+    <string name="sep_changelog">Список изменений</string>
+    <string name="f_select_build">Выбрать сборку</string>
+    <string name="dlg_ok">ОК</string>
+    <string name="sep_device">Это устройство</string>
+    <string name="sep_details">Детали</string>
+    <string name="sep_contact">Контакты</string>
+
+    <string name="f_version">Версия</string>
+    <string name="f_build_date">Дата сборки</string>
+    <string name="f_size">Размер загрузки</string>
+    <string name="f_android">Версия Android</string>
+    <string name="f_oneui">Версия One UI</string>
+    <string name="f_patch">Патч безопасности</string>
+    <string name="f_fingerprint">Fingerprint сборки</string>
+    <string name="f_installed">Установленная версия</string>
+    <string name="f_model">Модель устройства</string>
+    <string name="f_kernel">Версия ядра</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Устройство</string>
+
+    <string name="status_checking">Проверка обновлений…</string>
+    <string name="status_checking_sub">Подключение к серверу обновлений LumiROM</string>
+    <string name="status_up_to_date">Ваше ПО актуально</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s — последняя сборка для этого устройства</string>
+    <string name="status_update_available">Доступно обновление</string>
+    <string name="status_update_available_sub">LumiROM %1$s готова к загрузке</string>
+    <string name="status_failed">Не удалось проверить обновления</string>
+    <string name="status_downloading">Загрузка обновления</string>
+    <string name="status_downloading_sub">%1$d%% · держите Cloudy открытой</string>
+    <string name="status_installing">Подготовка к установке</string>
+
+    <string name="btn_check">Проверить обновления</string>
+    <string name="btn_download">Скачать и установить</string>
+    <string name="btn_flash_local">Прошить ROM из памяти</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Пожертвовать</string>
+
+    <string name="unknown_maintainer">Неизвестный разработчик</string>
+    <string name="flash_warning">Не отключайте и не выключайте устройство.</string>
+
+    <string name="status_copying">Копирование ROM в хранилище приложения</string>
+    <string name="status_copying_sub">Большие файлы могут занять время</string>
+    <string name="dlg_flash_local_title">Прошить %1$s?</string>
+    <string name="dlg_flash_local_msg">Это скопирует выбранную ROM в /data и перезагрузит устройство в recovery для её установки. Recovery применит пакет со своими защитными механизмами.\n\nУбедитесь, что батарея заряжена, и не прерывайте перезагрузку. Продолжайте только если понимаете риск.</string>
+    <string name="dlg_flash_confirm">Понимаю, прошить</string>
+
+    <string name="prefs_general">Общие</string>
+    <string name="prefs_credits">О приложении</string>
+    <string name="prefs_credits_summary">О приложении и его создателях</string>
+    <string name="prefs_advanced">Расширенные настройки</string>
+    <string name="prefs_advanced_summary">Источник обновлений и обслуживание</string>
+    <string name="prefs_check_app_update">Проверить обновления приложения</string>
+    <string name="dlg_credits_title">О приложении</string>
+    <string name="dlg_credits_body">Cloudy — OTA-обновлятор LumiROM.\n\nПоддерживается Lumi (@Luminous418).\nПриложение создано ncatt (@ncatt).\n\nПостроено на libsu для root-доступа и библиотеке дизайна One UI 8. Спасибо сообществу LumiROM за тестирование и поддержку.\n\nСообщайте о проблемах и получайте поддержку в Telegram LumiROM.</string>
+    <string name="dlg_credits_telegram">Telegram</string>
+
+    <string name="app_update_checking">Проверка обновлений приложения…</string>
+    <string name="app_update_uptodate">Актуально</string>
+    <string name="app_update_available_title">Доступно обновление</string>
+    <string name="app_update_available_msg">Cloudy %1$s готова к установке.</string>
+    <string name="app_update_download">Скачать и установить</string>
+    <string name="app_update_downloading">Загрузка обновления…</string>
+    <string name="app_update_downloading_sub">Загрузка обновления… %1$d%%</string>
+    <string name="app_update_error_title">Не удалось проверить обновления</string>
+    <string name="app_update_open_installer_failed">Не удалось открыть установщик: %1$s</string>
+
+    <string name="prefs_update_notifications">Уведомления об обновлениях</string>
+    <string name="prefs_update_notifications_summary">Получать уведомления о новых обновлениях LumiROM или Cloudy</string>
+    <string name="notif_channel">Уведомления об обновлениях</string>
+    <string name="notif_app_title">Доступно обновление Cloudy</string>
+    <string name="notif_app_msg">Cloudy %1$s готова к установке</string>
+    <string name="notif_rom_title">Доступно обновление LumiROM</string>
+    <string name="notif_rom_msg">LumiROM %1$s готова к установке</string>
+
+    <string-array name="update_interval_labels">
+        <item>Каждый час</item>
+        <item>Каждые 8 часов</item>
+        <item>Каждые 12 часов</item>
+        <item>Каждый день</item>
+        <item>Каждую неделю</item>
+        <item>Каждый месяц</item>
+    </string-array>
+
+    <string name="pref_cat_source">Источник обновлений</string>
+    <string name="pref_json_url">Свой JSON URL</string>
+    <string name="pref_json_url_dialog">URL манифеста обновления</string>
+    <string name="pref_json_url_summary">Удалённый манифест, который Cloudy проверяет на новые сборки LumiROM</string>
+    <string name="pref_cat_background">Фоновые проверки</string>
+    <string name="pref_check_interval">Интервал проверки</string>
+    <string name="pref_check_interval_summary">Как часто Cloudy проверяет обновления в фоне</string>
+    <string name="pref_cat_maintenance">Обслуживание</string>
+    <string name="pref_reset">Сбросить настройки</string>
+    <string name="pref_reset_summary">Очистить все сохранённые настройки Cloudy и восстановить значения по умолчанию</string>
+
+    <string name="hero_staged">Подготовлено</string>
+    <string name="hero_rebooting">Перезагрузка в recovery для применения…</string>
+    <string name="hero_root_required">Требуется root</string>
+    <string name="hero_root_required_sub">Требуется root + модуль Cloudy (%1$s)</string>
+    <string name="hero_install_failed">Ошибка установки</string>
+    <string name="hero_flashed">Прошито</string>
+    <string name="hero_rebooting_finalize">Перезагрузка в recovery для завершения…</string>
+    <string name="hero_flash_failed">Ошибка прошивки</string>
+    <string name="dialog_flashing">Прошивка %1$s</string>
+    <string name="hero_worker_unavailable">Root-worker недоступен — установлен ли модуль Cloudy?</string>
+    <string name="flash_progress_format">%1$d%%  ·  %2$s</string>
+    <string name="dlg_flash_direct_title">Прошить напрямую в /%1$s?</string>
+    <string name="dlg_flash_direct_msg">Это запишет образ напрямую в раздел %1$s.\n\nGalaxy A32 — A-only, запасного слота нет. Если запись будет прервана или образ окажется неверным, устройство может не загрузиться и потребуется восстановление через recovery/Odin.\n\nПродолжайте только если понимаете риск.</string>
+
+    <string name="prop_unset">не задано</string>
+    <string name="installed_unknown">неизвестно (%1$s не задано)</string>
+    <string name="err_no_internet">Нет подключения к интернету</string>
+    <string name="err_server_timeout">Сервер обновлений не ответил</string>
+    <string name="err_bad_json">Манифест не является корректным JSON</string>
+    <string name="err_read_manifest">Не удалось прочитать манифест обновления</string>
+    <string name="err_network">Ошибка сети</string>
+    <string name="err_empty_body">Пустое тело ответа</string>
+    <string name="err_checksum">Несовпадение контрольной суммы — загрузка отклонена</string>
+    <string name="err_no_releases">Манифест не содержит сборок</string>
+    <string name="err_storage_unavailable">Внешнее хранилище недоступно</string>
+    <string name="err_copy_failed">Не удалось скопировать выбранный файл</string>
+    <string name="err_not_priv_app">Не привилегированное приложение: %1$s</string>
+    <string name="err_verify_failed">Ошибка проверки пакета: %1$s</string>
+    <string name="err_no_root_shell">Нет root-оболочки</string>
+    <string name="err_module_missing">Модуль Cloudy не установлен</string>
+    <string name="err_staging_failed">Ошибка подготовки: %1$s</string>
+    <string name="err_reboot_failed">Не удалось перезагрузиться в recovery: %1$s</string>
+    <string name="err_raw_not_confirmed">Прямая прошивка не подтверждена</string>
+    <string name="err_raw_need_root">Для прямой прошивки требуется root + модуль Cloudy</string>
+    <string name="err_partition_not_found">Раздел «%1$s» не найден</string>
+    <string name="err_dd_failed">ошибка dd: %1$s</string>
+
+    <string name="rs_stage_failed">ошибка подготовки</string>
+    <string name="rs_flush_complete">запись завершена</string>
+    <string name="rs_flashed">Прошито: %1$s</string>
+    <string name="rs_dd_exited">dd завершился с кодом %1$s</string>
+    <string name="rs_raw_failed">ошибка прямой прошивки</string>
+    <string name="rs_shell_failed">ошибка выполнения команды</string>
+</resources>

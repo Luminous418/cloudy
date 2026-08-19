@@ -111,7 +111,7 @@ object SettingsPrefs {
  */
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    private val repo = UpdateRepository()
+    private val repo by lazy { UpdateRepository(requireContext()) }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.sharedPreferencesName = "cloudy"
@@ -180,7 +180,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 onFailure = { t ->
                     AlertDialog.Builder(requireContext())
                         .setTitle(R.string.app_update_error_title)
-                        .setMessage(UpdateRepository.describe(t))
+                        .setMessage(repo.describe(t))
                         .setPositiveButton(android.R.string.ok, null)
                         .show()
                 }

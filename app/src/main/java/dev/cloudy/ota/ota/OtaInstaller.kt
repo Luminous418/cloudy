@@ -2,6 +2,7 @@ package dev.cloudy.ota.ota
 
 import android.content.Context
 import android.os.RecoverySystem
+import dev.cloudy.ota.R
 import java.io.File
 
 sealed interface InstallResult {
@@ -30,9 +31,9 @@ class OtaInstaller(private val context: Context) {
         RecoverySystem.installPackage(context, pkg)   // triggers reboot to recovery
         InstallResult.StagedRebootingToRecovery
     } catch (se: SecurityException) {
-        InstallResult.NeedsRoot("Not a privileged app: ${se.message}")
+        InstallResult.NeedsRoot(context.getString(R.string.err_not_priv_app, se.message))
     } catch (e: Exception) {
-        InstallResult.Failed("Package verification failed: ${e.message}")
+        InstallResult.Failed(context.getString(R.string.err_verify_failed, e.message))
     }
 
     /**
@@ -41,9 +42,9 @@ class OtaInstaller(private val context: Context) {
      * on the next boot to apply an OTA and then wipe the command.
      */
     fun rootStageRecovery(pkg: File): InstallResult {
-        if (!RootManager.hasRoot()) return InstallResult.NeedsRoot("No root shell")
+        if (!RootManager.hasRoot()) return InstallResult.NeedsRoot(context.getString(R.string.err_no_root_shell))
         if (!RootManager.cloudyModulePresent())
-            return InstallResult.NeedsRoot("Cloudy module not installed")
+            return InstallResult.NeedsRoot(context.getString(R.string.err_module_missing))
 
         // Recovery expects the package on a partition it can read early. /data/media/0 (== internal
         // /sdcard) is standard for sideload-style OTAs on A-only Samsung.
@@ -63,13 +64,13 @@ class OtaInstaller(private val context: Context) {
         """.trimIndent()
 
         val res = RootManager.exec(*commands.lines().map { it.trim() }.filter { it.isNotEmpty() }.toTypedArray())
-        if (!res.isSuccess) return InstallResult.Failed("Staging failed: ${res.err.joinToString()}")
+        if (!res.isSuccess) return InstallResult.Failed(context.getString(R.string.err_staging_failed, res.err.joinToString()))
 
         // Reboot into recovery to apply. Prefer the framework reboot reason; module SELinux
         // rule allows the fallback binary too.
         val reboot = RootManager.exec("/system/bin/reboot recovery || reboot recovery")
         return if (reboot.isSuccess) InstallResult.StagedRebootingToRecovery
-        else InstallResult.Failed("Reboot to recovery failed: ${reboot.err.joinToString()}")
+        else InstallResult.Failed(context.getString(R.string.err_reboot_failed, reboot.err.joinToString()))
     }
 
     /**
@@ -81,9 +82,9 @@ class OtaInstaller(private val context: Context) {
      * the by-name symlink rather than a hardcoded block number so it survives across units.
      */
     fun rawBlockFlash(pkg: File, target: String, confirmedRawFlash: Boolean): InstallResult {
-        if (!confirmedRawFlash) return InstallResult.Failed("Raw flash not confirmed")
+        if (!confirmedRawFlash) return InstallResult.Failed(context.getString(R.string.err_raw_not_confirmed))
         if (!RootManager.hasRoot() || !RootManager.cloudyModulePresent())
-            return InstallResult.NeedsRoot("Root + Cloudy module required for raw flash")
+            return InstallResult.NeedsRoot(context.getString(R.string.err_raw_need_root))
 
         val safe = target.filter { it.isLetterOrDigit() || it == '_' }
         val cmd = """
@@ -95,9 +96,9 @@ class OtaInstaller(private val context: Context) {
         """.trimIndent()
         val res = RootManager.exec(cmd)
         return when {
-            res.out.any { it.contains("NO_PARTITION") } -> InstallResult.Failed("Partition '$safe' not found")
+            res.out.any { it.contains("NO_PARTITION") } -> InstallResult.Failed(context.getString(R.string.err_partition_not_found, safe))
             res.isSuccess -> InstallResult.StagedRebootingToRecovery
-            else -> InstallResult.Failed("dd failed: ${res.err.joinToString()}")
+            else -> InstallResult.Failed(context.getString(R.string.err_dd_failed, res.err.joinToString()))
         }
     }
 }

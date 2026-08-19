@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_version">Versione %1$s</string>
+    <string name="settings_entry_summary">Controlla gli aggiornamenti di LumiROM</string>
+
+    <string name="tab_check_update">Aggiorna</string>
+    <string name="tab_maintainer">Sviluppatore</string>
+    <string name="tab_settings">Impostazioni</string>
+
+    <string name="sep_status">Stato</string>
+    <string name="sep_available">Versioni disponibili</string>
+    <string name="sep_changelog">Registro delle modifiche</string>
+    <string name="f_select_build">Seleziona versione</string>
+    <string name="dlg_ok">OK</string>
+    <string name="sep_device">Questo dispositivo</string>
+    <string name="sep_details">Dettagli</string>
+    <string name="sep_contact">Contatto</string>
+
+    <string name="f_version">Versione</string>
+    <string name="f_build_date">Data di build</string>
+    <string name="f_size">Dimensione download</string>
+    <string name="f_android">Versione Android</string>
+    <string name="f_oneui">Versione One UI</string>
+    <string name="f_patch">Patch di sicurezza</string>
+    <string name="f_fingerprint">Impronta di build</string>
+    <string name="f_installed">Versione installata</string>
+    <string name="f_model">Modello del dispositivo</string>
+    <string name="f_kernel">Versione del kernel</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Dispositivo</string>
+
+    <string name="status_checking">Controllo degli aggiornamenti…</string>
+    <string name="status_checking_sub">Contattando il server di aggiornamento LumiROM</string>
+    <string name="status_up_to_date">Il tuo software è aggiornato</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s è l\'ultima build per questo dispositivo</string>
+    <string name="status_update_available">Aggiornamento disponibile</string>
+    <string name="status_update_available_sub">LumiROM %1$s è pronta per il download</string>
+    <string name="status_failed">Impossibile controllare gli aggiornamenti</string>
+    <string name="status_downloading">Download dell\'aggiornamento</string>
+    <string name="status_downloading_sub">%1$d%% · tieni Cloudy aperta</string>
+    <string name="status_installing">Preparazione dell\'installazione</string>
+
+    <string name="btn_check">Cerca aggiornamenti</string>
+    <string name="btn_download">Scarica e installa</string>
+    <string name="btn_flash_local">Flash ROM dall\'archivio</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Dona</string>
+
+    <string name="unknown_maintainer">Sviluppatore sconosciuto</string>
+    <string name="flash_warning">Non scollegare né spegnere il dispositivo.</string>
+
+    <string name="status_copying">Copia della ROM nell\'archivio dell\'app</string>
+    <string name="status_copying_sub">I file grandi possono richiedere tempo</string>
+    <string name="dlg_flash_local_title">Flash di %1$s?</string>
+    <string name="dlg_flash_local_msg">Questo copia la ROM selezionata su /data e riavvia il dispositivo in recovery per applicarla. Recovery applica il pacchetto con le sue protezioni.\n\nAssicurati che la batteria sia carica e non interrompere il riavvio. Continua solo se capisci il rischio.</string>
+    <string name="dlg_flash_confirm">Ho capito, flash</string>
+
+    <string name="prefs_general">Generale</string>
+    <string name="prefs_credits">Crediti</string>
+    <string name="prefs_credits_summary">Informazioni sull\'app e sui suoi creatori</string>
+    <string name="prefs_advanced">Impostazioni avanzate</string>
+    <string name="prefs_advanced_summary">Origine aggiornamenti e manutenzione</string>
+    <string name="prefs_check_app_update">Cerca aggiornamenti dell\'app</string>
+    <string name="dlg_credits_title">Crediti</string>
+    <string name="dlg_credits_body">Cloudy è l\'updater OTA di LumiROM.\n\nGestito da Lumi (@Luminous418).\nApp creata da ncatt (@ncatt).\n\nÈ costruita su libsu per l\'accesso root e la libreria di design One UI 8. Grazie alla community di LumiROM per i test e il supporto.\n\nSegnala problemi o ottieni supporto sul Telegram di LumiROM.</string>
+    <string name="dlg_credits_telegram">Telegram</string>
+
+    <string name="app_update_checking">Ricerca aggiornamenti dell\'app…</string>
+    <string name="app_update_uptodate">Aggiornata</string>
+    <string name="app_update_available_title">Aggiornamento disponibile</string>
+    <string name="app_update_available_msg">Cloudy %1$s è pronta per l\'installazione.</string>
+    <string name="app_update_download">Scarica e installa</string>
+    <string name="app_update_downloading">Download dell\'aggiornamento…</string>
+    <string name="app_update_downloading_sub">Download dell\'aggiornamento… %1$d%%</string>
+    <string name="app_update_error_title">Controllo aggiornamenti non riuscito</string>
+    <string name="app_update_open_installer_failed">Impossibile aprire il programma di installazione: %1$s</string>
+
+    <string name="prefs_update_notifications">Notifiche di aggiornamento</string>
+    <string name="prefs_update_notifications_summary">Ricevi una notifica quando è disponibile un nuovo aggiornamento di LumiROM o Cloudy</string>
+    <string name="notif_channel">Notifiche di aggiornamento</string>
+    <string name="notif_app_title">Aggiornamento di Cloudy disponibile</string>
+    <string name="notif_app_msg">Cloudy %1$s è pronta per l\'installazione</string>
+    <string name="notif_rom_title">Aggiornamento di LumiROM disponibile</string>
+    <string name="notif_rom_msg">LumiROM %1$s è pronta per l\'installazione</string>
+
+    <string-array name="update_interval_labels">
+        <item>Ogni ora</item>
+        <item>Ogni 8 ore</item>
+        <item>Ogni 12 ore</item>
+        <item>Ogni giorno</item>
+        <item>Ogni settimana</item>
+        <item>Ogni mese</item>
+    </string-array>
+
+    <string name="pref_cat_source">Origine aggiornamenti</string>
+    <string name="pref_json_url">URL JSON personalizzata</string>
+    <string name="pref_json_url_dialog">URL del manifest di aggiornamento</string>
+    <string name="pref_json_url_summary">Manifest remoto che Cloudy controlla per nuove build di LumiROM</string>
+    <string name="pref_cat_background">Controlli in background</string>
+    <string name="pref_check_interval">Intervallo di controllo</string>
+    <string name="pref_check_interval_summary">Con quale frequenza Cloudy cerca aggiornamenti in background</string>
+    <string name="pref_cat_maintenance">Manutenzione</string>
+    <string name="pref_reset">Ripristina configurazioni</string>
+    <string name="pref_reset_summary">Cancella tutte le impostazioni salvate di Cloudy e ripristina i valori predefiniti</string>
+
+    <string name="hero_staged">Pronto</string>
+    <string name="hero_rebooting">Riavvio in recovery per applicare…</string>
+    <string name="hero_root_required">Root richiesto</string>
+    <string name="hero_root_required_sub">Root + modulo Cloudy richiesti (%1$s)</string>
+    <string name="hero_install_failed">Installazione non riuscita</string>
+    <string name="hero_flashed">Flashato</string>
+    <string name="hero_rebooting_finalize">Riavvio in recovery per completare…</string>
+    <string name="hero_flash_failed">Flash non riuscito</string>
+    <string name="dialog_flashing">Flash di %1$s</string>
+    <string name="hero_worker_unavailable">Worker root non disponibile — il modulo Cloudy è installato?</string>
+    <string name="flash_progress_format">%1$d%%  ·  %2$s</string>
+    <string name="dlg_flash_direct_title">Flash diretto su /%1$s?</string>
+    <string name="dlg_flash_direct_msg">Questo scrive l\'immagine direttamente sulla partizione %1$s.\n\nIl Galaxy A32 è A-only — non esiste uno slot di backup. Se la scrittura viene interrotta o l\'immagine è sbagliata, il dispositivo potrebbe non avviarsi e richiedere recovery/Odin per il ripristino.\n\nContinua solo se capisci il rischio.</string>
+
+    <string name="prop_unset">non impostata</string>
+    <string name="installed_unknown">sconosciuta (%1$s non impostata)</string>
+    <string name="err_no_internet">Nessuna connessione Internet</string>
+    <string name="err_server_timeout">Timeout del server di aggiornamento</string>
+    <string name="err_bad_json">Il manifest non è un JSON valido</string>
+    <string name="err_read_manifest">Impossibile leggere il manifest di aggiornamento</string>
+    <string name="err_network">Errore di rete</string>
+    <string name="err_empty_body">Corpo vuoto</string>
+    <string name="err_checksum">Checksum non valido - download rifiutato</string>
+    <string name="err_no_releases">Il manifest non contiene versioni</string>
+    <string name="err_storage_unavailable">Archiviazione esterna non disponibile</string>
+    <string name="err_copy_failed">Impossibile copiare il file selezionato</string>
+    <string name="err_not_priv_app">Non è un\'app privilegiata: %1$s</string>
+    <string name="err_verify_failed">Verifica del pacchetto non riuscita: %1$s</string>
+    <string name="err_no_root_shell">Nessuna shell di root</string>
+    <string name="err_module_missing">Modulo Cloudy non installato</string>
+    <string name="err_staging_failed">Preparazione non riuscita: %1$s</string>
+    <string name="err_reboot_failed">Riavvio in recovery non riuscito: %1$s</string>
+    <string name="err_raw_not_confirmed">Flash diretto non confermato</string>
+    <string name="err_raw_need_root">Root + modulo Cloudy richiesti per il flash diretto</string>
+    <string name="err_partition_not_found">Partizione \'%1$s\' non trovata</string>
+    <string name="err_dd_failed">dd non riuscito: %1$s</string>
+
+    <string name="rs_stage_failed">preparazione non riuscita</string>
+    <string name="rs_flush_complete">scrittura completata</string>
+    <string name="rs_flashed">%1$s flashato</string>
+    <string name="rs_dd_exited">dd terminato con %1$s</string>
+    <string name="rs_raw_failed">flash diretto non riuscito</string>
+    <string name="rs_shell_failed">comando shell non riuscito</string>
+</resources>

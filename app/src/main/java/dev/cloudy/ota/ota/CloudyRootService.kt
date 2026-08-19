@@ -3,6 +3,7 @@ package dev.cloudy.ota.ota
 import android.content.Intent
 import android.os.IBinder
 import com.topjohnwu.superuser.ipc.RootService as LibsuRootService
+import dev.cloudy.ota.R
 import java.io.File
 
 /**
@@ -13,7 +14,7 @@ class CloudyRootService : LibsuRootService() {
 
     override fun onBind(intent: Intent): IBinder = Ipc()
 
-    private class Ipc : IRootIpc.Stub() {
+    private inner class Ipc : IRootIpc.Stub() {
 
         override fun getProp(key: String): String = runCatching {
             val p = Runtime.getRuntime().exec(arrayOf("getprop", key))
@@ -40,7 +41,7 @@ class CloudyRootService : LibsuRootService() {
                 )
                 ""
             } catch (e: Exception) {
-                e.message ?: "stage failed"
+                e.message ?: this@CloudyRootService.getString(R.string.rs_stage_failed)
             }
         }
 
@@ -54,7 +55,7 @@ class CloudyRootService : LibsuRootService() {
             try {
                 // Resolve the by-name symlink so we never touch a hardcoded mmcblk number.
                 val bn = resolveByName(safe)
-                    ?: run { cb.onDone(false, "Partition '$safe' not found"); return }
+                    ?: run { cb.onDone(false, this@CloudyRootService.getString(R.string.err_partition_not_found, safe)); return }
 
                 // dd status=progress writes "<bytes> bytes ... copied" lines to STDERR.
                 val proc = ProcessBuilder(
@@ -70,10 +71,10 @@ class CloudyRootService : LibsuRootService() {
                     cb.onProgress(pct, line.trim())
                 }
                 val code = proc.waitFor()
-                if (code == 0) cb.onProgress(100, "flush complete")
-                cb.onDone(code == 0, if (code == 0) "Flashed $safe" else "dd exited $code")
+                if (code == 0) cb.onProgress(100, this@CloudyRootService.getString(R.string.rs_flush_complete))
+                cb.onDone(code == 0, if (code == 0) this@CloudyRootService.getString(R.string.rs_flashed, safe) else this@CloudyRootService.getString(R.string.rs_dd_exited, code))
             } catch (e: Exception) {
-                cb.onDone(false, e.message ?: "raw flash failed")
+                cb.onDone(false, e.message ?: this@CloudyRootService.getString(R.string.rs_raw_failed))
             }
         }
 
@@ -99,7 +100,7 @@ class CloudyRootService : LibsuRootService() {
             val p = ProcessBuilder("sh", "-c", cmds.joinToString(" && ")).start()
             if (p.waitFor() != 0) {
                 val err = p.errorStream.bufferedReader().readText()
-                throw RuntimeException(err.ifBlank { "shell command failed" })
+                throw RuntimeException(err.ifBlank { this@CloudyRootService.getString(R.string.rs_shell_failed) })
             }
         }
     }
