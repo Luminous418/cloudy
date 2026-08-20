@@ -25,6 +25,7 @@
     <string name="f_fingerprint">Huella de compilación</string>
     <string name="f_installed">Versión instalada</string>
     <string name="f_model">Modelo del dispositivo</string>
+    <string name="f_bootloader">Bootloader</string>
     <string name="f_kernel">Versión del kernel</string>
     <string name="f_rom">ROM</string>
     <string name="f_device">Dispositivo</string>
@@ -34,7 +35,7 @@
     <string name="status_up_to_date">Tu software está actualizado</string>
     <string name="status_up_to_date_sub">LumiROM %1$s es la última versión para este dispositivo</string>
     <string name="status_update_available">Actualización disponible</string>
-    <string name="status_update_available_sub">LumiROM %1$s está lista para descargar</string>
+    <string name="status_update_available_sub">LumiROM %1$s está lista para ser descargada</string>
     <string name="status_failed">No se pudo comprobar las actualizaciones</string>
     <string name="status_downloading">Descargando actualización</string>
     <string name="status_downloading_sub">%1$d%% · mantén Cloudy abierta</string>
@@ -79,9 +80,9 @@
     <string name="prefs_update_notifications_summary">Notifícate cuando haya una nueva actualización de LumiROM o Cloudy</string>
     <string name="notif_channel">Notificaciones de actualización</string>
     <string name="notif_app_title">Actualización de Cloudy disponible</string>
-    <string name="notif_app_msg">Cloudy %1$s está lista para instalar</string>
+    <string name="notif_app_msg">Cloudy %1$s ya está disponible para instalar</string>
     <string name="notif_rom_title">Actualización de LumiROM disponible</string>
-    <string name="notif_rom_msg">LumiROM %1$s está lista para instalar</string>
+    <string name="notif_rom_msg">LumiROM %1$s ya está disponible para instalar</string>
 
     <string-array name="update_interval_labels">
         <item>Cada hora</item>

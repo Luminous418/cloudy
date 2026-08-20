@@ -26,6 +26,7 @@
     <string name="f_fingerprint">Build fingerprint</string>
     <string name="f_installed">Installed version</string>
     <string name="f_model">Device model</string>
+    <string name="f_bootloader">Bootloader</string>
     <string name="f_kernel">Kernel version</string>
     <string name="f_rom">ROM</string>
     <string name="f_device">Device</string>
@@ -36,7 +37,7 @@
     <string name="status_up_to_date">Your software is up to date</string>
     <string name="status_up_to_date_sub">LumiROM %1$s is the latest build for this device</string>
     <string name="status_update_available">Update available</string>
-    <string name="status_update_available_sub">LumiROM %1$s is ready to download</string>
+    <string name="status_update_available_sub">LumiROM %1$s is ready to be downloaded</string>
     <string name="status_failed">Couldn\'t check for updates</string>
     <string name="status_downloading">Downloading update</string>
     <string name="status_downloading_sub">%1$d%% · keep Cloudy open</string>
@@ -86,9 +87,9 @@
     <string name="prefs_update_notifications_summary">Get notified when a new LumiROM or Cloudy update is available</string>
     <string name="notif_channel">Update notifications</string>
     <string name="notif_app_title">Cloudy update available</string>
-    <string name="notif_app_msg">Cloudy %1$s is ready to install</string>
+    <string name="notif_app_msg">Cloudy %1$s is now available to install</string>
     <string name="notif_rom_title">LumiROM update available</string>
-    <string name="notif_rom_msg">LumiROM %1$s is ready to install</string>
+    <string name="notif_rom_msg">LumiROM %1$s is now available to install</string>
 
     <!-- Background check interval -->
     <string-array name="update_interval_labels">

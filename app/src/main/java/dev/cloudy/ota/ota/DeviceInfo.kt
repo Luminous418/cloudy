@@ -6,8 +6,9 @@ import java.util.concurrent.ConcurrentHashMap
 
 /** Reads the *installed* device state so Tab 1 can compare it against the remote release. */
 object DeviceInfo {
-    val model: String get() = "${Build.MANUFACTURER} ${Build.MODEL}"
-    val codename: String get() = Build.DEVICE               // "a32" on the A32 4G
+    val model: String get() = getProp("ro.product.vendor.model") ?: Build.MODEL
+    val bootloader: String get() = getProp("ro.boot.bootloader") ?: Build.BOOTLOADER
+    val codename: String get() = Build.DEVICE
     val androidVersion: String get() = Build.VERSION.RELEASE ?: "?"
     val securityPatch: String get() = Build.VERSION.SECURITY_PATCH
     val fingerprint: String get() = Build.FINGERPRINT

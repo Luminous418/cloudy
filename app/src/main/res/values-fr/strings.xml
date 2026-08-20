@@ -25,6 +25,7 @@
     <string name="f_fingerprint">Empreinte de build</string>
     <string name="f_installed">Version installée</string>
     <string name="f_model">Modèle de l\'appareil</string>
+    <string name="f_bootloader">Bootloader</string>
     <string name="f_kernel">Version du noyau</string>
     <string name="f_rom">ROM</string>
     <string name="f_device">Appareil</string>
@@ -79,9 +80,9 @@
     <string name="prefs_update_notifications_summary">Être notifié quand une nouvelle mise à jour de LumiROM ou Cloudy est disponible</string>
     <string name="notif_channel">Notifications de mise à jour</string>
     <string name="notif_app_title">Mise à jour de Cloudy disponible</string>
-    <string name="notif_app_msg">Cloudy %1$s est prête à être installée</string>
-    <string name="notif_rom_title">Mise à jour de LumiROM disponible</string>
-    <string name="notif_rom_msg">LumiROM %1$s est prête à être installée</string>
+<string name="notif_app_msg">Cloudy %1$s est maintenant disponible à l\'installation</string>
+    <string name="notif_rom_title">Mise à jour LumiROM disponible</string>
+    <string name="notif_rom_msg">LumiROM %1$s est maintenant disponible à l\'installation</string>
 
     <string-array name="update_interval_labels">
         <item>Chaque heure</item>

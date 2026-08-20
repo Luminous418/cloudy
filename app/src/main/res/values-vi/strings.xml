@@ -25,6 +25,7 @@
     <string name="f_fingerprint">Dấu vân tay bản dựng</string>
     <string name="f_installed">Phiên bản đã cài</string>
     <string name="f_model">Mẫu máy</string>
+    <string name="f_bootloader">Bootloader</string>
     <string name="f_kernel">Phiên bản kernel</string>
     <string name="f_rom">ROM</string>
     <string name="f_device">Thiết bị</string>
@@ -34,7 +35,7 @@
     <string name="status_up_to_date">Phần mềm của bạn đã mới nhất</string>
     <string name="status_up_to_date_sub">LumiROM %1$s là bản mới nhất cho thiết bị này</string>
     <string name="status_update_available">Có bản cập nhật</string>
-    <string name="status_update_available_sub">LumiROM %1$s sẵn sàng để tải</string>
+    <string name="status_update_available_sub">LumiROM %1$s sẵn sàng để được tải về</string>
     <string name="status_failed">Không thể kiểm tra cập nhật</string>
     <string name="status_downloading">Đang tải bản cập nhật</string>
     <string name="status_downloading_sub">%1$d%% · giữ Cloudy mở</string>
@@ -79,9 +80,9 @@
     <string name="prefs_update_notifications_summary">Nhận thông báo khi có bản cập nhật LumiROM hoặc Cloudy mới</string>
     <string name="notif_channel">Thông báo cập nhật</string>
     <string name="notif_app_title">Có bản cập nhật Cloudy</string>
-    <string name="notif_app_msg">Cloudy %1$s sẵn sàng để cài đặt</string>
-    <string name="notif_rom_title">Có bản cập nhật LumiROM</string>
-    <string name="notif_rom_msg">LumiROM %1$s sẵn sàng để cài đặt</string>
+<string name="notif_app_msg">Cloudy %1$s hiện có sẵn để cài đặt</string>
+    <string name="notif_rom_title">Đã có bản cập nhật LumiROM</string>
+    <string name="notif_rom_msg">LumiROM %1$s hiện có sẵn để cài đặt</string>
 
     <string-array name="update_interval_labels">
         <item>Mỗi giờ</item>

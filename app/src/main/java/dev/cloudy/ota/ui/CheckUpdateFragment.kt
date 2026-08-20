@@ -78,6 +78,7 @@ class CheckUpdateFragment : Fragment() {
                 LocalInfo(
                     installed = DeviceInfo.romVersion.ifBlank { "${DeviceInfo.PROP_ROM_VER} ${getString(R.string.prop_unset)}" },
                     model = DeviceInfo.model,
+                    bootloader = DeviceInfo.bootloader,
                     android = DeviceInfo.androidVersion,
                     oneUi = DeviceInfo.oneUiVersion,
                     patch = DeviceInfo.securityPatch,
@@ -88,6 +89,7 @@ class CheckUpdateFragment : Fragment() {
             val v = _b ?: return@launch
             v.rowInstalledVersion.summary = info.installed
             v.rowDeviceModel.summary = info.model
+            v.rowBootloader.summary = info.bootloader
             v.rowAndroid.summary = info.android
             v.rowOneUi.summary = formatOneUiVersion(info.oneUi) ?: "-"
             v.rowSecurity.summary = info.patch
@@ -227,6 +229,11 @@ class CheckUpdateFragment : Fragment() {
         v.rowRemoteSecurity.summary = sel.securityPatch
         v.rowRemoteFingerprint.summary = sel.fingerprint
         v.changelog.text = sel.changelog.joinToString("\n") { "•  $it" }
+        // Keep the hero in sync with the chosen build: the "update available" subtitle
+        // must name the build the user actually selected, not just the newest one.
+        if (v.heroTitle.text?.toString() == getString(R.string.status_update_available)) {
+            v.heroSubtitle.text = getString(R.string.status_update_available_sub, sel.version)
+        }
     }
 
     /** Radio list of every build, mirroring LumiHub's version combo. */
@@ -480,6 +487,7 @@ class CheckUpdateFragment : Fragment() {
     private data class LocalInfo(
         val installed: String,
         val model: String,
+        val bootloader: String,
         val android: String,
         val oneUi: String,
         val patch: String,

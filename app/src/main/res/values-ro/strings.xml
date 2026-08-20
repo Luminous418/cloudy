@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_version">Versiunea %1$s</string>
+    <string name="settings_entry_summary">Verifică actualizarea LumiROM</string>
+
+    <string name="tab_check_update">Actualizare</string>
+    <string name="tab_maintainer">Mentenitor</string>
+    <string name="tab_settings">Setări</string>
+
+    <string name="sep_status">Stare</string>
+    <string name="sep_available">Build-uri disponibile</string>
+    <string name="sep_changelog">Jurnal de modificări</string>
+    <string name="f_select_build">Selectează build</string>
+    <string name="dlg_ok">OK</string>
+    <string name="sep_device">Acest dispozitiv</string>
+    <string name="sep_details">Detalii</string>
+    <string name="sep_contact">Contact</string>
+
+    <string name="f_version">Versiune</string>
+    <string name="f_build_date">Data compilării</string>
+    <string name="f_size">Dimensiune descărcare</string>
+    <string name="f_android">Versiune Android</string>
+    <string name="f_oneui">Versiune One UI</string>
+    <string name="f_patch">Patch de securitate</string>
+    <string name="f_fingerprint">Fingerprint build</string>
+    <string name="f_installed">Versiune instalată</string>
+    <string name="f_model">Model dispozitiv</string>
+    <string name="f_bootloader">Bootloader</string>
+    <string name="f_kernel">Versiune kernel</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Dispozitiv</string>
+
+    <string name="status_checking">Se verifică actualizările…</string>
+    <string name="status_checking_sub">Se contactează serverul de actualizare LumiROM</string>
+    <string name="status_up_to_date">Software-ul tău este la zi</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s este cel mai recent build pentru acest dispozitiv</string>
+    <string name="status_update_available">Actualizare disponibilă</string>
+    <string name="status_update_available_sub">LumiROM %1$s este gata să fie descărcat</string>
+    <string name="status_failed">Nu s-a putut verifica actualizarea</string>
+    <string name="status_downloading">Se descarcă actualizarea</string>
+    <string name="status_downloading_sub">%1$d%% · ține Cloudy deschis</string>
+    <string name="status_installing">Se pregătește instalarea</string>
+
+    <string name="btn_check">Verifică actualizările</string>
+    <string name="btn_download">Descarcă și instalează</string>
+    <string name="btn_flash_local">Flash ROM din memorie</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Donează</string>
+
+    <string name="unknown_maintainer">Mentenitor necunoscut</string>
+    <string name="flash_warning">Nu deconecta sau opri dispozitivul.</string>
+
+    <string name="status_copying">Se copiază ROM în memoria aplicației</string>
+    <string name="status_copying_sub">Fișierele mari pot dura</string>
+    <string name="dlg_flash_local_title">Flashezi %1$s?</string>
+    <string name="dlg_flash_local_msg">Aceasta copiază ROM-ul selectat în /data, apoi repornește dispozitivul în recovery pentru a-l aplica. Recovery aplică pachetul cu propriile sale sisteme de siguranță.\n\nAsigură-te că bateria este încărcată și nu întrerupe repornirea. Continuă doar dacă înțelegi riscul.</string>
+    <string name="dlg_flash_confirm">Înțeleg, flash</string>
+
+    <string name="prefs_general">General</string>
+    <string name="prefs_credits">Credite</string>
+    <string name="prefs_credits_summary">Despre aplicație și creatorii săi</string>
+    <string name="prefs_advanced">Setări avansate</string>
+    <string name="prefs_advanced_summary">Sursa de actualizare și întreținere</string>
+    <string name="prefs_check_app_update">Verifică actualizări aplicație</string>
+    <string name="dlg_credits_title">Credite</string>
+    <string name="dlg_credits_body">Cloudy este actualizatorul OTA pentru LumiROM.\n\nMentenit de Lumi (@Luminous418).\nAplicație creată de ncatt (@ncatt).\n\nEste construit pe libsu pentru acces root și pe biblioteca de design One UI 8. Mulțumim comunității LumiROM pentru testare și suport.\n\nRaportează probleme sau primește suport pe Telegram LumiROM.</string>
+    <string name="dlg_credits_telegram">Telegram</string>
+
+    <string name="app_update_checking">Se verifică actualizările aplicației…</string>
+    <string name="app_update_uptodate">La zi</string>
+    <string name="app_update_available_title">Actualizare disponibilă</string>
+    <string name="app_update_available_msg">Cloudy %1$s este gata de instalat.</string>
+    <string name="app_update_download">Descarcă și instalează</string>
+    <string name="app_update_downloading">Se descarcă actualizarea…</string>
+    <string name="app_update_downloading_sub">Se descarcă actualizarea… %1$d%%</string>
+    <string name="app_update_error_title">Verificarea actualizării a eșuat</string>
+    <string name="app_update_open_installer_failed">Nu s-a putut deschide programul de instalare: %1$s</string>
+
+    <string name="prefs_update_notifications">Notificări de actualizare</string>
+    <string name="prefs_update_notifications_summary">Primește notificări când este disponibilă o nouă actualizare LumiROM sau Cloudy</string>
+    <string name="notif_channel">Notificări de actualizare</string>
+    <string name="notif_app_title">Actualizare Cloudy disponibilă</string>
+    <string name="notif_app_msg">Cloudy %1$s este acum disponibil de instalat</string>
+    <string name="notif_rom_title">Actualizare LumiROM disponibilă</string>
+    <string name="notif_rom_msg">LumiROM %1$s este acum disponibil de instalat</string>
+
+    <string-array name="update_interval_labels">
+        <item>În fiecare oră</item>
+        <item>La fiecare 8 ore</item>
+        <item>La fiecare 12 ore</item>
+        <item>În fiecare zi</item>
+        <item>În fiecare săptămână</item>
+        <item>În fiecare lună</item>
+    </string-array>
+
+    <string name="pref_cat_source">Sursa actualizării</string>
+    <string name="pref_json_url">URL JSON personalizat</string>
+    <string name="pref_json_url_dialog">URL manifest de actualizare</string>
+    <string name="pref_json_url_summary">Manifestul la distanță pe care Cloudy îl verifică pentru build-uri LumiROM noi</string>
+    <string name="pref_cat_background">Verificări în fundal</string>
+    <string name="pref_check_interval">Interval de verificare</string>
+    <string name="pref_check_interval_summary">Cât de des verifică Cloudy actualizări noi în fundal</string>
+    <string name="pref_cat_maintenance">Întreținere</string>
+    <string name="pref_reset">Resetează configurațiile</string>
+    <string name="pref_reset_summary">Șterge toate setările Cloudy salvate și restaurează valorile implicite</string>
+
+    <string name="hero_staged">Pregătit</string>
+    <string name="hero_rebooting">Se repornește în recovery pentru aplicare…</string>
+    <string name="hero_root_required">Este necesar root</string>
+    <string name="hero_root_required_sub">Necesită root + modulul Cloudy (%1$s)</string>
+    <string name="hero_install_failed">Instalarea a eșuat</string>
+    <string name="hero_flashed">Flashat</string>
+    <string name="hero_rebooting_finalize">Se repornește în recovery pentru finalizare…</string>
+    <string name="hero_flash_failed">Flash eșuat</string>
+    <string name="dialog_flashing">Se flashează %1$s</string>
+    <string name="hero_worker_unavailable">Worker-ul root nu este disponibil — este instalat modulul Cloudy?</string>
+    <string name="flash_progress_format">%1$d%%  ·  %2$s</string>
+    <string name="dlg_flash_direct_title">Flashezi direct pe /%1$s?</string>
+    <string name="dlg_flash_direct_msg">Aceasta scrie imaginea direct pe partiția %1$s.\n\nGalaxy A32 este A-only — nu există slot de rezervă. Dacă scrierea este întreruptă sau imaginea este greșită, dispozitivul s-ar putea să nu pornească și va avea nevoie de recovery/Odin pentru restaurare.\n\nContinuă doar dacă înțelegi riscul.</string>
+
+    <string name="prop_unset">nesetat</string>
+    <string name="installed_unknown">necunoscut (%1$s nesetat)</string>
+    <string name="err_no_internet">Fără conexiune la internet</string>
+    <string name="err_server_timeout">Serverul de actualizare a expirat</string>
+    <string name="err_bad_json">Manifestul nu este JSON valid</string>
+    <string name="err_read_manifest">Nu s-a putut citi manifestul de actualizare</string>
+    <string name="err_network">Eroare de rețea</string>
+    <string name="err_empty_body">Corp gol</string>
+    <string name="err_checksum">Neconcordanță de sumă de control - descărcarea a fost respinsă</string>
+    <string name="err_no_releases">Manifestul nu conține niciun build</string>
+    <string name="err_storage_unavailable">Stocare externă indisponibilă</string>
+    <string name="err_copy_failed">Nu s-a putut copia fișierul selectat</string>
+    <string name="err_not_priv_app">Nu este o aplicație privilegiată: %1$s</string>
+    <string name="err_verify_failed">Verificarea pachetului a eșuat: %1$s</string>
+    <string name="err_no_root_shell">Fără shell root</string>
+    <string name="err_module_missing">Modulul Cloudy nu este instalat</string>
+    <string name="err_staging_failed">Pregătirea a eșuat: %1$s</string>
+    <string name="err_reboot_failed">Repornirea în recovery a eșuat: %1$s</string>
+    <string name="err_raw_not_confirmed">Flash-ul direct nu a fost confirmat</string>
+    <string name="err_raw_need_root">Este necesar root + modulul Cloudy pentru flash direct</string>
+    <string name="err_partition_not_found">Partiția \'%1$s\' nu a fost găsită</string>
+    <string name="err_dd_failed">dd a eșuat: %1$s</string>
+
+    <string name="rs_stage_failed">pregătirea a eșuat</string>
+    <string name="rs_flush_complete">scriere completă</string>
+    <string name="rs_flashed">Flashat %1$s</string>
+    <string name="rs_dd_exited">dd a ieșit cu %1$s</string>
+    <string name="rs_raw_failed">flash-ul direct a eșuat</string>
+    <string name="rs_shell_failed">comanda shell a eșuat</string>
+</resources>

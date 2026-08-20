@@ -202,6 +202,9 @@
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowDeviceModel"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_model" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowBootloader"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_bootloader" />
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowAndroid"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_android" />
