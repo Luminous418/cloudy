@@ -72,6 +72,17 @@
                 android:max="100"
                 android:visibility="gone"
                 tools:visibility="visible" />
+
+            <!-- Centered "45% · 3.2 MB/s" readout for ROM downloads. -->
+            <TextView
+                android:id="@+id/downloadProgress"
+                style="@style/Cloudy.Text.HeroSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                tools:text="45% · 3.2 MB/s"
+                tools:visibility="visible" />
         </LinearLayout>
 
         <!-- ===== Actions (above the fold in 8.5, not buried under the cards) ===== -->

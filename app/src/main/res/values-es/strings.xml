@@ -38,7 +38,8 @@
     <string name="status_update_available_sub">LumiROM %1$s está lista para ser descargada</string>
     <string name="status_failed">No se pudo comprobar las actualizaciones</string>
     <string name="status_downloading">Descargando actualización</string>
-    <string name="status_downloading_sub">%1$d%% · mantén Cloudy abierta</string>
+    <string name="status_downloading_sub">Mantén Cloudy abierto</string>
+    <string name="download_progress_format">%1$d%% · %2$s</string>
     <string name="status_installing">Preparando la instalación</string>
 
     <string name="btn_check">Buscar actualizaciones</string>
@@ -79,6 +80,7 @@
     <string name="prefs_update_notifications">Notificaciones de actualización</string>
     <string name="prefs_update_notifications_summary">Notifícate cuando haya una nueva actualización de LumiROM o Cloudy</string>
     <string name="notif_channel">Notificaciones de actualización</string>
+    <string name="notif_progress_channel">Progreso de la descarga</string>
     <string name="notif_app_title">Actualización de Cloudy disponible</string>
     <string name="notif_app_msg">Cloudy %1$s ya está disponible para instalar</string>
     <string name="notif_rom_title">Actualización de LumiROM disponible</string>
@@ -118,8 +120,8 @@
     <string name="dlg_flash_direct_title">¿Flashear directamente a /%1$s?</string>
     <string name="dlg_flash_direct_msg">Esto escribe la imagen directamente en la partición %1$s.\n\nEl Galaxy A32 es A-only — no hay ranura de respaldo. Si la escritura se interrumpe o la imagen es incorrecta, el dispositivo podría no arrancar y necesitará recovery/Odin para restaurarlo.\n\nContinúa solo si entiendes el riesgo.</string>
 
-    <string name="prop_unset">sin definir</string>
-    <string name="installed_unknown">desconocido (%1$s sin definir)</string>
+    <string name="prop_unset">Sin definir</string>
+    <string name="installed_unknown">Desconocido (%1$s sin definir)</string>
     <string name="err_no_internet">Sin conexión a internet</string>
     <string name="err_server_timeout">El servidor de actualizaciones tardó demasiado</string>
     <string name="err_bad_json">El manifiesto no es JSON válido</string>
@@ -139,12 +141,12 @@
     <string name="err_raw_not_confirmed">Flash directo no confirmado</string>
     <string name="err_raw_need_root">Se requiere root + módulo de Cloudy para el flash directo</string>
     <string name="err_partition_not_found">Partición \'%1$s\' no encontrada</string>
-    <string name="err_dd_failed">fallo de dd: %1$s</string>
+    <string name="err_dd_failed">Fallo de dd: %1$s</string>
 
-    <string name="rs_stage_failed">fallo de preparación</string>
-    <string name="rs_flush_complete">escritura completada</string>
+    <string name="rs_stage_failed">Fallo de preparación</string>
+    <string name="rs_flush_complete">Escritura completada</string>
     <string name="rs_flashed">Flasheado %1$s</string>
     <string name="rs_dd_exited">dd terminó con %1$s</string>
-    <string name="rs_raw_failed">fallo del flash directo</string>
-    <string name="rs_shell_failed">fallo del comando de shell</string>
+    <string name="rs_raw_failed">Fallo del flash directo</string>
+    <string name="rs_shell_failed">Fallo del comando de shell</string>
 </resources>

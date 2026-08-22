@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- ROM downloads must survive Cloudy being backgrounded (dataSync FGS on API 34+). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Self-update: lets Cloudy hand its downloaded APK to the system installer. -->
@@ -64,6 +66,12 @@
 
         <service android:name=".ota.CloudyRootService" android:exported="false"
             tools:ignore="Instantiatable" />
+
+        <!-- Keeps ROM downloads alive while Cloudy is backgrounded; hosts the progress notification. -->
+        <service
+            android:name=".ota.DownloadService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
 
         <!-- Exposes the downloaded APK to the system installer (self-update). -->
         <provider

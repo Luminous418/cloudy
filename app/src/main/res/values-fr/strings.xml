@@ -38,7 +38,8 @@
     <string name="status_update_available_sub">LumiROM %1$s est prête à être téléchargée</string>
     <string name="status_failed">Impossible de vérifier les mises à jour</string>
     <string name="status_downloading">Téléchargement de la mise à jour</string>
-    <string name="status_downloading_sub">%1$d%% · gardez Cloudy ouvert</string>
+    <string name="status_downloading_sub">gardez Cloudy ouvert</string>
+    <string name="download_progress_format">%1$d%% · %2$s</string>
     <string name="status_installing">Préparation de l\'installation</string>
 
     <string name="btn_check">Rechercher des mises à jour</string>
@@ -79,6 +80,7 @@
     <string name="prefs_update_notifications">Notifications de mise à jour</string>
     <string name="prefs_update_notifications_summary">Être notifié quand une nouvelle mise à jour de LumiROM ou Cloudy est disponible</string>
     <string name="notif_channel">Notifications de mise à jour</string>
+    <string name="notif_progress_channel">Progression du téléchargement</string>
     <string name="notif_app_title">Mise à jour de Cloudy disponible</string>
 <string name="notif_app_msg">Cloudy %1$s est maintenant disponible à l\'installation</string>
     <string name="notif_rom_title">Mise à jour LumiROM disponible</string>

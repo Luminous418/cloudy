@@ -19,6 +19,7 @@ import dev.cloudy.ota.data.Release
 import dev.cloudy.ota.data.UpdateRepository
 import dev.cloudy.ota.databinding.FragmentCheckUpdateBinding
 import dev.cloudy.ota.ota.DeviceInfo
+import dev.cloudy.ota.ota.DownloadService
 import dev.cloudy.ota.ota.IFlashCallback
 import dev.cloudy.ota.ota.InstallResult
 import dev.cloudy.ota.ota.OtaInstaller
@@ -66,6 +67,9 @@ class CheckUpdateFragment : Fragment() {
         b.btnDownload.setOnClickListener { selectedRelease()?.let { downloadAndInstall(it.download) } }
         b.btnFlashLocal.setOnClickListener { pickLocalRom() }
         check()
+        // Mirror a ROM download owned by [DownloadService] - including one that started
+        // on a previous visit and kept running in the background.
+        observeDownload()
     }
 
     /**
@@ -154,8 +158,11 @@ class CheckUpdateFragment : Fragment() {
                     // Unlike the old single-release screen, the build selector stays on the
                     // screen even when up to date - that is the whole point of choosing a ROM.
                     showReleaseSections(true)
-                    v.btnDownload.visibility = View.VISIBLE
-                    v.btnDownload.isEnabled = true
+                    val downloading = DownloadService.state.value is DownloadState.Progress
+                    if (!downloading) {
+                        v.btnDownload.visibility = View.VISIBLE
+                        v.btnDownload.isEnabled = true
+                    }
                 }
                 .onFailure { t ->
                     releases = emptyList()
@@ -170,7 +177,11 @@ class CheckUpdateFragment : Fragment() {
                     v.btnDownload.isEnabled = false
                 }
 
-            v.downloadBar.visibility = View.GONE
+            // A live download owns the bar + label; don't wipe its UI after a check.
+            if (DownloadService.state.value !is DownloadState.Progress) {
+                v.downloadBar.visibility = View.GONE
+                v.downloadProgress.visibility = View.GONE
+            }
             v.btnCheck.isEnabled = true
         }
     }
@@ -253,30 +264,52 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun downloadAndInstall(dl: Download) {
-        val dest = File(requireContext().getExternalFilesDir(null), dl.filename)
+        // The service owns the transfer now (it survives backgrounding); this tab only
+        // mirrors its progress via [observeDownload].
         b.btnDownload.isEnabled = false
+        b.downloadBar.isIndeterminate = true
+        b.downloadBar.visibility = View.VISIBLE
+        setHero(
+            R.drawable.ic_status_available,
+            getString(R.string.status_downloading),
+            getString(R.string.status_downloading_sub)
+        )
+        DownloadService.start(requireContext(), dl)
+    }
+
+    /** Mirrors [DownloadService.state] into the tab's bar + hero while the view is alive. */
+    private fun observeDownload() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repo.download(dl, dest).collect { st ->
+            DownloadService.state.collect { st ->
                 val v = _b ?: return@collect
                 when (st) {
+                    null -> Unit
                     is DownloadState.Progress -> {
                         val pct = (st.fraction * 100).toInt()
                         v.downloadBar.isIndeterminate = false
                         v.downloadBar.visibility = View.VISIBLE
                         v.downloadBar.progress = pct
+                        v.downloadProgress.visibility = View.VISIBLE
+                        v.downloadProgress.text =
+                            getString(R.string.download_progress_format, pct, formatSpeed(st.bytesPerSecond))
                         setHero(
                             R.drawable.ic_status_available,
                             getString(R.string.status_downloading),
-                            getString(R.string.status_downloading_sub, pct)
+                            getString(R.string.status_downloading_sub)
                         )
+                        v.btnDownload.isEnabled = false
                     }
                     is DownloadState.Failed -> {
                         v.downloadBar.visibility = View.GONE
+                        v.downloadProgress.visibility = View.GONE
                         setHero(R.drawable.ic_status_error, getString(R.string.status_failed), st.reason)
                         v.btnDownload.isEnabled = true
+                        DownloadService.consume()
                     }
                     is DownloadState.Done -> {
                         v.downloadBar.visibility = View.GONE
+                        v.downloadProgress.visibility = View.GONE
+                        DownloadService.consume()
                         install(st.file)
                     }
                 }

@@ -38,7 +38,8 @@
     <string name="status_update_available_sub">LumiROM %1$s este gata să fie descărcat</string>
     <string name="status_failed">Nu s-a putut verifica actualizarea</string>
     <string name="status_downloading">Se descarcă actualizarea</string>
-    <string name="status_downloading_sub">%1$d%% · ține Cloudy deschis</string>
+    <string name="status_downloading_sub">ține Cloudy deschis</string>
+    <string name="download_progress_format">%1$d%% · %2$s</string>
     <string name="status_installing">Se pregătește instalarea</string>
 
     <string name="btn_check">Verifică actualizările</string>
@@ -79,6 +80,7 @@
     <string name="prefs_update_notifications">Notificări de actualizare</string>
     <string name="prefs_update_notifications_summary">Primește notificări când este disponibilă o nouă actualizare LumiROM sau Cloudy</string>
     <string name="notif_channel">Notificări de actualizare</string>
+    <string name="notif_progress_channel">Progresul descărcării</string>
     <string name="notif_app_title">Actualizare Cloudy disponibilă</string>
     <string name="notif_app_msg">Cloudy %1$s este acum disponibil de instalat</string>
     <string name="notif_rom_title">Actualizare LumiROM disponibilă</string>

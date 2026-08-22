@@ -40,7 +40,8 @@
     <string name="status_update_available_sub">LumiROM %1$s is ready to be downloaded</string>
     <string name="status_failed">Couldn\'t check for updates</string>
     <string name="status_downloading">Downloading update</string>
-    <string name="status_downloading_sub">%1$d%% · keep Cloudy open</string>
+    <string name="status_downloading_sub">keep Cloudy open</string>
+    <string name="download_progress_format">%1$d%% · %2$s</string>
     <string name="status_installing">Preparing to install</string>
 
     <string name="btn_check">Check for updates</string>
@@ -86,6 +87,7 @@
     <string name="prefs_update_notifications">Update notifications</string>
     <string name="prefs_update_notifications_summary">Get notified when a new LumiROM or Cloudy update is available</string>
     <string name="notif_channel">Update notifications</string>
+    <string name="notif_progress_channel">Download progress</string>
     <string name="notif_app_title">Cloudy update available</string>
     <string name="notif_app_msg">Cloudy %1$s is now available to install</string>
     <string name="notif_rom_title">LumiROM update available</string>

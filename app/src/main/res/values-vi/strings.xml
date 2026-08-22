@@ -22,7 +22,7 @@
     <string name="f_android">Phiên bản Android</string>
     <string name="f_oneui">Phiên bản One UI</string>
     <string name="f_patch">Bản vá bảo mật</string>
-    <string name="f_fingerprint">Dấu vân tay bản dựng</string>
+    <string name="f_fingerprint">Mã nhận diện</string>
     <string name="f_installed">Phiên bản đã cài</string>
     <string name="f_model">Mẫu máy</string>
     <string name="f_bootloader">Bootloader</string>
@@ -38,7 +38,8 @@
     <string name="status_update_available_sub">LumiROM %1$s sẵn sàng để được tải về</string>
     <string name="status_failed">Không thể kiểm tra cập nhật</string>
     <string name="status_downloading">Đang tải bản cập nhật</string>
-    <string name="status_downloading_sub">%1$d%% · giữ Cloudy mở</string>
+    <string name="status_downloading_sub">giữ Cloudy mở</string>
+    <string name="download_progress_format">%1$d%% · %2$s</string>
     <string name="status_installing">Đang chuẩn bị cài đặt</string>
 
     <string name="btn_check">Kiểm tra cập nhật</string>
@@ -79,6 +80,7 @@
     <string name="prefs_update_notifications">Thông báo cập nhật</string>
     <string name="prefs_update_notifications_summary">Nhận thông báo khi có bản cập nhật LumiROM hoặc Cloudy mới</string>
     <string name="notif_channel">Thông báo cập nhật</string>
+    <string name="notif_progress_channel">Tiến trình tải xuống</string>
     <string name="notif_app_title">Có bản cập nhật Cloudy</string>
 <string name="notif_app_msg">Cloudy %1$s hiện có sẵn để cài đặt</string>
     <string name="notif_rom_title">Đã có bản cập nhật LumiROM</string>

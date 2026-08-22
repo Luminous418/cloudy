@@ -1,17 +1,16 @@
 {
   "app_name": "Cloudy",
-  "version": "2.32",
-  "version_code": 9,
+  "version": "2.33",
+  "version_code": 10,
   "changelog": [
-    "Added Romanian language support",
-    "Device model now shows the vendor model, plus a new bootloader row",
-    "Update subtitle shows the version you actually selected"
+    "Download bar now shows network speed next to a centered percentage",
+    "ROM downloads now continue in the background via a foreground service"
   ],
   "download": {
     "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
-    "filename": "Cloudy_2.32.apk",
-    "size_bytes": 15841632,
-    "sha256": "1b5ad510305da73c030647141e57dd086d5f62dfeb98744370df7efda0c3cf62",
+    "filename": "Cloudy_2.33.apk",
+    "size_bytes": 15843388,
+    "sha256": "c2403c0d3433893052a23354aa42d6bb04df5e2d7af61a6c172c4c81dd6f92c7",
     "install_type": "apk"
   }
 }

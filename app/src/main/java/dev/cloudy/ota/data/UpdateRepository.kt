@@ -20,7 +20,7 @@ import java.security.MessageDigest
 import java.util.concurrent.TimeUnit
 
 sealed interface DownloadState {
-    data class Progress(val bytes: Long, val total: Long) : DownloadState {
+    data class Progress(val bytes: Long, val total: Long, val bytesPerSecond: Long = 0L) : DownloadState {
         val fraction: Float get() = if (total > 0) bytes.toFloat() / total else 0f
     }
     data class Done(val file: File) : DownloadState
@@ -123,19 +123,32 @@ class UpdateRepository(
                     var read: Int
                     var written = 0L
                     var lastEmit = 0L
+                    var lastBps = 0L
+                    // Speed over a sliding ~3s window of (timestampNs, bytes) samples, so a
+                    // single slow/fast chunk doesn't make the readout jump around.
+                    val window = ArrayDeque<LongArray>()
                     while (input.read(buf).also { read = it } != -1) {
                         output.write(buf, 0, read)
                         digest.update(buf, 0, read)
                         written += read
+                        val now = System.nanoTime()
+                        window.addLast(longArrayOf(now, written))
+                        while (window.size > 1 && now - window.first()[0] > SPEED_WINDOW_NS) window.removeFirst()
+                        val bps = if (window.size > 1) {
+                            val first = window.first()
+                            val dt = now - first[0]
+                            if (dt > 0) (written - first[1]) * 1_000_000_000L / dt else 0L
+                        } else 0L
                         // Emitting per 64KB chunk floods the UI with thousands of updates on a
                         // multi-GB ROM zip; throttle to whole percentage points.
                         val pct = if (total > 0) written * 100 / total else 0
                         if (pct != lastEmit) {
                             lastEmit = pct
-                            emit(DownloadState.Progress(written, total))
+                            lastBps = bps
+                            emit(DownloadState.Progress(written, total, bps))
                         }
                     }
-                    emit(DownloadState.Progress(written, total))
+                    emit(DownloadState.Progress(written, total, lastBps))
                 }
             }
             val hex = digest.digest().joinToString("") { "%02x".format(it) }
@@ -148,6 +161,11 @@ class UpdateRepository(
             }
         }
     }.flowOn(Dispatchers.IO)
+
+    private companion object {
+        /** Window over which download speed is averaged, in nanoseconds (~3s). */
+        const val SPEED_WINDOW_NS = 3_000_000_000L
+    }
 
     /**
      * Turns a throwable into something worth showing on a status row. Several of the
