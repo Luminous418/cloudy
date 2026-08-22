@@ -1,9 +1,9 @@
 {
   "app_name": "Cloudy",
-"version": "2.34",
+  "version": "2.34",
   "version_code": 11,
   "changelog": [
-    "Fixed black bar above the bottom navigation bar",
+    "Fixed light mode",
     "Content now keeps its rounded sheet curve while scrolling"
   ],
   "download": {
