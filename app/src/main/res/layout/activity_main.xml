@@ -20,9 +20,8 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_oui_content_rounded_bottom"
+        android:background="@null"
         android:clipToOutline="true"
-        android:paddingBottom="12dp"
         app:layout_location="main_content" />
 
     <dev.oneuiproject.oneui.widget.BottomFloatingLayout

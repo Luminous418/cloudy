@@ -1,16 +1,16 @@
 {
   "app_name": "Cloudy",
-  "version": "2.33",
-  "version_code": 10,
+"version": "2.34",
+  "version_code": 11,
   "changelog": [
-    "Download bar now shows network speed next to a centered percentage",
-    "ROM downloads now continue in the background via a foreground service"
+    "Fixed black bar above the bottom navigation bar",
+    "Content now keeps its rounded sheet curve while scrolling"
   ],
   "download": {
     "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
-    "filename": "Cloudy_2.33.apk",
-    "size_bytes": 15843388,
-    "sha256": "672252a97f6cdee47f77f1cab87a38c46a65f4198aef6540898a1423cdf4736f",
+    "filename": "Cloudy_2.34.apk",
+    "size_bytes": 15842787,
+    "sha256": "0e54ba7be75b02eb9c3dcb6a08ff1cc70d0ecace0efd5476d71cd3c05d84d8fa",
     "install_type": "apk"
   }
 }

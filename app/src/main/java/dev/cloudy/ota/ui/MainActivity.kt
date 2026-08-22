@@ -2,7 +2,10 @@ package dev.cloudy.ota.ui
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.Outline
 import android.os.Bundle
+import android.view.View
+import android.view.ViewOutlineProvider
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -43,6 +46,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Round ONLY the bottom corners of the fragment area, so scrolled content ends in
+        // the One UI "floating sheet" curve above the nav pill (captura4) instead of a hard
+        // straight edge. An outline WITHOUT a background does the clipping while keeping the
+        // container fully transparent - a background drawable here used to leak a colored
+        // band onto tabs whose content doesn't reach the bottom.
+        val sheetRadius = resources.getDimension(R.dimen.oui_float_nav_radius)
+        binding.fragmentContainer.outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                // Extend the rect upward by the radius itself: the top corners' curvature
+                // happens off-screen, leaving only the bottom corners rounded.
+                val r = sheetRadius.toInt()
+                outline.setRoundRect(0, -r, view.width, view.height, sheetRadius)
+            }
+        }
+        binding.fragmentContainer.clipToOutline = true
 
         binding.bottomTab.inflateMenu(R.menu.menu_bottom_tabs) { item ->
             when (item.itemId) {
