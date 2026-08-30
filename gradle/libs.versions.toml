@@ -17,7 +17,7 @@ libsu = "6.0.0"
 # Published on GitHub Packages (Maven) and require auth - see settings.gradle.kts.
 # Versions taken from the oneui-design lib's own catalog so they are mutually compatible;
 # re-check the repo before bumping, they change often.
-oneuiDesign = "0.9.12+oneui8"
+oneuiDesign = "0.9.13+oneui8"
 seslAppcompat = "1.7.1+1.0.21-sesl8+rev8"
 seslCore = "1.17.0+1.0.7-sesl8+rev1"
 seslCoreKtx = "1.17.0+1.0.0-sesl8+rev0"

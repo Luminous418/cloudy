@@ -4,12 +4,14 @@
     <string name="settings_entry_title">Cloudy</string>
     <string name="settings_entry_summary">Check update of LumiROM</string>
 
-    <string name="tab_check_update">Update</string>
+    <string name="tab_ota">OTA</string>
+    <string name="tab_rom">ROM</string>
     <string name="tab_maintainer">Maintainer</string>
     <string name="tab_settings">Settings</string>
 
     <string name="sep_status">Status</string>
     <string name="sep_available">Available builds</string>
+    <string name="sep_ota_available">Available OTA</string>
     <string name="sep_changelog">Changelog</string>
     <string name="f_select_build">Select build</string>
     <string name="dlg_ok">OK</string>

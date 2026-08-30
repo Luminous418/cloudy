@@ -3,12 +3,14 @@
     <string name="app_version">Version %1$s</string>
     <string name="settings_entry_summary">LumiROM-Updates prüfen</string>
 
-    <string name="tab_check_update">Update</string>
+    <string name="tab_ota">OTA</string>
+    <string name="tab_rom">ROM</string>
     <string name="tab_maintainer">Entwickler</string>
     <string name="tab_settings">Einstellungen</string>
 
     <string name="sep_status">Status</string>
     <string name="sep_available">Verfügbare Builds</string>
+    <string name="sep_ota_available">Verfügbares OTA</string>
     <string name="sep_changelog">Änderungsprotokoll</string>
     <string name="f_select_build">Build auswählen</string>
     <string name="dlg_ok">OK</string>

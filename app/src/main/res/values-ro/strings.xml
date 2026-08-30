@@ -3,12 +3,14 @@
     <string name="app_version">Versiunea %1$s</string>
     <string name="settings_entry_summary">Verifică actualizarea LumiROM</string>
 
-    <string name="tab_check_update">Actualizare</string>
+    <string name="tab_ota">OTA</string>
+    <string name="tab_rom">ROM</string>
     <string name="tab_maintainer">Mentenitor</string>
     <string name="tab_settings">Setări</string>
 
     <string name="sep_status">Stare</string>
     <string name="sep_available">Build-uri disponibile</string>
+    <string name="sep_ota_available">OTA disponibilă</string>
     <string name="sep_changelog">Jurnal de modificări</string>
     <string name="f_select_build">Selectează build</string>
     <string name="dlg_ok">OK</string>

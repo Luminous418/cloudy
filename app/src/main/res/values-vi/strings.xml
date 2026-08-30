@@ -3,12 +3,14 @@
     <string name="app_version">Phiên bản %1$s</string>
     <string name="settings_entry_summary">Kiểm tra bản cập nhật LumiROM</string>
 
-    <string name="tab_check_update">Cập nhật</string>
+    <string name="tab_ota">OTA</string>
+    <string name="tab_rom">ROM</string>
     <string name="tab_maintainer">Nhà phát triển</string>
     <string name="tab_settings">Cài đặt</string>
 
     <string name="sep_status">Trạng thái</string>
     <string name="sep_available">Các bản dựng khả dụng</string>
+    <string name="sep_ota_available">OTA có sẵn</string>
     <string name="sep_changelog">Nhật ký thay đổi</string>
     <string name="f_select_build">Chọn bản dựng</string>
     <string name="dlg_ok">OK</string>

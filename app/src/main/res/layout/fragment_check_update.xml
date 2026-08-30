@@ -196,11 +196,13 @@
 
         <!-- ===== This device ===== -->
         <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepDevice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sep_device" />
 
         <LinearLayout
+            android:id="@+id/cardDevice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_oui_card"

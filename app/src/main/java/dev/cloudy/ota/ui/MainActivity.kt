@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val updateFragment by lazy { CheckUpdateFragment() }
+    private val otaFragment by lazy { OtaFragment() }
+    private val romFragment by lazy { RomFragment() }
     private val maintainerFragment by lazy { MaintainerFragment() }
     private val settingsFragment by lazy { SettingsFragment() }
 
@@ -65,23 +66,22 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomTab.inflateMenu(R.menu.menu_bottom_tabs) { item ->
             when (item.itemId) {
-                R.id.tab_update -> show(updateFragment, R.string.tab_check_update)
+                R.id.tab_ota -> show(otaFragment, R.string.tab_ota)
+                R.id.tab_rom -> show(romFragment, R.string.tab_rom)
                 R.id.tab_maintainer -> show(maintainerFragment, R.string.tab_maintainer)
                 R.id.tab_settings -> show(settingsFragment, R.string.tab_settings)
             }
             true
         }
 
-        removeOverflowTab()
-
         if (savedInstanceState == null) {
-            // A tapped notification may ask for a specific tab; otherwise land on Update.
+            // A tapped notification may ask for a specific tab; otherwise land on OTA.
             val requestedTab = intent?.getStringExtra(EXTRA_TAB)
             if (requestedTab == UpdateChecker.TAB_SETTINGS) {
                 show(settingsFragment, R.string.tab_settings)
-                binding.bottomTab.getTabAt(2)?.select()
+                binding.bottomTab.getTabAt(3)?.select()
             } else {
-                show(updateFragment, R.string.tab_check_update)
+                show(otaFragment, R.string.tab_ota)
                 binding.bottomTab.getTabAt(0)?.select()
             }
         }
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         setIntent(intent)
         // BottomTabLayout maps a selected tab to the menu item callback in show().
         when (intent.getStringExtra(EXTRA_TAB)) {
-            UpdateChecker.TAB_SETTINGS -> binding.bottomTab.getTabAt(2)?.select()
+            UpdateChecker.TAB_SETTINGS -> binding.bottomTab.getTabAt(3)?.select()
             UpdateChecker.TAB_UPDATE -> binding.bottomTab.getTabAt(0)?.select()
         }
     }
@@ -122,20 +122,6 @@ class MainActivity : AppCompatActivity() {
         thread {
             val result = runBlocking { UpdateChecker.check(ctx) }
             UpdateNotifier.notifyIfNeeded(ctx, result)
-        }
-    }
-
-    /**
-     * BottomTabLayout appends a "More" overflow tab (hamburger, opening a grid dialog)
-     * whenever it decides some menu items don't fit. With only three tabs we never want it,
-     * so drop it if the library added one.
-     */
-    private fun removeOverflowTab() {
-        val overflowId = dev.oneuiproject.oneui.design.R.id.bottom_tab_menu_show_grid_dialog
-        for (i in binding.bottomTab.tabCount - 1 downTo 0) {
-            if (binding.bottomTab.getTabAt(i)?.id == overflowId) {
-                binding.bottomTab.removeTabAt(i)
-            }
         }
     }
 

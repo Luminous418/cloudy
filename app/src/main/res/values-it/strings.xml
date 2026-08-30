@@ -3,12 +3,14 @@
     <string name="app_version">Versione %1$s</string>
     <string name="settings_entry_summary">Controlla gli aggiornamenti di LumiROM</string>
 
-    <string name="tab_check_update">Aggiorna</string>
+    <string name="tab_ota">OTA</string>
+    <string name="tab_rom">ROM</string>
     <string name="tab_maintainer">Sviluppatore</string>
     <string name="tab_settings">Impostazioni</string>
 
     <string name="sep_status">Stato</string>
     <string name="sep_available">Versioni disponibili</string>
+    <string name="sep_ota_available">OTA disponibile</string>
     <string name="sep_changelog">Registro delle modifiche</string>
     <string name="f_select_build">Seleziona versione</string>
     <string name="dlg_ok">OK</string>
