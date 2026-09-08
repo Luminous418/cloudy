@@ -29,6 +29,21 @@
         <item name="android:fontFamily">@font/oneui_sans</item>
     </style>
 
+    <!--
+        Download button: corner radius matches the LumiROM logo (rom_logo.png, 817x116).
+        The logo exposes at match_parent-minus-24dp margins (~954px on this device); its
+        corner radius is ~65px at density 2.625, i.e. 25dp. OneUI.ContainedButton's default
+        26dp is not applied because sesl resolves buttonCornerRadius from the button's own
+        theme, so we set it explicitly here.
+    -->
+    <style name="Theme.Cloudy.Button.Download" parent="OneUITheme">
+        <item name="buttonCornerRadius">25dp</item>
+    </style>
+
+    <style name="Cloudy.Button.Download" parent="@style/OneUI.ContainedButton">
+        <item name="android:theme">@style/Theme.Cloudy.Button.Download</item>
+    </style>
+
     <!-- ===== OneUI 8.5 type scale =====
          8.5 leans on a tall, tightly-tracked headline over a quiet secondary line.
          Weight 500 (medium) is the One UI title weight; 700 is reserved for the hero. -->

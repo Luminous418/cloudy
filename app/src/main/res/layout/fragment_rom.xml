@@ -41,7 +41,7 @@
 
             <Button
                 android:id="@+id/btnDownload"
-                style="@style/OneUI.ContainedButton"
+                style="@style/Cloudy.Button.Download"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
