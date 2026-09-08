@@ -47,7 +47,7 @@ class OtaFragment : Fragment() {
             .getString("json_url", null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
-            ?: DEFAULT_JSON_URL
+            ?: CheckUpdateFragment.DEFAULT_OTA_URL
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
         _b = FragmentOtaBinding.inflate(i, c, false)

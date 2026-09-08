@@ -69,7 +69,8 @@ object SettingsPrefs {
     fun wire(f: PreferenceFragmentCompat) {
         f.findPreference<EditTextPreference>("json_url")?.apply {
             summaryProvider = EditTextPreference.SimpleSummaryProvider.getInstance()
-            if (text.isNullOrBlank()) text = CheckUpdateFragment.DEFAULT_JSON_URL
+            // Leave the pref blank unless the user sets an override: the OTA tab, Check and
+            // background checker fall back to the OTA-only default, ROM/Maintainer to theirs.
         }
         f.findPreference<ListPreference>("update_interval")?.apply {
             summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
@@ -84,10 +85,6 @@ object SettingsPrefs {
         }
         f.findPreference<Preference>("reset")?.setOnPreferenceClickListener {
             f.requireContext().getSharedPreferences("cloudy", 0).edit().clear().apply()
-            // Re-seed the default URL so the app stays usable after a reset.
-            f.requireContext().getSharedPreferences("cloudy", 0).edit()
-                .putString("json_url", CheckUpdateFragment.DEFAULT_JSON_URL).apply()
-            f.findPreference<EditTextPreference>("json_url")?.text = CheckUpdateFragment.DEFAULT_JSON_URL
             // The interval pref was cleared, so the pending alarm must match the default.
             rescheduleNotifications(f)
             true

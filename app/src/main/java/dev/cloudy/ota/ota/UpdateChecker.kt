@@ -42,7 +42,7 @@ object UpdateChecker {
             .getString("json_url", null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
-            ?: CheckUpdateFragment.DEFAULT_JSON_URL
+            ?: CheckUpdateFragment.DEFAULT_OTA_URL
 
     /**
      * Fetches both manifests and reports what is newer than what's installed.

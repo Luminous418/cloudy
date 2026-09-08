@@ -52,7 +52,7 @@ class CheckUpdateFragment : Fragment() {
             .getString("json_url", null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
-            ?: DEFAULT_JSON_URL
+            ?: DEFAULT_OTA_URL
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
         _b = FragmentCheckUpdateBinding.inflate(i, c, false)
@@ -535,6 +535,10 @@ class CheckUpdateFragment : Fragment() {
          */
         private const val OTA_BASE = "https://raw.githubusercontent.com/Luminous418/cloudy/refs/heads/main/updater"
         val DEFAULT_JSON_URL: String get() = "$OTA_BASE/${DeviceInfo.deviceCodename}.json"
+
+        /** OTA-only manifest, kept separate from the full ROM manifest (used by the ROM tab). */
+        private const val OTA_ONLY_BASE = "$OTA_BASE/ota"
+        val DEFAULT_OTA_URL: String get() = "$OTA_ONLY_BASE/${DeviceInfo.deviceCodename}.json"
 
         private const val REQUEST_PICK_ROM = 71
         private const val LOCAL_ROM_DIR = "roms"
