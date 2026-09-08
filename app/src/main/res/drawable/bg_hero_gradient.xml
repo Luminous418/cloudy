@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One UI 8.5 software-update hero: a soft wash of the accent colour at the top of
+     the screen, fading to transparent. android:alpha on a layer-list item needs
+     API 23; minSdk here is 26. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:alpha="0.14">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="?attr/colorPrimary"
+                android:centerColor="?attr/colorPrimary"
+                android:endColor="@android:color/transparent" />
+        </shape>
+    </item>
+</layer-list>

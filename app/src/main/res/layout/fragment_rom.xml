@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    One UI 8.5 ROM tab: the available-builds card and the changelog of the selected
+    build. Download/install and the device details live in the OTA tab.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="always"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/oui_content_bottom_inset">
+
+        <!-- ===== Available builds ===== -->
+        <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sep_available" />
+
+        <LinearLayout
+            android:id="@+id/cardAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_oui_card"
+            android:layout_marginHorizontal="@dimen/oui_card_margin_h"
+            android:orientation="vertical">
+
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowVersionPicker"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:clickable="true" android:focusable="true"
+                app:showTopDivider="false" app:title="@string/f_version"
+                app:drawableEnd="@drawable/ic_chevron_down" tools:summary="8.6.4" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowBuildDate"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_build_date" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowDownloadSize"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_size" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteAndroid"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_android" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteOneUi"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_oneui" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteSecurity"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_patch" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteFingerprint"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_fingerprint" app:summaryMaxLines="3" />
+        </LinearLayout>
+
+        <!-- ===== Changelog ===== -->
+        <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepChangelog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sep_changelog" />
+
+        <LinearLayout
+            android:id="@+id/cardChangelog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_oui_card"
+            android:layout_marginHorizontal="@dimen/oui_card_margin_h"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/changelog"
+                style="@style/Cloudy.Text.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/oui_card_padding_h"
+                android:paddingVertical="18dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

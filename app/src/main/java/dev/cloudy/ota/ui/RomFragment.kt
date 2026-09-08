@@ -10,17 +10,17 @@ import androidx.lifecycle.lifecycleScope
 import dev.cloudy.ota.R
 import dev.cloudy.ota.data.Release
 import dev.cloudy.ota.data.UpdateRepository
-import dev.cloudy.ota.databinding.FragmentCheckUpdateBinding
+import dev.cloudy.ota.databinding.FragmentRomBinding
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 /**
- * ROM info tab: every available build (picker), the changelog of the selected build and
- * the device's installed details. Download/install lives in the OTA tab.
+ * ROM info tab: every available build (picker) and the changelog of the selected build.
+ * Download/install lives in the OTA tab.
  */
 class RomFragment : Fragment() {
 
-    private var _b: FragmentCheckUpdateBinding? = null
+    private var _b: FragmentRomBinding? = null
     private val b get() = _b!!
     private val repo by lazy { UpdateRepository(requireContext()) }
 
@@ -36,30 +36,12 @@ class RomFragment : Fragment() {
             ?: OtaFragment.DEFAULT_JSON_URL
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
-        _b = FragmentCheckUpdateBinding.inflate(i, c, false)
+        _b = FragmentRomBinding.inflate(i, c, false)
         return b.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // This tab only shows info: hide the hero + download actions.
-        b.heroIcon.visibility = View.GONE
-        b.heroTitle.visibility = View.GONE
-        b.heroSubtitle.visibility = View.GONE
-        b.downloadBar.visibility = View.GONE
-        b.downloadProgress.visibility = View.GONE
-        b.btnDownload.visibility = View.GONE
-        b.btnFlashLocal.visibility = View.GONE
-        b.btnCheck.visibility = View.GONE
-
-        b.sepAvailable.visibility = View.VISIBLE
-        b.cardAvailable.visibility = View.VISIBLE
-        b.sepChangelog.visibility = View.VISIBLE
-        b.cardChangelog.visibility = View.VISIBLE
-        // "This device" lives in the OTA tab now.
-        b.sepDevice.visibility = View.GONE
-        b.cardDevice.visibility = View.GONE
-
         b.rowVersionPicker.setOnClickListener { showBuildPicker() }
         check()
     }

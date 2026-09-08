@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    One UI 8.5 "Software update" style OTA screen.
+    Hero block on a soft accent gradient, then the download action, then the
+    "Available OTA" card (only when an update exists) and the "This device" card.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="always"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/oui_content_bottom_inset">
+
+        <!-- ===== Hero on gradient ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@drawable/bg_hero_gradient"
+            android:paddingHorizontal="32dp"
+            android:paddingTop="@dimen/oui_hero_padding_top"
+            android:paddingBottom="28dp">
+
+            <FrameLayout
+                android:layout_width="@dimen/oui_hero_glyph_size"
+                android:layout_height="@dimen/oui_hero_glyph_size"
+                android:background="@drawable/bg_oui_hero_circle">
+
+                <ImageView
+                    android:id="@+id/heroIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_cloud_large"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/heroTitle"
+                style="@style/Cloudy.Text.Hero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/status_checking" />
+
+            <TextView
+                android:id="@+id/heroSubtitle"
+                style="@style/Cloudy.Text.HeroSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="LumiROM 8.6.4" />
+
+            <ProgressBar
+                android:id="@+id/downloadBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:max="100"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/downloadProgress"
+                style="@style/Cloudy.Text.HeroSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                tools:text="45% · 3.2 MB/s"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <!-- ===== Download action ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="8dp">
+
+            <Button
+                android:id="@+id/btnDownload"
+                style="@style/OneUI.ContainedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:visibility="gone"
+                android:text="@string/btn_download"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <!-- ===== Available OTA ===== -->
+        <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/sep_ota_available"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/cardAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_oui_card"
+            android:layout_marginHorizontal="@dimen/oui_card_margin_h"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowVersionPicker"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:clickable="true" android:focusable="true"
+                app:showTopDivider="false" app:title="@string/f_version"
+                app:drawableEnd="@drawable/ic_chevron_down" tools:summary="8.6.4" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowBuildDate"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_build_date" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowDownloadSize"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_size" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteAndroid"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_android" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteOneUi"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_oneui" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteSecurity"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_patch" />
+        </LinearLayout>
+
+        <!-- ===== This device ===== -->
+        <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepDevice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sep_device" />
+
+        <LinearLayout
+            android:id="@+id/cardDevice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_oui_card"
+            android:layout_marginHorizontal="@dimen/oui_card_margin_h"
+            android:orientation="vertical">
+
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowInstalledVersion"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:showTopDivider="false" app:title="@string/f_installed" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowDeviceModel"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_model" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowBootloader"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_bootloader" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowAndroid"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_android" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowOneUi"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_oneui" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowSecurity"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_patch" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowFingerprint"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_fingerprint" app:summaryMaxLines="3" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowKernel"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_kernel" app:summaryMaxLines="3" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
