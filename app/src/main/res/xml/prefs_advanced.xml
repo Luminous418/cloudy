@@ -2,7 +2,7 @@
 <!-- Advanced settings screen: opened as a separate screen from the Settings tab. -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/pref_cat_source">
+    <PreferenceCategory android:key="source_cat" android:title="@string/pref_cat_source">
         <EditTextPreference
             android:key="rom_json_url"
             android:title="@string/pref_json_url_rom"

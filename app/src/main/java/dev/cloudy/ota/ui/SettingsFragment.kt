@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.SwitchPreferenceCompat
@@ -96,6 +97,7 @@ object SettingsPrefs {
         }
 
         val unlocked = prefs.getBoolean(UpdateChecker.KEY_DEV_UNLOCKED, false)
+        f.findPreference<PreferenceCategory>("source_cat")?.isVisible = unlocked
         f.findPreference<EditTextPreference>(UpdateChecker.KEY_ROM_URL)?.apply {
             summaryProvider = EditTextPreference.SimpleSummaryProvider.getInstance()
             isVisible = unlocked
