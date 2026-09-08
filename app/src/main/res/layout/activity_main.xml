@@ -42,8 +42,7 @@
             android:background="@drawable/bg_oui_float_nav"
             android:elevation="0dp"
             android:clipToOutline="true"
-            android:minHeight="48dp"
-            app:menu="@menu/menu_bottom_tabs" />
+            android:minHeight="48dp" />
     </dev.oneuiproject.oneui.widget.BottomFloatingLayout>
 
 </dev.oneuiproject.oneui.layout.ToolbarLayout>

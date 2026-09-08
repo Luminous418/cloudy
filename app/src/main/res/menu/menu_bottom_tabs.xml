@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/tab_ota"        android:icon="@drawable/ic_tab_update"     android:title="@string/tab_ota" />
-    <item android:id="@+id/tab_rom"        android:icon="@drawable/ic_tab_maintainer" android:title="@string/tab_rom" />
+    <item android:id="@+id/tab_rom"        android:icon="@drawable/ic_tab_rom"          android:title="@string/tab_rom" />
     <item android:id="@+id/tab_maintainer" android:icon="@drawable/ic_tab_maintainer" android:title="@string/tab_maintainer" />
     <item android:id="@+id/tab_settings"   android:icon="@drawable/ic_settings_gear"  android:title="@string/tab_settings" />
 </menu>
