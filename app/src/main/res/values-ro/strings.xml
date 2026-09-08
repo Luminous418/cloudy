@@ -98,9 +98,14 @@
     </string-array>
 
     <string name="pref_cat_source">Sursa actualizării</string>
-    <string name="pref_json_url">URL JSON personalizat</string>
-    <string name="pref_json_url_dialog">URL manifest de actualizare</string>
-    <string name="pref_json_url_summary">Manifestul la distanță pe care Cloudy îl verifică pentru build-uri LumiROM noi</string>
+    <string name="pref_json_url_rom">URL JSON personalizat (ROM)</string>
+    <string name="pref_json_url_rom_dialog">URL manifest ROM</string>
+    <string name="pref_json_url_rom_summary">Manifestul de la distanță pentru fila ROM / ecranul de întreținere</string>
+    <string name="pref_json_url_ota">URL JSON personalizat (OTA)</string>
+    <string name="pref_json_url_ota_dialog">URL manifest OTA</string>
+    <string name="pref_json_url_ota_summary">Manifestul de la distanță pentru actualizările OTA și verificările în fundal</string>
+    <string name="dev_options_unlocked">Opțiunile de dezvoltator au fost activate</string>
+    <string name="dev_options_already">Opțiunile de dezvoltator sunt deja activate</string>
     <string name="pref_cat_background">Verificări în fundal</string>
     <string name="pref_check_interval">Interval de verificare</string>
     <string name="pref_check_interval_summary">Cât de des verifică Cloudy actualizări noi în fundal</string>

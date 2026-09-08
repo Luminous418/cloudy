@@ -16,6 +16,7 @@ import dev.cloudy.ota.databinding.FragmentRomBinding
 import dev.cloudy.ota.ota.DownloadService
 import dev.cloudy.ota.ota.InstallResult
 import dev.cloudy.ota.ota.OtaInstaller
+import dev.cloudy.ota.ota.UpdateChecker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,7 +39,7 @@ class RomFragment : Fragment() {
     private val jsonUrl: String
         get() = requireContext()
             .getSharedPreferences("cloudy", 0)
-            .getString("json_url", null)
+            .getString(UpdateChecker.KEY_ROM_URL, null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?: OtaFragment.DEFAULT_JSON_URL

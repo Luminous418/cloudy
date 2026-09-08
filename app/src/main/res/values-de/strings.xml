@@ -98,9 +98,14 @@
     </string-array>
 
     <string name="pref_cat_source">Update-Quelle</string>
-    <string name="pref_json_url">Eigene JSON-URL</string>
-    <string name="pref_json_url_dialog">URL des Update-Manifests</string>
-    <string name="pref_json_url_summary">Remote-Manifest, das Cloudy auf neue LumiROM-Builds prüft</string>
+    <string name="pref_json_url_rom">Eigene JSON-URL (ROM)</string>
+    <string name="pref_json_url_rom_dialog">URL des ROM-Manifests</string>
+    <string name="pref_json_url_rom_summary">Remote-Manifest für den ROM-Tab / Wartungsbildschirm</string>
+    <string name="pref_json_url_ota">Eigene JSON-URL (OTA)</string>
+    <string name="pref_json_url_ota_dialog">URL des OTA-Manifests</string>
+    <string name="pref_json_url_ota_summary">Remote-Manifest für OTA-Updates und Hintergrundprüfungen</string>
+    <string name="dev_options_unlocked">Entwickleroptionen aktiviert</string>
+    <string name="dev_options_already">Entwickleroptionen bereits aktiviert</string>
     <string name="pref_cat_background">Hintergrundprüfungen</string>
     <string name="pref_check_interval">Prüfintervall</string>
     <string name="pref_check_interval_summary">Wie oft Cloudy im Hintergrund nach Updates sucht</string>

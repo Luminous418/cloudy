@@ -17,6 +17,7 @@ import dev.cloudy.ota.R
 import dev.cloudy.ota.data.UpdateRepository
 import dev.cloudy.ota.databinding.FragmentMaintainerBinding
 import dev.cloudy.ota.ota.DeviceInfo
+import dev.cloudy.ota.ota.UpdateChecker
 import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,7 +39,7 @@ class MaintainerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val url = requireContext().getSharedPreferences("cloudy", 0)
-            .getString("json_url", null)
+            .getString(UpdateChecker.KEY_ROM_URL, null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?: CheckUpdateFragment.DEFAULT_JSON_URL

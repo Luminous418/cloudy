@@ -22,6 +22,11 @@ object UpdateChecker {
     const val PREFS_NAME = "cloudy"
     const val KEY_NOTIFICATIONS = "update_notifications"
     const val KEY_INTERVAL = "update_interval"
+    const val KEY_ROM_URL = "rom_json_url"
+    const val KEY_OTA_URL = "ota_json_url"
+    const val KEY_LEGACY_URL = "json_url"
+    const val KEY_DEV_UNLOCKED = "dev_unlocked"
+    const val KEY_DEV_TAPS = "dev_taps"
 
     /** Notification tap targets, matched against MainActivity extras / tab indexes. */
     const val TAB_UPDATE = "update"
@@ -39,7 +44,7 @@ object UpdateChecker {
     /** Default ROM manifest URL (device codename based), same as the Update tab. */
     private fun romJsonUrl(context: Context): String =
         context.getSharedPreferences(PREFS_NAME, 0)
-            .getString("json_url", null)
+            .getString(KEY_OTA_URL, null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?: CheckUpdateFragment.DEFAULT_OTA_URL

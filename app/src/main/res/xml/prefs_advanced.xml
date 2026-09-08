@@ -4,10 +4,15 @@
 
     <PreferenceCategory android:title="@string/pref_cat_source">
         <EditTextPreference
-            android:key="json_url"
-            android:title="@string/pref_json_url"
-            android:dialogTitle="@string/pref_json_url_dialog"
-            android:summary="@string/pref_json_url_summary" />
+            android:key="rom_json_url"
+            android:title="@string/pref_json_url_rom"
+            android:dialogTitle="@string/pref_json_url_rom_dialog"
+            android:summary="@string/pref_json_url_rom_summary" />
+        <EditTextPreference
+            android:key="ota_json_url"
+            android:title="@string/pref_json_url_ota"
+            android:dialogTitle="@string/pref_json_url_ota_dialog"
+            android:summary="@string/pref_json_url_ota_summary" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_cat_background">

@@ -115,9 +115,14 @@
 
     <!-- Advanced settings screen -->
     <string name="pref_cat_source">Update source</string>
-    <string name="pref_json_url">Custom JSON URL</string>
-    <string name="pref_json_url_dialog">Update manifest URL</string>
-    <string name="pref_json_url_summary">Remote manifest Cloudy checks for new LumiROM builds</string>
+    <string name="pref_json_url_rom">Custom ROM JSON URL</string>
+    <string name="pref_json_url_rom_dialog">ROM manifest URL</string>
+    <string name="pref_json_url_rom_summary">Remote manifest for the ROM tab / maintainer screen</string>
+    <string name="pref_json_url_ota">Custom OTA JSON URL</string>
+    <string name="pref_json_url_ota_dialog">OTA manifest URL</string>
+    <string name="pref_json_url_ota_summary">Remote manifest for OTA updates and background checks</string>
+    <string name="dev_options_unlocked">Developer options enabled</string>
+    <string name="dev_options_already">Developer options already enabled</string>
     <string name="pref_cat_background">Background checks</string>
     <string name="pref_check_interval">Check interval</string>
     <string name="pref_check_interval_summary">How often Cloudy checks for new updates in the background</string>

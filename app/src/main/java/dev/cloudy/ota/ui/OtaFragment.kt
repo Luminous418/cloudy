@@ -17,6 +17,7 @@ import dev.cloudy.ota.ota.DeviceInfo
 import dev.cloudy.ota.ota.DownloadService
 import dev.cloudy.ota.ota.InstallResult
 import dev.cloudy.ota.ota.OtaInstaller
+import dev.cloudy.ota.ota.UpdateChecker
 import dev.cloudy.ota.ota.VersionCheck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,7 +45,7 @@ class OtaFragment : Fragment() {
     private val jsonUrl: String
         get() = requireContext()
             .getSharedPreferences("cloudy", 0)
-            .getString("json_url", null)
+            .getString(UpdateChecker.KEY_OTA_URL, null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?: CheckUpdateFragment.DEFAULT_OTA_URL
