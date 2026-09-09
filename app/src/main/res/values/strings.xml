@@ -155,7 +155,8 @@
     <string name="err_network">Network error</string>
     <string name="err_empty_body">Empty body</string>
     <string name="err_checksum">Checksum mismatch - download rejected</string>
-    <string name="err_no_releases">Manifest contains no releases</string>
+    <string name="status_no_updates">No updates available</string>
+    <string name="status_no_updates_sub">No OTA builds are published for this device yet</string>
     <string name="err_storage_unavailable">External storage unavailable</string>
     <string name="err_copy_failed">Couldn\'t copy the selected file</string>
     <string name="err_not_priv_app">Not a privileged app: %1$s</string>

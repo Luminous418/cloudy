@@ -86,9 +86,9 @@ class OtaFragment : Fragment() {
 
                     if (releases.isEmpty()) {
                         setHero(
-                            R.drawable.ic_status_error,
-                            getString(R.string.status_failed),
-                            getString(R.string.err_no_releases)
+                            R.drawable.ic_status_uptodate,
+                            getString(R.string.status_no_updates),
+                            getString(R.string.status_no_updates_sub)
                         )
                         v.btnDownload.visibility = View.GONE
                         v.btnDownload.isEnabled = false
