@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    OneUI 8.5 "Software update" layout.
-
-    8.5 opens this screen with a hero block - large state glyph, one headline, one quiet
-    supporting line - and only then drops into cards. The old build put the state in a
-    CardItemView row at the top, which reads as a list item rather than an answer to
-    "am I up to date?". The Available-build and Changelog sections are collapsed until a
-    remote release actually exists, so the up-to-date screen stays short.
+    One UI 8.5 "Software update" style OTA screen.
+    Hero block on a soft accent gradient, then the download action, then the
+    "Available OTA" card (only when an update exists) and the "This device" card.
 -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,12 +19,13 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/oui_content_bottom_inset">
 
-        <!-- ===== Hero ===== -->
+        <!-- ===== Hero on gradient ===== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:background="@drawable/bg_hero_gradient"
             android:paddingHorizontal="32dp"
             android:paddingTop="@dimen/oui_hero_padding_top"
             android:paddingBottom="28dp">
@@ -73,7 +70,6 @@
                 android:visibility="gone"
                 tools:visibility="visible" />
 
-            <!-- Centered "45% · 3.2 MB/s" readout for ROM downloads. -->
             <TextView
                 android:id="@+id/downloadProgress"
                 style="@style/Cloudy.Text.HeroSupport"
@@ -85,12 +81,13 @@
                 tools:visibility="visible" />
         </LinearLayout>
 
-        <!-- ===== Actions (above the fold in 8.5, not buried under the cards) ===== -->
+        <!-- ===== Download action ===== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="24dp">
+            android:paddingHorizontal="24dp"
+            android:paddingTop="8dp">
 
             <Button
                 android:id="@+id/btnDownload"
@@ -101,34 +98,15 @@
                 android:visibility="gone"
                 android:text="@string/btn_download"
                 tools:visibility="visible" />
-
-            <Button
-                android:id="@+id/btnFlashLocal"
-                style="@style/OneUI.ButtonStyleOutline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/btn_flash_local" />
-
-            <Button
-                android:id="@+id/btnCheck"
-                style="@style/OneUI.ButtonStyleOutline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/btn_check" />
         </LinearLayout>
 
-        <!-- ===== Available builds =====
-             One row per release, selectable like LumiHub's version combo. The row opens a
-             radio dialog listing every build in the manifest; picking one re-renders the
-             details below and targets the Download button at that build. -->
+        <!-- ===== Available OTA ===== -->
         <dev.oneuiproject.oneui.widget.Separator
             android:id="@+id/sepAvailable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:text="@string/sep_available"
+            android:text="@string/sep_ota_available"
             tools:visibility="visible" />
 
         <LinearLayout
@@ -145,7 +123,7 @@
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:clickable="true" android:focusable="true"
                 app:showTopDivider="false" app:title="@string/f_version"
-                app:drawableEnd="@drawable/ic_chevron_down" tools:summary="8.6.3" />
+                app:drawableEnd="@drawable/ic_chevron_down" tools:summary="8.6.4" />
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowBuildDate"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_build_date" />
@@ -161,37 +139,6 @@
             <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteSecurity"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:title="@string/f_patch" />
-            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteFingerprint"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                app:title="@string/f_fingerprint" app:summaryMaxLines="3" />
-        </LinearLayout>
-
-        <!-- ===== Changelog ===== -->
-        <dev.oneuiproject.oneui.widget.Separator
-            android:id="@+id/sepChangelog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="@string/sep_changelog"
-            tools:visibility="visible" />
-
-        <LinearLayout
-            android:id="@+id/cardChangelog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_oui_card"
-            android:layout_marginHorizontal="@dimen/oui_card_margin_h"
-            android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible">
-
-            <TextView
-                android:id="@+id/changelog"
-                style="@style/Cloudy.Text.Body"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/oui_card_padding_h"
-                android:paddingVertical="18dp" />
         </LinearLayout>
 
         <!-- ===== This device ===== -->

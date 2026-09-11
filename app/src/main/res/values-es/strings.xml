@@ -98,9 +98,14 @@
     </string-array>
 
     <string name="pref_cat_source">Origen de actualizaciones</string>
-    <string name="pref_json_url">URL JSON personalizada</string>
-    <string name="pref_json_url_dialog">URL del manifiesto de actualización</string>
-    <string name="pref_json_url_summary">Manifiesto remoto que Cloudy comprueba para nuevas versiones de LumiROM</string>
+    <string name="pref_json_url_rom">URL JSON personalizada (ROM)</string>
+    <string name="pref_json_url_rom_dialog">URL del manifiesto de ROM</string>
+    <string name="pref_json_url_rom_summary">Manifiesto remoto para la pestaña ROM / pantalla de mantenimiento</string>
+    <string name="pref_json_url_ota">URL JSON personalizada (OTA)</string>
+    <string name="pref_json_url_ota_dialog">URL del manifiesto OTA</string>
+    <string name="pref_json_url_ota_summary">Manifiesto remoto para actualizaciones OTA y comprobaciones en segundo plano</string>
+    <string name="dev_options_unlocked">Opciones de desarrollador activadas</string>
+    <string name="dev_options_already">Opciones de desarrollador ya activadas</string>
     <string name="pref_cat_background">Comprobaciones en segundo plano</string>
     <string name="pref_check_interval">Intervalo de comprobación</string>
     <string name="pref_check_interval_summary">Con qué frecuencia comprueba Cloudy actualizaciones en segundo plano</string>
@@ -131,7 +136,8 @@
     <string name="err_network">Error de red</string>
     <string name="err_empty_body">Cuerpo vacío</string>
     <string name="err_checksum">Coincidencia de checksum fallida - descarga rechazada</string>
-    <string name="err_no_releases">El manifiesto no contiene versiones</string>
+    <string name="status_no_updates">No hay actualizaciones disponibles</string>
+    <string name="status_no_updates_sub">Aún no hay versiones OTA publicadas para este dispositivo</string>
     <string name="err_storage_unavailable">Almacenamiento externo no disponible</string>
     <string name="err_copy_failed">No se pudo copiar el archivo seleccionado</string>
     <string name="err_not_priv_app">No es una app privilegiada: %1$s</string>

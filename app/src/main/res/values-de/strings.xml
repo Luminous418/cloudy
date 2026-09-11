@@ -98,9 +98,14 @@
     </string-array>
 
     <string name="pref_cat_source">Update-Quelle</string>
-    <string name="pref_json_url">Eigene JSON-URL</string>
-    <string name="pref_json_url_dialog">URL des Update-Manifests</string>
-    <string name="pref_json_url_summary">Remote-Manifest, das Cloudy auf neue LumiROM-Builds prüft</string>
+    <string name="pref_json_url_rom">Eigene JSON-URL (ROM)</string>
+    <string name="pref_json_url_rom_dialog">URL des ROM-Manifests</string>
+    <string name="pref_json_url_rom_summary">Remote-Manifest für den ROM-Tab / Wartungsbildschirm</string>
+    <string name="pref_json_url_ota">Eigene JSON-URL (OTA)</string>
+    <string name="pref_json_url_ota_dialog">URL des OTA-Manifests</string>
+    <string name="pref_json_url_ota_summary">Remote-Manifest für OTA-Updates und Hintergrundprüfungen</string>
+    <string name="dev_options_unlocked">Entwickleroptionen aktiviert</string>
+    <string name="dev_options_already">Entwickleroptionen bereits aktiviert</string>
     <string name="pref_cat_background">Hintergrundprüfungen</string>
     <string name="pref_check_interval">Prüfintervall</string>
     <string name="pref_check_interval_summary">Wie oft Cloudy im Hintergrund nach Updates sucht</string>
@@ -131,7 +136,8 @@
     <string name="err_network">Netzwerkfehler</string>
     <string name="err_empty_body">Leerer Inhalt</string>
     <string name="err_checksum">Checksumme nicht stimmig - Download abgelehnt</string>
-    <string name="err_no_releases">Manifest enthält keine Versionen</string>
+    <string name="status_no_updates">Keine Updates verfügbar</string>
+    <string name="status_no_updates_sub">Es sind noch keine OTA-Builds für dieses Gerät veröffentlicht</string>
     <string name="err_storage_unavailable">Externer Speicher nicht verfügbar</string>
     <string name="err_copy_failed">Ausgewählte Datei konnte nicht kopiert werden</string>
     <string name="err_not_priv_app">Keine privilegierte App: %1$s</string>

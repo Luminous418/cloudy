@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    One UI 8.5 ROM tab: pick any build, download + install it, and read the changelog.
+    Unlike the OTA tab (which tracks only the latest build), here the user can choose
+    any build from the manifest before downloading.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="always"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/oui_content_bottom_inset">
+
+        <!-- ===== ROM logo ===== -->
+        <ImageView
+            android:id="@+id/romLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="24dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/rom_logo"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/tab_rom" />
+
+        <!-- ===== Download action ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="16dp">
+
+            <Button
+                android:id="@+id/btnDownload"
+                style="@style/Cloudy.Button.Download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:visibility="gone"
+                android:text="@string/btn_download"
+                tools:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/downloadBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:max="100"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/downloadProgress"
+                style="@style/Cloudy.Text.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                tools:text="45% · 3.2 MB/s"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <!-- ===== Available builds ===== -->
+        <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sep_available" />
+
+        <LinearLayout
+            android:id="@+id/cardAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_oui_card"
+            android:layout_marginHorizontal="@dimen/oui_card_margin_h"
+            android:orientation="vertical">
+
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowVersionPicker"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:clickable="true" android:focusable="true"
+                app:showTopDivider="false" app:title="@string/f_version"
+                app:drawableEnd="@drawable/ic_chevron_down" tools:summary="8.6.4" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowBuildDate"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_build_date" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowDownloadSize"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_size" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteAndroid"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_android" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteOneUi"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_oneui" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteSecurity"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_patch" />
+            <dev.oneuiproject.oneui.widget.CardItemView android:id="@+id/rowRemoteFingerprint"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                app:title="@string/f_fingerprint" app:summaryMaxLines="3" />
+        </LinearLayout>
+
+        <!-- ===== Changelog ===== -->
+        <dev.oneuiproject.oneui.widget.Separator
+            android:id="@+id/sepChangelog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sep_changelog" />
+
+        <LinearLayout
+            android:id="@+id/cardChangelog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_oui_card"
+            android:layout_marginHorizontal="@dimen/oui_card_margin_h"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/changelog"
+                style="@style/Cloudy.Text.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/oui_card_padding_h"
+                android:paddingVertical="18dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

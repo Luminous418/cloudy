@@ -98,9 +98,14 @@
     </string-array>
 
     <string name="pref_cat_source">Nguồn cập nhật</string>
-    <string name="pref_json_url">URL JSON tùy chỉnh</string>
-    <string name="pref_json_url_dialog">URL tệp kê khai cập nhật</string>
-    <string name="pref_json_url_summary">Tệp kê khai từ xa mà Cloudy kiểm tra các bản dựng LumiROM mới</string>
+    <string name="pref_json_url_rom">URL JSON tùy chỉnh (ROM)</string>
+    <string name="pref_json_url_rom_dialog">URL tệp kê khai ROM</string>
+    <string name="pref_json_url_rom_summary">Tệp kê khai từ xa cho tab ROM / màn hình bảo trì</string>
+    <string name="pref_json_url_ota">URL JSON tùy chỉnh (OTA)</string>
+    <string name="pref_json_url_ota_dialog">URL tệp kê khai OTA</string>
+    <string name="pref_json_url_ota_summary">Tệp kê khai từ xa cho cập nhật OTA và kiểm tra nền</string>
+    <string name="dev_options_unlocked">Đã bật tùy chọn nhà phát triển</string>
+    <string name="dev_options_already">Tùy chọn nhà phát triển đã được bật</string>
     <string name="pref_cat_background">Kiểm tra nền</string>
     <string name="pref_check_interval">Khoảng thời gian kiểm tra</string>
     <string name="pref_check_interval_summary">Tần suất Cloudy kiểm tra cập nhật trong nền</string>
@@ -131,7 +136,8 @@
     <string name="err_network">Lỗi mạng</string>
     <string name="err_empty_body">Thân phản hồi trống</string>
     <string name="err_checksum">Kiểm tra tổng không khớp - từ chối tải xuống</string>
-    <string name="err_no_releases">Tệp kê khai không chứa bản dựng nào</string>
+    <string name="status_no_updates">Không có bản cập nhật nào</string>
+    <string name="status_no_updates_sub">Chưa có bản dựng OTA nào được phát hành cho thiết bị này</string>
     <string name="err_storage_unavailable">Bộ nhớ ngoài không khả dụng</string>
     <string name="err_copy_failed">Không thể sao chép tệp đã chọn</string>
     <string name="err_not_priv_app">Không phải ứng dụng đặc quyền: %1$s</string>

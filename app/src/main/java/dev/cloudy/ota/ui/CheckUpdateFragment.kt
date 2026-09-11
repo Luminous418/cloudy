@@ -24,6 +24,7 @@ import dev.cloudy.ota.ota.IFlashCallback
 import dev.cloudy.ota.ota.InstallResult
 import dev.cloudy.ota.ota.OtaInstaller
 import dev.cloudy.ota.ota.RootIpc
+import dev.cloudy.ota.ota.UpdateChecker
 import dev.cloudy.ota.ota.VersionCheck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,10 +50,10 @@ class CheckUpdateFragment : Fragment() {
     private val jsonUrl: String
         get() = requireContext()
             .getSharedPreferences("cloudy", 0)
-            .getString("json_url", null)
+            .getString(UpdateChecker.KEY_OTA_URL, null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
-            ?: DEFAULT_JSON_URL
+            ?: DEFAULT_OTA_URL
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
         _b = FragmentCheckUpdateBinding.inflate(i, c, false)
@@ -124,9 +125,9 @@ class CheckUpdateFragment : Fragment() {
 
                     if (releases.isEmpty()) {
                         setHero(
-                            R.drawable.ic_status_error,
-                            getString(R.string.status_failed),
-                            getString(R.string.err_no_releases)
+                            R.drawable.ic_status_uptodate,
+                            getString(R.string.status_no_updates),
+                            getString(R.string.status_no_updates_sub)
                         )
                         showReleaseSections(false)
                         v.btnDownload.visibility = View.GONE
@@ -535,6 +536,10 @@ class CheckUpdateFragment : Fragment() {
          */
         private const val OTA_BASE = "https://raw.githubusercontent.com/Luminous418/cloudy/refs/heads/main/updater"
         val DEFAULT_JSON_URL: String get() = "$OTA_BASE/${DeviceInfo.deviceCodename}.json"
+
+        /** OTA-only manifest, kept separate from the full ROM manifest (used by the ROM tab). */
+        private const val OTA_ONLY_BASE = "$OTA_BASE/ota"
+        val DEFAULT_OTA_URL: String get() = "$OTA_ONLY_BASE/${DeviceInfo.deviceCodename}.json"
 
         private const val REQUEST_PICK_ROM = 71
         private const val LOCAL_ROM_DIR = "roms"

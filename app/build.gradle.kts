@@ -32,8 +32,8 @@ android {
         applicationId = "dev.cloudy.ota"
         minSdk = 26
         targetSdk = 34
-        versionCode = 11
-        versionName = "2.34"
+        versionCode = 12
+        versionName = "2.4"
     }
 
     buildTypes {

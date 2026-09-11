@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.AttributeSet
+import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.SwitchPreferenceCompat
@@ -61,15 +63,48 @@ class AppInfoPreference @JvmOverloads constructor(
             text = pillLabel ?: context.getString(R.string.prefs_check_app_update)
             setOnClickListener { onCheckUpdatesClick?.invoke() }
         }
+        // Easter egg: seven taps on the app icon unlock the hidden ROM/OTA URL overrides,
+        // mirroring Android's "tap the build number seven times" developer options.
+        holder.itemView.findViewById<View>(R.id.appIcon)?.setOnClickListener {
+            val prefs = context.getSharedPreferences(UpdateChecker.PREFS_NAME, 0)
+            if (prefs.getBoolean(UpdateChecker.KEY_DEV_UNLOCKED, false)) {
+                Toast.makeText(context, R.string.dev_options_already, Toast.LENGTH_SHORT).show()
+            } else {
+                val taps = prefs.getInt(UpdateChecker.KEY_DEV_TAPS, 0) + 1
+                if (taps >= 7) {
+                    prefs.edit()
+                        .putBoolean(UpdateChecker.KEY_DEV_UNLOCKED, true)
+                        .remove(UpdateChecker.KEY_DEV_TAPS)
+                        .apply()
+                    Toast.makeText(context, R.string.dev_options_unlocked, Toast.LENGTH_LONG).show()
+                } else {
+                    prefs.edit().putInt(UpdateChecker.KEY_DEV_TAPS, taps).apply()
+                }
+            }
+        }
     }
 }
 
 /** Wiring shared by the Settings tab and the Advanced settings screen. */
 object SettingsPrefs {
     fun wire(f: PreferenceFragmentCompat) {
-        f.findPreference<EditTextPreference>("json_url")?.apply {
+        val prefs = f.requireContext().getSharedPreferences(UpdateChecker.PREFS_NAME, 0)
+
+        // Migrate the pre-split single override (if any) to the new ROM key once.
+        if (prefs.contains(UpdateChecker.KEY_LEGACY_URL) && !prefs.contains(UpdateChecker.KEY_ROM_URL)) {
+            prefs.edit().putString(UpdateChecker.KEY_ROM_URL, prefs.getString(UpdateChecker.KEY_LEGACY_URL, null))
+                .remove(UpdateChecker.KEY_LEGACY_URL).apply()
+        }
+
+        val unlocked = prefs.getBoolean(UpdateChecker.KEY_DEV_UNLOCKED, false)
+        f.findPreference<PreferenceCategory>("source_cat")?.isVisible = unlocked
+        f.findPreference<EditTextPreference>(UpdateChecker.KEY_ROM_URL)?.apply {
             summaryProvider = EditTextPreference.SimpleSummaryProvider.getInstance()
-            if (text.isNullOrBlank()) text = CheckUpdateFragment.DEFAULT_JSON_URL
+            isVisible = unlocked
+        }
+        f.findPreference<EditTextPreference>(UpdateChecker.KEY_OTA_URL)?.apply {
+            summaryProvider = EditTextPreference.SimpleSummaryProvider.getInstance()
+            isVisible = unlocked
         }
         f.findPreference<ListPreference>("update_interval")?.apply {
             summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
@@ -84,10 +119,6 @@ object SettingsPrefs {
         }
         f.findPreference<Preference>("reset")?.setOnPreferenceClickListener {
             f.requireContext().getSharedPreferences("cloudy", 0).edit().clear().apply()
-            // Re-seed the default URL so the app stays usable after a reset.
-            f.requireContext().getSharedPreferences("cloudy", 0).edit()
-                .putString("json_url", CheckUpdateFragment.DEFAULT_JSON_URL).apply()
-            f.findPreference<EditTextPreference>("json_url")?.text = CheckUpdateFragment.DEFAULT_JSON_URL
             // The interval pref was cleared, so the pending alarm must match the default.
             rescheduleNotifications(f)
             true

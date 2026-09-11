@@ -98,9 +98,14 @@
     </string-array>
 
     <string name="pref_cat_source">Источник обновлений</string>
-    <string name="pref_json_url">Свой JSON URL</string>
-    <string name="pref_json_url_dialog">URL манифеста обновления</string>
-    <string name="pref_json_url_summary">Удалённый манифест, который Cloudy проверяет на новые сборки LumiROM</string>
+    <string name="pref_json_url_rom">Свой JSON URL (ROM)</string>
+    <string name="pref_json_url_rom_dialog">URL манифеста ROM</string>
+    <string name="pref_json_url_rom_summary">Удалённый манифест для вкладки ROM / экрана обслуживания</string>
+    <string name="pref_json_url_ota">Свой JSON URL (OTA)</string>
+    <string name="pref_json_url_ota_dialog">URL манифеста OTA</string>
+    <string name="pref_json_url_ota_summary">Удалённый манифест для OTA-обновлений и фоновых проверок</string>
+    <string name="dev_options_unlocked">Параметры разработчика включены</string>
+    <string name="dev_options_already">Параметры разработчика уже включены</string>
     <string name="pref_cat_background">Фоновые проверки</string>
     <string name="pref_check_interval">Интервал проверки</string>
     <string name="pref_check_interval_summary">Как часто Cloudy проверяет обновления в фоне</string>
@@ -131,7 +136,8 @@
     <string name="err_network">Ошибка сети</string>
     <string name="err_empty_body">Пустое тело ответа</string>
     <string name="err_checksum">Несовпадение контрольной суммы — загрузка отклонена</string>
-    <string name="err_no_releases">Манифест не содержит сборок</string>
+    <string name="status_no_updates">Нет доступных обновлений</string>
+    <string name="status_no_updates_sub">Для этого устройства пока нет опубликованных OTA-сборок</string>
     <string name="err_storage_unavailable">Внешнее хранилище недоступно</string>
     <string name="err_copy_failed">Не удалось скопировать выбранный файл</string>
     <string name="err_not_priv_app">Не привилегированное приложение: %1$s</string>

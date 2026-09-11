@@ -8,19 +8,28 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import dev.cloudy.ota.R
+import dev.cloudy.ota.data.Download
+import dev.cloudy.ota.data.DownloadState
 import dev.cloudy.ota.data.Release
 import dev.cloudy.ota.data.UpdateRepository
-import dev.cloudy.ota.databinding.FragmentCheckUpdateBinding
+import dev.cloudy.ota.databinding.FragmentRomBinding
+import dev.cloudy.ota.ota.DownloadService
+import dev.cloudy.ota.ota.InstallResult
+import dev.cloudy.ota.ota.OtaInstaller
+import dev.cloudy.ota.ota.UpdateChecker
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 import java.util.Locale
 
 /**
- * ROM info tab: every available build (picker), the changelog of the selected build and
- * the device's installed details. Download/install lives in the OTA tab.
+ * ROM tab: pick any build (not just the latest), download + install it, read the changelog.
+ * Unlike OTA, the user can freely choose a build before downloading.
  */
 class RomFragment : Fragment() {
 
-    private var _b: FragmentCheckUpdateBinding? = null
+    private var _b: FragmentRomBinding? = null
     private val b get() = _b!!
     private val repo by lazy { UpdateRepository(requireContext()) }
 
@@ -30,38 +39,22 @@ class RomFragment : Fragment() {
     private val jsonUrl: String
         get() = requireContext()
             .getSharedPreferences("cloudy", 0)
-            .getString("json_url", null)
+            .getString(UpdateChecker.KEY_ROM_URL, null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?: OtaFragment.DEFAULT_JSON_URL
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
-        _b = FragmentCheckUpdateBinding.inflate(i, c, false)
+        _b = FragmentRomBinding.inflate(i, c, false)
         return b.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // This tab only shows info: hide the hero + download actions.
-        b.heroIcon.visibility = View.GONE
-        b.heroTitle.visibility = View.GONE
-        b.heroSubtitle.visibility = View.GONE
-        b.downloadBar.visibility = View.GONE
-        b.downloadProgress.visibility = View.GONE
-        b.btnDownload.visibility = View.GONE
-        b.btnFlashLocal.visibility = View.GONE
-        b.btnCheck.visibility = View.GONE
-
-        b.sepAvailable.visibility = View.VISIBLE
-        b.cardAvailable.visibility = View.VISIBLE
-        b.sepChangelog.visibility = View.VISIBLE
-        b.cardChangelog.visibility = View.VISIBLE
-        // "This device" lives in the OTA tab now.
-        b.sepDevice.visibility = View.GONE
-        b.cardDevice.visibility = View.GONE
-
         b.rowVersionPicker.setOnClickListener { showBuildPicker() }
+        b.btnDownload.setOnClickListener { selectedRelease()?.let { downloadAndInstall(it.download) } }
         check()
+        observeDownload()
     }
 
     private fun check() {
@@ -75,6 +68,11 @@ class RomFragment : Fragment() {
                     if (releases.isNotEmpty()) {
                         selectedIndex = 0
                         renderSelected()
+                        val downloading = DownloadService.state.value is DownloadState.Progress
+                        if (!downloading) {
+                            b.btnDownload.visibility = View.VISIBLE
+                            b.btnDownload.isEnabled = true
+                        }
                     }
                 }
                 .onFailure { }
@@ -124,10 +122,77 @@ class RomFragment : Fragment() {
             .setPositiveButton(R.string.dlg_ok) { d, _ ->
                 d.dismiss()
                 renderSelected()
+                b.btnDownload.isEnabled = true
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
+
+    private fun downloadAndInstall(dl: Download) {
+        b.btnDownload.isEnabled = false
+        b.downloadBar.isIndeterminate = true
+        b.downloadBar.visibility = View.VISIBLE
+        DownloadService.start(requireContext(), dl)
+    }
+
+    private fun observeDownload() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            DownloadService.state.collect { st ->
+                val v = _b ?: return@collect
+                when (st) {
+                    null -> Unit
+                    is DownloadState.Progress -> {
+                        val pct = (st.fraction * 100).toInt()
+                        v.downloadBar.isIndeterminate = false
+                        v.downloadBar.visibility = View.VISIBLE
+                        v.downloadBar.progress = pct
+                        v.downloadProgress.visibility = View.VISIBLE
+                        v.downloadProgress.text =
+                            getString(R.string.download_progress_format, pct, formatSpeed(st.bytesPerSecond))
+                        v.btnDownload.isEnabled = false
+                    }
+                    is DownloadState.Failed -> {
+                        v.downloadBar.visibility = View.GONE
+                        v.downloadProgress.visibility = View.GONE
+                        v.btnDownload.isEnabled = true
+                        DownloadService.consume()
+                    }
+                    is DownloadState.Done -> {
+                        v.downloadBar.visibility = View.GONE
+                        v.downloadProgress.visibility = View.GONE
+                        DownloadService.consume()
+                        install(st.file)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Signature-verifies the package against the system's otacerts.zip (LumiROM's OTA cert
+     * on this ROM) before handing it to recovery.
+     */
+    private fun install(pkg: File) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                val installer = OtaInstaller(requireContext().applicationContext)
+                when (val privileged = installer.tryPrivilegedInstall(pkg)) {
+                    is InstallResult.NeedsRoot -> installer.rootStageRecovery(pkg)
+                    else -> privileged
+                }
+            }
+            val v = _b ?: return@launch
+            when (result) {
+                is InstallResult.StagedRebootingToRecovery ->
+                    v.btnDownload.visibility = View.GONE
+                is InstallResult.NeedsRoot -> v.btnDownload.isEnabled = true
+                is InstallResult.Failed -> v.btnDownload.isEnabled = true
+            }
+        }
+    }
+
+    private fun formatSpeed(bytesPerSecond: Long): String =
+        if (bytesPerSecond <= 0) "0 B/s" else "${formatBytes(bytesPerSecond)}/s"
 
     override fun onDestroyView() {
         super.onDestroyView()

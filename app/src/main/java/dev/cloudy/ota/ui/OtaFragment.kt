@@ -12,11 +12,12 @@ import dev.cloudy.ota.data.Download
 import dev.cloudy.ota.data.DownloadState
 import dev.cloudy.ota.data.Release
 import dev.cloudy.ota.data.UpdateRepository
-import dev.cloudy.ota.databinding.FragmentCheckUpdateBinding
+import dev.cloudy.ota.databinding.FragmentOtaBinding
 import dev.cloudy.ota.ota.DeviceInfo
 import dev.cloudy.ota.ota.DownloadService
 import dev.cloudy.ota.ota.InstallResult
 import dev.cloudy.ota.ota.OtaInstaller
+import dev.cloudy.ota.ota.UpdateChecker
 import dev.cloudy.ota.ota.VersionCheck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +32,7 @@ import java.util.Locale
  */
 class OtaFragment : Fragment() {
 
-    private var _b: FragmentCheckUpdateBinding? = null
+    private var _b: FragmentOtaBinding? = null
     private val b get() = _b!!
     private val repo by lazy { UpdateRepository(requireContext()) }
 
@@ -44,27 +45,21 @@ class OtaFragment : Fragment() {
     private val jsonUrl: String
         get() = requireContext()
             .getSharedPreferences("cloudy", 0)
-            .getString("json_url", null)
+            .getString(UpdateChecker.KEY_OTA_URL, null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
-            ?: DEFAULT_JSON_URL
+            ?: CheckUpdateFragment.DEFAULT_OTA_URL
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
-        _b = FragmentCheckUpdateBinding.inflate(i, c, false)
+        _b = FragmentOtaBinding.inflate(i, c, false)
         return b.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // This tab only downloads from the LumiROM manifest: no local-file flashing.
-        b.btnFlashLocal.visibility = View.GONE
-        // Changelog lives in the ROM tab; the OTA tab shows only the pending OTA.
-        b.sepChangelog.visibility = View.GONE
-        b.cardChangelog.visibility = View.GONE
+        // The "Available OTA" section appears only when a newer build exists.
         b.sepAvailable.visibility = View.GONE
         b.cardAvailable.visibility = View.GONE
-        // The "Available OTA" section appears only when a newer build exists.
-        b.sepAvailable.text = getString(R.string.sep_ota_available)
         // This device details live here (changelog + full build list live in the ROM tab).
         b.rowVersionPicker.setOnClickListener { showBuildPicker() }
         b.btnDownload.setOnClickListener { selectedRelease()?.let { downloadAndInstall(it.download) } }
@@ -91,9 +86,9 @@ class OtaFragment : Fragment() {
 
                     if (releases.isEmpty()) {
                         setHero(
-                            R.drawable.ic_status_error,
-                            getString(R.string.status_failed),
-                            getString(R.string.err_no_releases)
+                            R.drawable.ic_status_uptodate,
+                            getString(R.string.status_no_updates),
+                            getString(R.string.status_no_updates_sub)
                         )
                         v.btnDownload.visibility = View.GONE
                         v.btnDownload.isEnabled = false
@@ -217,7 +212,6 @@ class OtaFragment : Fragment() {
         v.rowRemoteAndroid.summary = sel.androidVersion
         v.rowRemoteOneUi.summary = formatOneUiVersion(sel.oneuiVersion) ?: "-"
         v.rowRemoteSecurity.summary = sel.securityPatch
-        v.rowRemoteFingerprint.summary = sel.fingerprint
         if (v.heroTitle.text?.toString() == getString(R.string.status_update_available)) {
             v.heroSubtitle.text = getString(R.string.status_update_available_sub, sel.version)
         }
