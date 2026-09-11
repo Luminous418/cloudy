@@ -1,16 +1,18 @@
 {
   "app_name": "Cloudy",
-  "version": "2.34",
-  "version_code": 11,
+  "version": "2.4",
+  "version_code": 12,
   "changelog": [
-    "Fixed light mode",
-    "Content now keeps its rounded sheet curve while scrolling"
+    "OTA and ROM are now separate tabs",
+    "Empty OTA manifests show a friendly no-updates state",
+    "Download button corner radius aligned with ROM logo",
+    "No-updates state translated to 8 languages"
   ],
   "download": {
     "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
-    "filename": "Cloudy_2.34.apk",
-    "size_bytes": 15842787,
-    "sha256": "ff93718bdf29c8677b0004c12e358889b6650b3f103da6be061db50d42f5349a",
+    "filename": "Cloudy_2.4.apk",
+    "size_bytes": 16384900,
+    "sha256": "0d56c5a66ebe2d14f2358df48838e7fb77eda03ec600c262493b1757ad03faa9",
     "install_type": "apk"
   }
 }
