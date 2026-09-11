@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "dev.cloudy.ota.v2"
+        applicationId = "dev.cloudy.ota"
         minSdk = 26
         targetSdk = 34
         versionCode = 12
