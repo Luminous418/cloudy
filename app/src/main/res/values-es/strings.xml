@@ -136,7 +136,8 @@
     <string name="err_network">Error de red</string>
     <string name="err_empty_body">Cuerpo vacío</string>
     <string name="err_checksum">Coincidencia de checksum fallida - descarga rechazada</string>
-    <string name="err_no_releases">El manifiesto no contiene versiones</string>
+    <string name="status_no_updates">No hay actualizaciones disponibles</string>
+    <string name="status_no_updates_sub">Aún no hay versiones OTA publicadas para este dispositivo</string>
     <string name="err_storage_unavailable">Almacenamiento externo no disponible</string>
     <string name="err_copy_failed">No se pudo copiar el archivo seleccionado</string>
     <string name="err_not_priv_app">No es una app privilegiada: %1$s</string>

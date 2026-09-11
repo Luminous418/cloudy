@@ -136,7 +136,8 @@
     <string name="err_network">Netzwerkfehler</string>
     <string name="err_empty_body">Leerer Inhalt</string>
     <string name="err_checksum">Checksumme nicht stimmig - Download abgelehnt</string>
-    <string name="err_no_releases">Manifest enthält keine Versionen</string>
+    <string name="status_no_updates">Keine Updates verfügbar</string>
+    <string name="status_no_updates_sub">Es sind noch keine OTA-Builds für dieses Gerät veröffentlicht</string>
     <string name="err_storage_unavailable">Externer Speicher nicht verfügbar</string>
     <string name="err_copy_failed">Ausgewählte Datei konnte nicht kopiert werden</string>
     <string name="err_not_priv_app">Keine privilegierte App: %1$s</string>

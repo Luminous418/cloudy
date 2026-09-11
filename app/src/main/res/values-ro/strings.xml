@@ -136,7 +136,8 @@
     <string name="err_network">Eroare de rețea</string>
     <string name="err_empty_body">Corp gol</string>
     <string name="err_checksum">Neconcordanță de sumă de control - descărcarea a fost respinsă</string>
-    <string name="err_no_releases">Manifestul nu conține niciun build</string>
+    <string name="status_no_updates">Nicio actualizare disponibilă</string>
+    <string name="status_no_updates_sub">Încă nu există build-uri OTA publicate pentru acest dispozitiv</string>
     <string name="err_storage_unavailable">Stocare externă indisponibilă</string>
     <string name="err_copy_failed">Nu s-a putut copia fișierul selectat</string>
     <string name="err_not_priv_app">Nu este o aplicație privilegiată: %1$s</string>

@@ -136,7 +136,8 @@
     <string name="err_network">Lỗi mạng</string>
     <string name="err_empty_body">Thân phản hồi trống</string>
     <string name="err_checksum">Kiểm tra tổng không khớp - từ chối tải xuống</string>
-    <string name="err_no_releases">Tệp kê khai không chứa bản dựng nào</string>
+    <string name="status_no_updates">Không có bản cập nhật nào</string>
+    <string name="status_no_updates_sub">Chưa có bản dựng OTA nào được phát hành cho thiết bị này</string>
     <string name="err_storage_unavailable">Bộ nhớ ngoài không khả dụng</string>
     <string name="err_copy_failed">Không thể sao chép tệp đã chọn</string>
     <string name="err_not_priv_app">Không phải ứng dụng đặc quyền: %1$s</string>

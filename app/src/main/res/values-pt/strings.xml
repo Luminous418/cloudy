@@ -136,7 +136,8 @@
     <string name="err_network">Erro de rede</string>
     <string name="err_empty_body">Corpo vazio</string>
     <string name="err_checksum">Checksum incorreto - download rejeitado</string>
-    <string name="err_no_releases">O manifesto não contém versões</string>
+    <string name="status_no_updates">Nenhuma atualização disponível</string>
+    <string name="status_no_updates_sub">Ainda não há builds OTA publicadas para este dispositivo</string>
     <string name="err_storage_unavailable">Armazenamento externo indisponível</string>
     <string name="err_copy_failed">Não foi possível copiar o ficheiro selecionado</string>
     <string name="err_not_priv_app">Não é uma app privilegiada: %1$s</string>

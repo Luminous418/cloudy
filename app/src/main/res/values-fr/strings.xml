@@ -136,7 +136,8 @@
     <string name="err_network">Erreur réseau</string>
     <string name="err_empty_body">Corps vide</string>
     <string name="err_checksum">Empreinte non conforme - téléchargement refusé</string>
-    <string name="err_no_releases">Le manifeste ne contient aucune version</string>
+    <string name="status_no_updates">Aucune mise à jour disponible</string>
+    <string name="status_no_updates_sub">Aucun build OTA n\'a encore été publié pour cet appareil</string>
     <string name="err_storage_unavailable">Stockage externe indisponible</string>
     <string name="err_copy_failed">Impossible de copier le fichier sélectionné</string>
     <string name="err_not_priv_app">Pas une application privilégiée : %1$s</string>

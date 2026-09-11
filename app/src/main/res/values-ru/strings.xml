@@ -136,7 +136,8 @@
     <string name="err_network">Ошибка сети</string>
     <string name="err_empty_body">Пустое тело ответа</string>
     <string name="err_checksum">Несовпадение контрольной суммы — загрузка отклонена</string>
-    <string name="err_no_releases">Манифест не содержит сборок</string>
+    <string name="status_no_updates">Нет доступных обновлений</string>
+    <string name="status_no_updates_sub">Для этого устройства пока нет опубликованных OTA-сборок</string>
     <string name="err_storage_unavailable">Внешнее хранилище недоступно</string>
     <string name="err_copy_failed">Не удалось скопировать выбранный файл</string>
     <string name="err_not_priv_app">Не привилегированное приложение: %1$s</string>

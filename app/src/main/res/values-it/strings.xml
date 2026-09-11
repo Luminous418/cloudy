@@ -136,7 +136,8 @@
     <string name="err_network">Errore di rete</string>
     <string name="err_empty_body">Corpo vuoto</string>
     <string name="err_checksum">Checksum non valido - download rifiutato</string>
-    <string name="err_no_releases">Il manifest non contiene versioni</string>
+    <string name="status_no_updates">Nessun aggiornamento disponibile</string>
+    <string name="status_no_updates_sub">Nessun build OTA è ancora stato pubblicato per questo dispositivo</string>
     <string name="err_storage_unavailable">Archiviazione esterna non disponibile</string>
     <string name="err_copy_failed">Impossibile copiare il file selezionato</string>
     <string name="err_not_priv_app">Non è un\'app privilegiata: %1$s</string>
