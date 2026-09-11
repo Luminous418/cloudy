@@ -11,8 +11,8 @@
   "download": {
     "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
     "filename": "Cloudy_2.4.apk",
-    "size_bytes": 16384900,
-    "sha256": "0d56c5a66ebe2d14f2358df48838e7fb77eda03ec600c262493b1757ad03faa9",
+    "size_bytes": 15905360,
+    "sha256": "b993a2202e759c8b12a6fe1110533641bef2b8275b3025a4dd6bce27a398dc7b",
     "install_type": "apk"
   }
 }
