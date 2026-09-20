@@ -11,6 +11,37 @@
   },
   "releases": [
     {
+      "version": "8.6.5-20092026",
+      "version_code": 80605,
+      "build_date": "2026-09-20",
+      "android_version": "16",
+      "oneui_version": "8.5",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXSGFZG4:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Fixed black recents preview by switching to the OpenGL renderer",
+        "Fixed app crashes caused by Vulkan",
+        "Fixed the hotspot that could not be turned off",
+        "[a22] Fixed camera bug",
+        "Added a full OTA update system with incremental updates",
+        "Added the LumiROM disclaimer page on First Time Setup in 30 languages",
+        "New navigation bar step in the setup wizard",
+        "Added Software update in Settings that opens Cloudy",
+        "Updated Cloudy to 2.4",
+        "Added more wallpapers"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.6.5/SM-A325F/LumiROM_8.6.5-20092026_OFFICIAL_a32.zip?download=true",
+        "filename": "LumiROM_8.6.5-20092026_OFFICIAL_a32.zip",
+        "size_bytes": 4597258659,
+        "sha256": "8f6743b6eb5936309436abdcb84084d2195c120ab5213a571596ab769fb18372",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
       "version": "8.6.4",
       "version_code": 80604,
       "build_date": "2026-08-16",
