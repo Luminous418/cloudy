@@ -11,7 +11,7 @@
   },
   "releases": [
     {
-      "version": "8.6.5-20092026",
+      "version": "8.6.5",
       "version_code": 80605,
       "build_date": "2026-09-20",
       "android_version": "16",
