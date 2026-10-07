@@ -11,6 +11,32 @@
   },
   "releases": [
     {
+      "version": "8.7.0",
+      "version_code": 80700,
+      "build_date": "2026-10-07",
+      "android_version": "16",
+      "oneui_version": "80500",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXSGFZG4:user/release-keys",
+      "device_model": "SM-M325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "It will reboot on first time after updating the ROM, it is normal and intended",
+        "Added LumIROM Settings to personalize the rom with more to come",
+        "Added a better Knox Patch built-in on the ROM",
+        "Fixed Samsung Camera modes like 0.5x",
+        "Fixed notification style when you apply a new style on settings"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/8.7.0/SM-M325F/LumiROM_8.7.0-07102026_OFFICIAL_m32.zip?download=true",
+        "filename": "LumiROM_8.7.0-07102026_OFFICIAL_m32.zip",
+        "size_bytes": 4582027020,
+        "sha256": "acfed4bffb15e8a50f1b1f78ba440296beae22d630228bf3d98f3b21cab45939",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
       "version": "8.6.5",
       "version_code": 80605,
       "build_date": "2026-09-20",

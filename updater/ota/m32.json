@@ -3,11 +3,38 @@
   "maintainer": {
     "name": "Lumi",
     "handle": "@Luminous418",
-    "device": "Samsung Galaxy M32",
+    "device": "Samsung Galaxy M32 4G",
     "codename": "m32",
     "avatar_url": "https://avatars.githubusercontent.com/u/107070993?v=4",
     "telegram": "https://t.me/LumiROMs",
     "donate_url": "https://buymeacoffee.com/luminous418"
   },
-  "releases": []
+  "releases": [
+    {
+      "version": "8.7.0",
+      "version_code": 80700,
+      "build_date": "2026-10-07",
+      "android_version": "16",
+      "oneui_version": "80500",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXSGFZG4:user/release-keys",
+      "device_model": "SM-M325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "It will reboot on first time after updating the ROM, it is normal and intended",
+        "Added LumIROM Settings to personalize the rom with more to come",
+        "Added a better Knox Patch built-in on the ROM",
+        "Fixed Samsung Camera modes like 0.5x",
+        "Fixed notification style when you apply a new style on settings"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/OTAs/resolve/8.7.0/SM-M325F/LumiROM_8.7.0-07102026_OFFICIAL_m32-INCREMENTAL_from_8.6.5.zip?download=true",
+        "filename": "LumiROM_8.7.0-07102026_OFFICIAL_m32-INCREMENTAL_from_8.6.5.zip",
+        "size_bytes": 1203375282,
+        "sha256": "aed7524173053c3404b71fdae63f6ca7078cf1c97edbecc74216912cec94dd4d",
+        "install_type": "recovery_zip"
+      }
+    }
+  ]
 }

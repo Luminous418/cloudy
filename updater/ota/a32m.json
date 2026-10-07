@@ -1,0 +1,40 @@
+{
+  "rom_name": "LumiROM",
+  "maintainer": {
+    "name": "Lumi",
+    "handle": "@Luminous418",
+    "device": "Samsung Galaxy A32 4G",
+    "codename": "a32m",
+    "avatar_url": "https://avatars.githubusercontent.com/u/107070993?v=4",
+    "telegram": "https://t.me/LumiROMs",
+    "donate_url": "https://buymeacoffee.com/luminous418"
+  },
+  "releases": [
+    {
+      "version": "8.7.0",
+      "version_code": 80700,
+      "build_date": "2026-10-07",
+      "android_version": "16",
+      "oneui_version": "80500",
+      "security_patch": "2026-07-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:16/BP4A.251205.006/A346BXXSGFZG4:user/release-keys",
+      "device_model": "SM-A325M",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "It will reboot on first time after updating the ROM, it is normal and intended",
+        "Added LumIROM Settings to personalize the rom with more to come",
+        "Added a better Knox Patch built-in on the ROM",
+        "Fixed Samsung Camera modes like 0.5x",
+        "Fixed notification style when you apply a new style on settings"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/OTAs/resolve/8.7.0/SM-A325M/LumiROM_8.7.0-07102026_OFFICIAL_a32m-INCREMENTAL_from_8.6.5.zip?download=true",
+        "filename": "LumiROM_8.7.0-07102026_OFFICIAL_a32m-INCREMENTAL_from_8.6.5.zip",
+        "size_bytes": 1204092866,
+        "sha256": "21d2b7d2186a7de0096178fed1028e73195b1fb0b0ea41572ae2f51c779770ca",
+        "install_type": "recovery_zip"
+      }
+    }
+  ]
+}

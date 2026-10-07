@@ -9,5 +9,32 @@
     "telegram": "https://t.me/LumiROMs",
     "donate_url": "https://buymeacoffee.com/luminous418"
   },
-  "releases": []
+  "releases": [
+    {
+      "version": "8.7.0",
+      "version_code": 80700,
+      "build_date": "2026-10-07",
+      "android_version": "16",
+      "oneui_version": "80500",
+      "security_patch": "2026-08-05",
+      "build_fingerprint": "samsung/a24nsxx/a24:16/BP4A.251205.006/A245FXXSEFZH6:user/release-keys",
+      "device_model": "SM-A225F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "It will reboot on first time after updating the ROM, it is normal and intended",
+        "Added LumIROM Settings to personalize the rom with more to come",
+        "Added a better Knox Patch built-in on the ROM",
+        "Fixed Samsung Camera modes like 0.5x",
+        "Fixed notification style when you apply a new style on settings"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/OTAs/resolve/8.7.0/SM-A225F/LumiROM_8.7.0-07102026_OFFICIAL_a22-INCREMENTAL_from_8.6.5.zip?download=true",
+        "filename": "LumiROM_8.7.0-07102026_OFFICIAL_a22-INCREMENTAL_from_8.6.5.zip",
+        "size_bytes": 1127378044,
+        "sha256": "dc23d5a0b896d8e1c8696b9ad99b06383caa19e921cac5816db0e7aa118e34b8",
+        "install_type": "recovery_zip"
+      }
+    }
+  ]
 }
