@@ -2,6 +2,15 @@
 
 All notable changes to the Cloudy OTA helper.
 
+## [2.41] - 2026-10-11
+
+### Added
+- **Local OTA testing over adb**: a permission-guarded `DevConfigReceiver` lets `adb shell am broadcast` repoint Cloudy at a locally served manifest, without unlocking developer options or typing a URL on the device. [`tools/adb-local-ota.sh`](tools/adb-local-ota.sh) does the whole loop in one step (generate the manifest from a ZIP's `build_info.txt`, serve it, `adb reverse` + broadcast).
+- **Test build suffix**: `./gradlew assembleRelease -PappIdSuffix=.dev` builds `dev.cloudy.ota.dev` so a test copy can be installed next to a system Cloudy whose PackageManager signature record is locked.
+
+### Fixed
+- **OTA install failed with "unable to create command file"**: once the package verified, the privileged `RecoverySystem.installPackage` tried to write `/cache/recovery/command`, a `root:root 0771` directory a platform_app UID cannot write. The failure now falls back to the root staging path (same as the ROM tab), instead of surfacing a dead-end error.
+
 ## [2.31] - 2026-08-19
 
 ### Added

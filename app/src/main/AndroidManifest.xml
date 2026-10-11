@@ -84,6 +84,14 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!-- Dev/testing: `adb shell am broadcast` can repoint the updater at a locally
+             served manifest. Exported so the adb shell can reach it, but gated by
+             WRITE_SECURE_SETTINGS, which only the shell/system hold. -->
+        <receiver
+            android:name=".ota.DevConfigReceiver"
+            android:exported="true"
+            android:permission="android.permission.WRITE_SECURE_SETTINGS" />
+
         <!-- Background update notifications. -->
         <receiver
             android:name=".ota.UpdateAlarm$UpdateReceiver"

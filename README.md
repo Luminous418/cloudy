@@ -54,6 +54,45 @@ keyPassword=...
 
 If `keystore.properties` is missing, the release build falls back to debug signing (useful for CI/development).
 
+## Testing an OTA build over adb
+
+The app can be pointed at a locally served manifest from `adb`, without unlocking developer
+options or typing a URL on the device. [`tools/adb-local-ota.sh`](tools/adb-local-ota.sh)
+automates the whole loop: it reads the ZIP's `build_info.txt`, writes a manifest, serves the
+manifest + ZIP on `127.0.0.1`, maps that port back to the dev machine with `adb reverse`, and
+broadcasts the URL to Cloudy.
+
+```bash
+tools/adb-local-ota.sh /path/to/LumiROM_8.7.1-...-INCREMENTAL_from_8.7.0.zip "changelog;entries"
+# then open Cloudy → OTA / ROM tab and pull the update
+tools/adb-local-ota.sh --stop     # stop the local server + adb reverse
+tools/adb-local-ota.sh --clear    # restore the built-in sources
+```
+
+Under the hood it is a single `am broadcast` to a permission-guarded receiver; the same can
+be done by hand:
+
+```bash
+adb reverse tcp:8000 tcp:8000
+adb shell am broadcast -n dev.cloudy.ota/.ota.DevConfigReceiver --es url "http://127.0.0.1:8000/a32.json"
+adb shell am broadcast -n dev.cloudy.ota/.ota.DevConfigReceiver --ez clear true
+```
+
+`--es url` sets both tabs; `--es ota_url` / `--es rom_url` target one tab each. The receiver
+is exported but gated by `android.permission.WRITE_SECURE_SETTINGS`, so only the adb shell /
+system (which hold it) can repoint the updater. Cleartext traffic is only permitted to
+`127.0.0.1` / `localhost` (see `network_security_config.xml`), so the local server must be
+reached through `adb reverse`.
+
+If the device refuses a normal install because a system copy of Cloudy is signed with a
+different key (dirty flash across signing keys), build a test copy with a suffix that can
+coexist and pass it to the script:
+
+```bash
+./gradlew assembleRelease -PappIdSuffix=.dev     # -> dev.cloudy.ota.dev
+tools/adb-local-ota.sh -k dev.cloudy.ota.dev /path/to/ROM.zip
+```
+
 ## JSON manifest
 
 The app reads a manifest by default from:

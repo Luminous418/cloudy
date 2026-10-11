@@ -25,11 +25,26 @@ sealed interface InstallResult {
  */
 class OtaInstaller(private val context: Context) {
 
-    /** Tier 1: works only when Cloudy holds the system RECOVERY permission (priv-app in ROM). */
+    /**
+     * Tier 1: works only when Cloudy holds the system RECOVERY permission (priv-app in ROM).
+     *
+     * Once the package is verified it is handed to [RecoverySystem.installPackage], which
+     * writes `/cache/recovery/command`. On One UI that directory is `root:root 0771`, so a
+     * plain platform_app UID cannot create the file and the framework throws
+     * "Reboot failed (unable to create command file)". Nothing is staged and no reboot
+     * happens in that case, so we report [InstallResult.NeedsRoot] and let the caller fall
+     * back to the root staging path (which writes the same file as uid 0). Without this,
+     * OTA installs died here while the ROM tab - whose unsigned package fails verification
+     * and already falls back - kept working.
+     */
     fun tryPrivilegedInstall(pkg: File): InstallResult = try {
         RecoverySystem.verifyPackage(pkg, null, null)
-        RecoverySystem.installPackage(context, pkg)   // triggers reboot to recovery
-        InstallResult.StagedRebootingToRecovery
+        try {
+            RecoverySystem.installPackage(context, pkg)   // triggers reboot to recovery
+            InstallResult.StagedRebootingToRecovery
+        } catch (e: Exception) {
+            InstallResult.NeedsRoot(context.getString(R.string.err_staging_failed, e.message.orEmpty()))
+        }
     } catch (se: SecurityException) {
         InstallResult.NeedsRoot(context.getString(R.string.err_not_priv_app, se.message))
     } catch (e: Exception) {

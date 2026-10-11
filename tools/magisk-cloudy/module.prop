@@ -1,0 +1,6 @@
+id=cloudy_ota_app
+name=Cloudy (systemless update)
+version=2.4
+versionCode=12
+author=Lumi
+description=Latest Cloudy OTA client, mounted over /system/priv-app/Cloudy. Dev/testing module built from the cloudy repo.

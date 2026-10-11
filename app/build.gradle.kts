@@ -12,6 +12,11 @@ val keystoreProperties = Properties().apply {
     if (f.exists()) f.inputStream().use { load(it) }
 }
 
+// Optional applicationId suffix for dev/test installs that must coexist with a system copy
+// whose PackageManager signature record is locked (dirty flash across signing keys):
+//   ./gradlew assembleRelease -PappIdSuffix=.dev   ->  dev.cloudy.ota.dev
+val appIdSuffix: String? = (findProperty("appIdSuffix") as String?)?.trim()?.ifEmpty { null }
+
 android {
     namespace = "dev.cloudy.ota"
     compileSdk = 36          // SESL8 requires compileSdk >= 34
@@ -32,12 +37,13 @@ android {
         applicationId = "dev.cloudy.ota"
         minSdk = 26
         targetSdk = 34
-        versionCode = 12
-        versionName = "2.4"
+        versionCode = 13
+        versionName = "2.41"
     }
 
     buildTypes {
         release {
+            applicationIdSuffix = appIdSuffix
             signingConfig = if (keystoreProperties.containsKey("storeFile"))
                 signingConfigs.getByName("release")
             else

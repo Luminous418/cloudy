@@ -30,3 +30,6 @@ keystore.properties
 .DS_Store
 *~
 *.swp
+
+# Packaged Magisk modules
+dist/
