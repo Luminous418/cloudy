@@ -1,7 +1,7 @@
 {
   "app_name": "Cloudy",
-  "version": "2.4",
-  "version_code": 12,
+  "version": "2.41",
+  "version_code": 13,
   "changelog": [
     "OTA and ROM are now separate tabs",
     "Empty OTA manifests show a friendly no-updates state",
@@ -10,9 +10,9 @@
   ],
   "download": {
     "url": "https://github.com/Luminous418/cloudy/releases/download/latest/app-release.apk",
-    "filename": "Cloudy_2.4.apk",
-    "size_bytes": 15905360,
-    "sha256": "b993a2202e759c8b12a6fe1110533641bef2b8275b3025a4dd6bce27a398dc7b",
+    "filename": "Cloudy_2.41.apk",
+    "size_bytes": 15905412,
+    "sha256": "b82aa3b3d291e0793b7501f502cc2d54577d46664e9a2d34814d5e98bf6c99f2",
     "install_type": "apk"
   }
 }
