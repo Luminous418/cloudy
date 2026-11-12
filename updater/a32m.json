@@ -11,6 +11,35 @@
   },
   "releases": [
     {
+      "version": "9.0.0",
+      "version_code": 90000,
+      "build_date": "2026-11-12",
+      "android_version": "17",
+      "oneui_version": "90000",
+      "security_patch": "2026-10-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:17/CP2A.260605.016/A346BXXUHGZJ8:user/release-keys",
+      "device_model": "SM-A325M",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "One UI 9 / Android 17 base (A346BXXUHGZJ8)",
+        "FluidMotion unlock, app and notification fly-in animations",
+        "FluidMotion settings in LumiROM Settings / UI Settings, no root or LSPosed",
+        "Smoother Quick Settings panel and split-panel transition",
+        "Fixed Launcher animation type preference",
+        "Samsung debloat for ShareLive, Rubin, SCPM and IP Service",
+        "Fixed SDHMS SIOP warning and Samsung Camera patch",
+        "Clean flash recommended when coming from One UI 8.5"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/9.0.0/SM-A325M/LumiROM_9.0.0-12112026_OFFICIAL_a32m.zip?download=true",
+        "filename": "LumiROM_9.0.0-12112026_OFFICIAL_a32m.zip",
+        "size_bytes": 4536912509,
+        "sha256": "49cde3581a1a9d8ea90db1817ddce7c995f92f7de5665816f91e067c73e37a68",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
       "version": "8.7.0",
       "version_code": 80700,
       "build_date": "2026-10-07",

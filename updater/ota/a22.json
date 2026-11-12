@@ -11,28 +11,31 @@
   },
   "releases": [
     {
-      "version": "8.7.0",
-      "version_code": 80700,
-      "build_date": "2026-10-07",
-      "android_version": "16",
-      "oneui_version": "80500",
-      "security_patch": "2026-08-05",
-      "build_fingerprint": "samsung/a24nsxx/a24:16/BP4A.251205.006/A245FXXSEFZH6:user/release-keys",
+      "version": "9.0.0",
+      "version_code": 90000,
+      "build_date": "2026-11-12",
+      "android_version": "17",
+      "oneui_version": "90000",
+      "security_patch": "2026-10-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:17/CP2A.260605.016/A346BXXUHGZJ8:user/release-keys",
       "device_model": "SM-A225F",
       "kernel_version": "4.14.357",
       "partition_layout": "a-only",
       "changelog": [
-        "It will reboot on first time after updating the ROM, it is normal and intended",
-        "Added LumIROM Settings to personalize the rom with more to come",
-        "Added a better Knox Patch built-in on the ROM",
-        "Fixed Samsung Camera modes like 0.5x",
-        "Fixed notification style when you apply a new style on settings"
+        "One UI 9 / Android 17 base (A346BXXUHGZJ8)",
+        "FluidMotion unlock, app and notification fly-in animations",
+        "FluidMotion settings in LumiROM Settings / UI Settings, no root or LSPosed",
+        "Smoother Quick Settings panel and split-panel transition",
+        "Fixed Launcher animation type preference",
+        "Samsung debloat for ShareLive, Rubin, SCPM and IP Service",
+        "Fixed SDHMS SIOP warning and Samsung Camera patch",
+        "Clean flash recommended when coming from One UI 8.5"
       ],
       "download": {
-        "url": "https://huggingface.co/buckets/LuminousJD418/OTAs/resolve/8.7.0/SM-A225F/LumiROM_8.7.0-07102026_OFFICIAL_a22-INCREMENTAL_from_8.6.5.zip?download=true",
-        "filename": "LumiROM_8.7.0-07102026_OFFICIAL_a22-INCREMENTAL_from_8.6.5.zip",
-        "size_bytes": 1127378044,
-        "sha256": "dc23d5a0b896d8e1c8696b9ad99b06383caa19e921cac5816db0e7aa118e34b8",
+        "url": "https://huggingface.co/buckets/LuminousJD418/OTAs/resolve/9.0.0/SM-A225F/LumiROM_9.0.0-12112026_OFFICIAL_a22-INCREMENTAL_from_8.7.0.zip?download=true",
+        "filename": "LumiROM_9.0.0-12112026_OFFICIAL_a22-INCREMENTAL_from_8.7.0.zip",
+        "size_bytes": 3986048818,
+        "sha256": "f57b5de95682f5cc29a6e17ad5e297b9ba238189175a224c7ba92653d60b5f8f",
         "install_type": "recovery_zip"
       }
     }
