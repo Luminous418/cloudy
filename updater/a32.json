@@ -11,6 +11,30 @@
   },
   "releases": [
     {
+      "version": "9.0.1",
+      "version_code": 90001,
+      "build_date": "2026-11-13",
+      "android_version": "17",
+      "oneui_version": "90000",
+      "security_patch": "2026-10-05",
+      "build_fingerprint": "samsung/a34xxx/a34x:17/CP2A.260605.016/A346BXXUHGZJ8:user/release-keys",
+      "device_model": "SM-A325F",
+      "kernel_version": "4.14.357",
+      "partition_layout": "a-only",
+      "changelog": [
+        "Chrome crashes has been fixed",
+        "JPG on social media apps has been fixed",
+        "New kernel with BBR has been added to the ROM to fix data and wifi issues for A32 devices"
+      ],
+      "download": {
+        "url": "https://huggingface.co/buckets/LuminousJD418/LumiROM/resolve/ROMs/9.0.1/SM-A325F/LumiROM_9.0.1-13112026_OFFICIAL_a32.zip?download=true",
+        "filename": "LumiROM_9.0.1-13112026_OFFICIAL_a32.zip",
+        "size_bytes": 4536596444,
+        "sha256": "10c90ada33b0346f4deb941c1a816f175de6f6e8548e2d77984b4bca4ac74d5a",
+        "install_type": "recovery_zip"
+      }
+    },
+    {
       "version": "9.0.0",
       "version_code": 90000,
       "build_date": "2026-11-12",
