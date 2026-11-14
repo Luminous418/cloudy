@@ -5,6 +5,10 @@
 <img src="art/title.svg" height="70" alt="Cloudy"/>
 <br><br>
 
+
+> [!IMPORTANT]
+> Cloudy has been archived and it won't be updated anymore, thanks for all
+
 OTA client for **LumiROM** series. Checks for updates, downloads the ROM from the configured server and triggers installation in recovery. It also updates **itself** from a JSON manifest and can notify you about new app and ROM releases.
 
 > Current integration status: the app installs as a **system priv-app** inside the ROM, with its privileged permissions and its entry in Samsung's *allowlist*. The whole pipeline (build, signing, release, ROM integration) lives in this repo.
